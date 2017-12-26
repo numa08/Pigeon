@@ -7,11 +7,11 @@
 
 import UIKit
 import Eureka
-import EventKit
+import GoogleSignIn
 
 class CalendarBodyBuildViewController: FormViewController {
 
-    private var eventStore: EKEventStore? = nil
+    private let calendarRepository: GoogleCalendarRepository = DefaultGoogleCalendarRepository.shared
     public var openGraph: OpenGraph? = nil {
         didSet {
             didUpdateOpenGraph()
@@ -67,15 +67,17 @@ extension CalendarBodyBuildViewController {
                 $0.hidden = dateRowPredicate
         }
             +++ Section()
-            <<< PushRow<EKCalendar>("Calendar") {
+            <<< PushRow<String>("Calendar") {
                 $0.title = "カレンダー"
                 $0.selectorTitle = "カレンダー"
                 $0.optionsProvider = .lazy({(_, completion) in
-                    self.authorizedEventStore(completion: { (eventStore, error) in
-                        guard let ev = eventStore else {
-                            fatalError("get eventstore error \(error!)")
+                    
+                    self.calendarRepository.fetchCalendarList(uiDelegate: self, completion: {(list, error) in
+                        if let error = error {
+                            print("fetch calendar error \(error.localizedDescription)")
+                            return
                         }
-                        let calendars = ev.calendars(for: .event).filter({$0.allowsContentModifications })
+                        let calendars = list.map({ $0.summary! + "," + $0.identifier! })
                         DispatchQueue.main.async {
                             completion(calendars)
                         }
@@ -88,46 +90,6 @@ extension CalendarBodyBuildViewController {
             +++ Section()
             <<< ButtonRow("Register") {
                 $0.title = "追加"
-                if self.form.validate().isEmpty {
-                    guard let eventStore = self.eventStore else {
-                        fatalError("eventStore is nil")
-                    }
-                    guard let calendarRow: PushRow<EKCalendar> = form.rowBy(tag: "Calendar"),
-                        let calendar = calendarRow.value else {
-                            fatalError("Calendar is nil")
-                    }
-                    
-                    guard let titleRow: TextRow = form.rowBy(tag: "Title"),
-                        let title = titleRow.value else {
-                        fatalError("titleRow is nil")
-                    }
-                    guard let allDayRow: SwitchRow = form.rowBy(tag: "AllDay"),
-                        let allDay = allDayRow.value else {
-                            fatalError("allDayRow is nil")
-                    }
-                    func rowFor(dateRowTag: String, dateTimeRowTag: String) -> RowOf<Date> {
-                        if allDay {
-                            guard let row: DateRow = form.rowBy(tag: dateRowTag) else {
-                                fatalError("\(dateRowTag) is nil")
-                            }
-                            return row
-                        } else {
-                            guard let row: DateTimeRow = form.rowBy(tag: dateTimeRowTag) else {
-                                fatalError("\(dateTimeRowTag) is nil")
-                            }
-                            return row
-                        }
-                    }
-                    let startRow = rowFor(dateRowTag: "StartDate", dateTimeRowTag: "StartDateTime")
-                    guard let start = startRow.value else {
-                        fatalError("startRow is nil")
-                    }
-                    let endRow = rowFor(dateRowTag: "EndDate", dateTimeRowTag: "EndDateTime")
-                    guard let end = endRow.value else {
-                        fatalError("endRow is nil")
-                    }
-                    let _ = self.buildEventItem(title: title, allDay: allDay, startDate: start, endDate: end, calendar: calendar, description: "", eventStore: eventStore)
-                }
         }
     }
     
@@ -139,3 +101,5 @@ extension CalendarBodyBuildViewController {
         self.tableView.reloadData()
     }
 }
+
+extension CalendarBodyBuildViewController: GIDSignInUIDelegate {}

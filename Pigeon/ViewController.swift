@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GoogleAPIClientForREST
+import GoogleSignIn
 
 class ViewController: UIViewController {
 

@@ -8,7 +8,9 @@ target 'Pigeon' do
 
   # Pods for Pigeon
   pod 'Eureka'
-
+  pod 'GoogleAPIClientForREST/Calendar', '~> 1.2.1'
+  pod 'Google/SignIn', '~> 3.0.3'
+  
   target 'PigeonTests' do
     inherit! :search_paths
     # Pods for testing
