@@ -14,6 +14,7 @@ protocol GoogleCalendarRepository {
     var calendarService: GTLRCalendarService { get }
     var accountRepository: GoogleAccountRepository { get }
     func fetchCalendarList(uiDelegate: GIDSignInUIDelegate, completion: @escaping ([GTLRCalendar_CalendarListEntry], Error?) -> Void)
+    func insertEvent(uiDelegate: GIDSignInUIDelegate, event: GTLRCalendar_Event, calendarID: String, completion: @escaping (GTLRCalendar_Event?, Error?) -> Void)
 }
 
 extension GoogleCalendarRepository {
@@ -33,6 +34,38 @@ extension GoogleCalendarRepository {
             }
             self.fetchCalendarList(forAuthorizer: authorizer, completion: completion)
         })
+    }
+    
+    func insertEvent(uiDelegate: GIDSignInUIDelegate, event: GTLRCalendar_Event, calendarID: String, completion: @escaping (GTLRCalendar_Event?, Error?) -> Void) {
+        if let authorizer = accountRepository.authorizer {
+            insertEvent(forAuthorizer: authorizer, event: event, calendarID: calendarID, completion: completion)
+            return
+        }
+        accountRepository.signIn(uiDelegate: uiDelegate, completion: {error in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            guard let authorizer = self.accountRepository.authorizer else {
+                fatalError("accountRepository doesn't signin")
+            }
+            self.insertEvent(forAuthorizer: authorizer, event: event, calendarID: calendarID, completion: completion)
+        })
+    }
+    
+    private func insertEvent(forAuthorizer authorizer:GTMFetcherAuthorizationProtocol, event: GTLRCalendar_Event, calendarID: String, completion: @escaping (GTLRCalendar_Event?, Error?) -> Void) {
+        self.calendarService.authorizer = authorizer
+        let query = GTLRCalendarQuery_EventsInsert.query(withObject: event, calendarId: calendarID)
+        self.calendarService.executeQuery(query) {(_, response, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            guard let ev = response as? GTLRCalendar_Event else {
+                fatalError("unknown response")
+            }
+            completion(ev, nil)
+        }
     }
     
     private func fetchCalendarList(forAuthorizer authorizer: GTMFetcherAuthorizationProtocol, completion: @escaping ([GTLRCalendar_CalendarListEntry], Error?) -> Void){
