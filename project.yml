@@ -7,6 +7,11 @@ targets:
     platform: iOS
     sources:
       - Pigeon
+    settings:
+      base:
+        IPHONEOS_DEPLOYMENT_TARGET: 11.2
+    dependencies:
+      - framework: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/EventKit.framework
   PigeonTests:
     type: bundle.unit-test
     platform: iOS
