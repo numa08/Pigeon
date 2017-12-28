@@ -13,6 +13,9 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static let userDefaults: UserDefaults = UserDefaults.standard
+    let userAccountRepository: UserAccountRepository = UserDefaultsUserAccountRepository(userDefaults: AppDelegate.userDefaults)
+    let calendarRepository: CalendarRepository = UserDefaultsCalendarRepository(userDefaults: AppDelegate.userDefaults)
     var window: UIWindow?
 
 
