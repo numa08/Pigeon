@@ -10,6 +10,14 @@ import GoogleSignIn
 import GoogleAPIClientForREST
 import Hydra
 
+extension EKEventStore {
+    
+    static var shared: EKEventStore = {
+       return EKEventStore()
+    }()
+    
+}
+
 protocol Calendar: PersistenceModel {
     var provider: SupportedProvider { get }
     var identifier: String { get }
@@ -35,7 +43,7 @@ extension EventKitCalendar: UserDefaultsStorableModel {
  
     init?(userDefaults: UserDefaults, modelIdentifier identifier: String, withUserAccount account: UserAccount) {
         guard let calendarIdentifier = userDefaults.string(forKey: identifier),
-            let calendar = EKEventStore().calendar(withIdentifier: calendarIdentifier) else {
+            let calendar = EKEventStore.shared.calendars(for: .event).filter({$0.calendarIdentifier == calendarIdentifier}).first else {
             return nil
         }
         self.calendar = calendar
@@ -79,8 +87,8 @@ extension EventKitAccount: CalendarProvider {
     
     func fetchModifiableCalendar() -> Promise<[Calendar]> {
         return Promise(in: .background) {(resolve, reject, _) in
-            let eventStore = EKEventStore()
-            let list = eventStore.calendars(for: .event).filter({ !$0.isImmutable }).map({ EventKitCalendar(calendar: $0, account: self) })
+            let eventStore = EKEventStore.shared
+            let list = eventStore.calendars(for: .event).filter({ $0.allowsContentModifications }).map({ EventKitCalendar(calendar: $0, account: self) })
             resolve(list)
         }
     }
@@ -133,6 +141,7 @@ struct UserDefaultsCalendarRepository: CalendarRepository {
             model.store(toUserDefaults: userDefaults, forKey: modelIdentifier)
             var identifiers = userDefaults.stringArray(forKey: accountIdentifier) ?? []
             if !identifiers.contains(modelIdentifier) {
+                print("store \(modelIdentifier)")
                 identifiers.append(modelIdentifier)
             }
             userDefaults.set(identifiers, forKey: accountIdentifier)
@@ -148,6 +157,7 @@ struct UserDefaultsCalendarRepository: CalendarRepository {
             let userDefaults = self.userDefaults
             let modelIdentifiers = userDefaults.stringArray(forKey: accountIdentifier) ?? []
             let calendars: [Calendar] = modelIdentifiers.map({identifier in
+                print("restore calendarIdentifier: \(identifier)")
                 let providerKey = "\(identifier):provider"
                 guard let providerName = userDefaults.string(forKey: providerKey) else {
                     fatalError("provider name is not stored. key: \(providerKey)")

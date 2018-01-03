@@ -40,9 +40,13 @@ class LoginViewController: UITableViewController {
                     .then { Void -> Promise<[Calendar]> in
                         print("store success")
                         return userAccount.fetchModifiableCalendar()
-                    }.then({ (calendars) -> Promise<[Void]> in
-                        let promises = calendars.map({self.calendarRepository?.store(calendar: $0, fromUserAccount: userAccount)}).filter({$0 != nil}).map({$0!})
-                        return all(promises)
+                    }.then({ (calendars) -> Promise<Void> in
+                        return async({ _ -> Void in
+                            guard let calendarRepository = self.calendarRepository else { return }
+                            for calendar in calendars {
+                                try await(calendarRepository.store(calendar: calendar, fromUserAccount: userAccount))
+                            }
+                        })
                     }).then(in: .main) { _ in
                         print("calendar stored")
                 }

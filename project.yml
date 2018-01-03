@@ -1,13 +1,16 @@
 name: Pigeon
 options:
   bundleIdPrefix: net.numa08
+  developmentLanguage: ja
 targets:
   Pigeon:
     type: application
     platform: iOS
+    codeSign: true
     sources:
       - Pigeon
     settings:
+      "CODE_SIGN_IDENTITY[sdk=iphoneos*]": "iPhone Developer"
       base:
         IPHONEOS_DEPLOYMENT_TARGET: 11.2
   PigeonTests:

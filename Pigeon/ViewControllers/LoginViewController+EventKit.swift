@@ -27,7 +27,7 @@ extension LoginViewController {
         default:
             break
         }
-        let store = EKEventStore()
+        let store = EKEventStore.shared
         store.requestAccess(to: .event) { (granted, error) in
             if let error = error {
                 completion(nil, error)
