@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Hydra
 
 class LoginViewController: UITableViewController {
     
@@ -21,22 +22,6 @@ class LoginViewController: UITableViewController {
         super.viewDidLoad()
         userAccountRepository = (UIApplication.shared.delegate as? AppDelegate)?.userAccountRepository
         calendarRepository = (UIApplication.shared.delegate as? AppDelegate)?.calendarRepository
-        
-        userAccountRepository?.restore({(accounts, error) in
-            if let error = error {
-                print("restore account error. \(error)")
-                return
-            }
-            accounts.forEach({account in
-                self.calendarRepository?.restore(forAccount: account, completion: {(calendar, error) in
-                    if let error = error {
-                        print("restore calendar error. \(error)")
-                        return
-                    }
-                    calendar.forEach({ print("\($0.provider), \($0.identifier)") })
-                })
-            })
-        })
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -51,31 +36,16 @@ class LoginViewController: UITableViewController {
             }
             if let userAccount = userAccount {
                 print("login success")
-                self.userAccountRepository?.store(account: userAccount, completion: {error in
-                    if let error = error {
-                        print("failed store \(error)")
-                        return
-                    }
-                    print("store success")
-                })
-                userAccount.fetchModifiableCalendar({(calendars, error) in
-                    if let error = error {
-                        print("failed fetch calendar provider: \(userAccount.provider) error \(error)")
-                        return
-                    }
-                    let queueGroup = DispatchGroup()
-                    // 非同期に全部を保存するのを待つ
-                    calendars.forEach({calendar in
-                        DispatchQueue(label: "\(calendar.identifier)").async(group: queueGroup) {
-                            var stored = false
-                            self.calendarRepository?.store(calendar: calendar, fromUserAccount: userAccount, completion: { _ in stored = true })
-                            while(!stored) {}
-                        }
-                    })
-                    queueGroup.notify(queue: DispatchQueue.main) {
+                self.userAccountRepository?.store(account: userAccount)
+                    .then { Void -> Promise<[Calendar]> in
+                        print("store success")
+                        return userAccount.fetchModifiableCalendar()
+                    }.then({ (calendars) -> Promise<[Void]> in
+                        let promises = calendars.map({self.calendarRepository?.store(calendar: $0, fromUserAccount: userAccount)}).filter({$0 != nil}).map({$0!})
+                        return all(promises)
+                    }).then(in: .main) { _ in
                         print("calendar stored")
-                    }
-                })
+                }
             }
         }
         switch cell {

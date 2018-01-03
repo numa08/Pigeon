@@ -7,6 +7,7 @@
 
 import Foundation
 import GoogleSignIn
+import Hydra
 
 protocol UserAccount: PersistenceModel, CalendarProvider {
     var provider: SupportedProvider { get }
@@ -55,55 +56,61 @@ extension GoogleAccount: NSCodingStorableModel {
 
 protocol UserAccountRepository {
     
-    func store(account: UserAccount, completion: @escaping (Error?) -> Void) 
-    func restore(_ completion: @escaping ([UserAccount], Error?) -> Void)
+    func store(account: UserAccount) -> Promise<Void>
+    func restore() -> Promise<[UserAccount]>
 }
 
 struct UserDefaultsUserAccountRepository: UserAccountRepository {
         
     let userDefaults: UserDefaults
     
-    func store(account: UserAccount, completion: @escaping (Error?) -> Void) {
-        guard let model = account as? UserDefaultsStorableModel else {
-            completion(nil)
-            return
-        }
-        let accountIdentifier = "\(account.provider):\(account.identifier)"
-        model.store(toUserDefaults: userDefaults, forKey: accountIdentifier)
-        var accounts = userDefaults.stringArray(forKey: "userAccounts") ?? []
-        if !accounts.contains(accountIdentifier) {
-            accounts.append(accountIdentifier)
-        }
-        userDefaults.set(accounts, forKey: "userAccounts")
-        userDefaults.set(account.provider.rawValue, forKey: "\(accountIdentifier):provider")
-        userDefaults.synchronize()
-        completion(nil)
+    func restore() -> Promise<[UserAccount]> {
+        return Promise(in: .background, { (resolve, rejet, _) in
+            let userDefaults = self.userDefaults
+            let accountIdentifiers = userDefaults.stringArray(forKey: "userAccounts") ?? []
+            let accounts: [UserAccount] = accountIdentifiers.map({identifier in
+                let providerKey = "\(identifier):provider"
+                guard let providerName = userDefaults.string(forKey: providerKey) else {
+                    fatalError("provider name is not stored. key: \(providerKey)")
+                }
+                guard let provider = SupportedProvider(rawValue: providerName) else {
+                    fatalError("provider name is invalid. name: \(providerName)")
+                }
+                let account: UserAccount = {
+                    switch provider {
+                    case .EventKit:
+                        return EventKitAccount()
+                    case .Google:
+                        guard let a = GoogleAccount(userDefaults: userDefaults, modelIdentifier: identifier) else {
+                            fatalError("Failed restore GoogleAccount. identifier: \(identifier)")
+                        }
+                        return a
+                    }
+                }()
+                return account
+            })
+            resolve(accounts)
+        })
     }
     
-    func restore(_ completion: @escaping ([UserAccount], Error?) -> Void) {
-        let accountIdentifiers = userDefaults.stringArray(forKey: "userAccounts") ?? []
-        let accounts: [UserAccount] = accountIdentifiers.map({identifier in
-            let providerKey = "\(identifier):provider"
-            guard let providerName = userDefaults.string(forKey: providerKey) else {
-                fatalError("provider name is not stored. key: \(providerKey)")
+    func store(account: UserAccount) -> Promise<Void> {
+        return Promise(in: .background, { (resolve, reject, _) in
+            guard let model = account as? UserDefaultsStorableModel else {
+                
+                return
             }
-            guard let provider = SupportedProvider(rawValue: providerName) else {
-                fatalError("provider name is invalid. name: \(providerName)")
+            let userDefaults = self.userDefaults
+            let accountIdentifier = "\(account.provider):\(account.identifier)"
+            model.store(toUserDefaults: userDefaults, forKey: accountIdentifier)
+            var accounts = userDefaults.stringArray(forKey: "userAccounts") ?? []
+            if !accounts.contains(accountIdentifier) {
+                accounts.append(accountIdentifier)
             }
-            let account: UserAccount = {
-                switch provider {
-                case .EventKit:
-                    return EventKitAccount()
-                case .Google:
-                    guard let a = GoogleAccount(userDefaults: userDefaults, modelIdentifier: identifier) else {
-                        fatalError("Failed restore GoogleAccount. identifier: \(identifier)")
-                    }
-                    return a
-                }
-            }()
-            return account
+            userDefaults.set(accounts, forKey: "userAccounts")
+            userDefaults.set(account.provider.rawValue, forKey: "\(accountIdentifier):provider")
+            userDefaults.synchronize()
+            resolve(())
         })
-        completion(accounts, nil)
     }
     
 }

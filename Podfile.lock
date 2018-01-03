@@ -40,11 +40,13 @@ PODS:
   - GTMSessionFetcher/Core (1.1.12)
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
+  - HydraAsync (1.2.1)
 
 DEPENDENCIES:
   - Eureka
   - Google/SignIn (~> 3.0.3)
   - GoogleAPIClientForREST/Calendar (~> 1.2.1)
+  - HydraAsync
 
 SPEC CHECKSUMS:
   Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
@@ -57,7 +59,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  HydraAsync: 8f2ab62d57e140b4ca587ae0f66e1eb04e8e6965
 
-PODFILE CHECKSUM: 8b294c9573c3f43195030bf3bdbd92be662e34c0
+PODFILE CHECKSUM: 2f37d4aa4aeb7d752698d015daea81c7c175711b
 
 COCOAPODS: 1.4.0.beta.2

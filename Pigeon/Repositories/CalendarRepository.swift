@@ -8,6 +8,7 @@
 import EventKit
 import GoogleSignIn
 import GoogleAPIClientForREST
+import Hydra
 
 protocol Calendar: PersistenceModel {
     var provider: SupportedProvider { get }
@@ -71,91 +72,106 @@ extension GoogleCalendar: NSCodingStorableModel {
 }
 
 protocol CalendarProvider {
-    func fetchModifiableCalendar(_ completcion: @escaping (([Calendar], Error?) -> Void))
+    func fetchModifiableCalendar() -> Promise<[Calendar]>
 }
 
 extension EventKitAccount: CalendarProvider {
     
-    func fetchModifiableCalendar(_ completcion: @escaping (([Calendar], Error?) -> Void)) {
-        let eventStore = EKEventStore()
-        let list = eventStore.calendars(for: .event).filter({ !$0.isImmutable }).map({ EventKitCalendar(calendar: $0, account: self) })
-        completcion(list, nil)
+    func fetchModifiableCalendar() -> Promise<[Calendar]> {
+        return Promise(in: .background) {(resolve, reject, _) in
+            let eventStore = EKEventStore()
+            let list = eventStore.calendars(for: .event).filter({ !$0.isImmutable }).map({ EventKitCalendar(calendar: $0, account: self) })
+            resolve(list)
+        }
     }
     
 }
 
 extension GoogleAccount: CalendarProvider {
-    func fetchModifiableCalendar(_ completcion: @escaping (([Calendar], Error?) -> Void)) {
-        let service = GTLRCalendarService()
-        service.authorizer = self.user.authentication.fetcherAuthorizer()
-        let query = GTLRCalendarQuery_CalendarListList.query()
-        query.minAccessRole = "writer"
-        service.executeQuery(query) {(_, response, error) in
-            guard let list = response as? GTLRCalendar_CalendarList,
-                let entries = list.items else {
-                    fatalError("unknown response")
+    
+    func fetchModifiableCalendar() -> Promise<[Calendar]> {
+        return Promise(in: .background) {(resolve, reject, _) in
+            let service = GTLRCalendarService()
+            service.authorizer = self.user.authentication.fetcherAuthorizer()
+            let query = GTLRCalendarQuery_CalendarListList.query()
+            query.minAccessRole = "writer"
+            service.executeQuery(query) {(_, response, error) in
+                guard let list = response as? GTLRCalendar_CalendarList,
+                    let entries = list.items else {
+                        fatalError("unknown response")
+                }
+                if let error = error {
+                    reject(error)
+                    return
+                }
+                let calendars = entries.map({ GoogleCalendar(calendar: $0, account: self) })
+                resolve(calendars)
             }
-            let calendars = entries.map({ GoogleCalendar(calendar: $0, account: self) })
-            completcion(calendars, error)
         }
     }
 }
 
 protocol CalendarRepository {
     
-    func store(calendar: Calendar, fromUserAccount account: UserAccount, completion: @escaping (Error?) -> Void)
-    func restore(forAccount account: UserAccount, completion: @escaping ([Calendar], Error?) -> Void)
+    func store(calendar: Calendar, fromUserAccount account: UserAccount) -> Promise<Void>
+    func restore(forAccount account: UserAccount) -> Promise<[Calendar]>
 }
 
 struct UserDefaultsCalendarRepository: CalendarRepository {
     
     let userDefaults: UserDefaults
     
-    func store(calendar: Calendar, fromUserAccount account: UserAccount, completion: @escaping (Error?) -> Void) {
-        guard let model = calendar as? UserDefaultsStorableModel else {
-            completion(nil)
-            return
+    func store(calendar: Calendar, fromUserAccount account: UserAccount) -> Promise<Void> {
+        return Promise(in: .background) { (resolve, reject, _) in
+            guard let model = calendar as? UserDefaultsStorableModel else {
+                resolve(())
+                return
+            }
+            let modelIdentifier = "\(calendar.provider):\(calendar.identifier)"
+            let accountIdentifier = "\(account.provider):\(account.identifier):calendar"
+            let userDefaults = self.userDefaults
+            model.store(toUserDefaults: userDefaults, forKey: modelIdentifier)
+            var identifiers = userDefaults.stringArray(forKey: accountIdentifier) ?? []
+            if !identifiers.contains(modelIdentifier) {
+                identifiers.append(modelIdentifier)
+            }
+            userDefaults.set(identifiers, forKey: accountIdentifier)
+            userDefaults.set(calendar.provider.rawValue, forKey: "\(modelIdentifier):provider")
+            userDefaults.synchronize()
+            resolve(())
         }
-        let modelIdentifier = "\(calendar.provider):\(calendar.identifier)"
-        let accountIdentifier = "\(account.provider):\(account.identifier):calendar"
-        model.store(toUserDefaults: userDefaults, forKey: modelIdentifier)
-        var identifiers = userDefaults.stringArray(forKey: accountIdentifier) ?? []
-        if !identifiers.contains(modelIdentifier) {
-            identifiers.append(modelIdentifier)
-        }
-        userDefaults.set(identifiers, forKey: accountIdentifier)
-        userDefaults.set(calendar.provider.rawValue, forKey: "\(modelIdentifier):provider")
-        userDefaults.synchronize()
-        completion(nil)
     }
     
-    func restore(forAccount account: UserAccount, completion: @escaping ([Calendar], Error?) -> Void) {
-        let accountIdentifier = "\(account.provider):\(account.identifier):calendar"
-        let modelIdentifiers = userDefaults.stringArray(forKey: accountIdentifier) ?? []
-        let calendars: [Calendar] = modelIdentifiers.map({identifier in
-            let providerKey = "\(identifier):provider"
-            guard let providerName = userDefaults.string(forKey: providerKey) else {
-                fatalError("provider name is not stored. key: \(providerKey)")
-            }
-            guard let provider = SupportedProvider(rawValue: providerName) else {
-                fatalError("provider name is invalid. name: \(providerName)")
-            }
-            let calendar: Calendar = {
-                switch provider {
-                case .EventKit:
-                    guard let c = EventKitCalendar(userDefaults: userDefaults, modelIdentifier: identifier, withUserAccount: account) else {
-                        fatalError("Failed restore EventKitCalendar. identifier: \(identifier), account: \(account)")
-                    }
-                    return c
-                case .Google:
-                    guard let c = GoogleCalendar(userDefaults: userDefaults, modelIdentifier: identifier, withUserAccount: account) else {
-                        fatalError("Failed restore GoogleCalendar. identifier: \(identifier), account: \(account)")
-                    }
-                    return c
+    func restore(forAccount account: UserAccount) -> Promise<[Calendar]> {
+        return Promise(in: .background) {(resolve, reject, _) in
+            let accountIdentifier = "\(account.provider):\(account.identifier):calendar"
+            let userDefaults = self.userDefaults
+            let modelIdentifiers = userDefaults.stringArray(forKey: accountIdentifier) ?? []
+            let calendars: [Calendar] = modelIdentifiers.map({identifier in
+                let providerKey = "\(identifier):provider"
+                guard let providerName = userDefaults.string(forKey: providerKey) else {
+                    fatalError("provider name is not stored. key: \(providerKey)")
                 }
-            }()
-            return calendar
-        })
-        completion(calendars, nil)
+                guard let provider = SupportedProvider(rawValue: providerName) else {
+                    fatalError("provider name is invalid. name: \(providerName)")
+                }
+                let calendar: Calendar = {
+                    switch provider {
+                    case .EventKit:
+                        guard let c = EventKitCalendar(userDefaults: userDefaults, modelIdentifier: identifier, withUserAccount: account) else {
+                            fatalError("Failed restore EventKitCalendar. identifier: \(identifier), account: \(account)")
+                        }
+                        return c
+                    case .Google:
+                        guard let c = GoogleCalendar(userDefaults: userDefaults, modelIdentifier: identifier, withUserAccount: account) else {
+                            fatalError("Failed restore GoogleCalendar. identifier: \(identifier), account: \(account)")
+                        }
+                        return c
+                    }
+                }()
+                return calendar
+            })
+            resolve(calendars)
+        }
     }
 }

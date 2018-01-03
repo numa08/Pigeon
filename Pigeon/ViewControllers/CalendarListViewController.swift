@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Hydra
 
 class CalendarListViewController: UITableViewController {
     
@@ -29,33 +30,22 @@ class CalendarListViewController: UITableViewController {
 extension CalendarListViewController {
     
     func loadRepository() {
-        userAccountRepository?.restore({ (accounts, error) in
-            if let error = error {
-                print("restore useraccount error \(error)")
-                return
-            }
-            let queueGroup = DispatchGroup()
-            // 非同期に全部が読み込まれるのを待つ
-            accounts.forEach({account in
-                DispatchQueue(label: "\(account.identifier)").async(group: queueGroup) {
-                    var restored = false
-                    self.calendarRepository?.restore(forAccount: account, completion: {(calendars, error) in
-                        if let error = error {
-                            print("restore calendar error \(error)")
-                            restored = true
-                            return
-                        }
-                        let userAccountRow = account.toRow()
-                        let calendarRows = calendars.map({$0.toRow()})
-                        self.dataSet[userAccountRow] = calendarRows
-                        restored = true
-                    })
-                    while(!restored) {}
-                }
+        userAccountRepository?.restore().then({ (userAccounts) -> Promise<[(UserAccount, [Calendar])]> in
+            let promises = userAccounts.map({ (account) in
+                return self.calendarRepository?.restore(forAccount: account).then({ (calendars) in
+                    return (account, calendars)
+                })
+            }).filter({$0 != nil}).map({$0!})
+            return all(promises)
+        }).then(in: .main) {res in
+            res.forEach({ (account, calendars) in
+                let accountRow = account.toRow()
+                let calendarRows = calendars.map({$0.toRow()})
+                self.dataSet[accountRow] = calendarRows
             })
-            queueGroup.notify(queue: DispatchQueue.main) {
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
+        }.catch({ (error) in
+            print("restore useraccount error \(error)")
         })
     }
     
