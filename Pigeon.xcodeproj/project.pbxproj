@@ -1,0 +1,794 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		249B8FBA1FFF730F00C3535E /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FB91FFF730F00C3535E /* ActionViewController.swift */; };
+		249B8FBD1FFF730F00C3535E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 249B8FBB1FFF730F00C3535E /* MainInterface.storyboard */; };
+		249B8FC11FFF730F00C3535E /* AddCalendarAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		45D4A72F4A3AD6047FB6A223 /* Pods_PigeonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */; };
+		6227C246712F32810EEA2AA8 /* Pods_Pigeon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118A7D273452A756D713F8D /* Pods_Pigeon.framework */; };
+		BF_127051520179 /* PersistenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_858121270346 /* PersistenceModel.swift */; };
+		BF_165923807992 /* SupportedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_553055846822 /* SupportedProvider.swift */; };
+		BF_215061820840 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = VG_774826763097 /* LaunchScreen.storyboard */; };
+		BF_226169127571 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FR_314644839885 /* GoogleService-Info.plist */; };
+		BF_347189994367 /* rows.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_635198303258 /* rows.swift */; };
+		BF_440320040498 /* OpenGraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_442452621321 /* OpenGraphParser.swift */; };
+		BF_476957834166 /* GoogleCalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_974558396188 /* GoogleCalendarRepository.swift */; };
+		BF_512890763990 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = VG_106140571276 /* Main.storyboard */; };
+		BF_548894639379 /* UserAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_306575360467 /* UserAccountRepository.swift */; };
+		BF_562737928675 /* GoogleAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_270194438561 /* GoogleAccountRepository.swift */; };
+		BF_596691187977 /* OpenGraphRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_460586586996 /* OpenGraphRepository.swift */; };
+		BF_629410552227 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_500918527952 /* AppDelegate.swift */; };
+		BF_666027296538 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_767346830800 /* LoginViewController.swift */; };
+		BF_670056304807 /* CalendarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_385422901303 /* CalendarListViewController.swift */; };
+		BF_694473157007 /* LoginViewController+EventKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_404828084436 /* LoginViewController+EventKit.swift */; };
+		BF_748210087172 /* CalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_672373638083 /* CalendarRepository.swift */; };
+		BF_794404818034 /* PigeonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_243283262423 /* PigeonTests.swift */; };
+		BF_855237681256 /* OpenGraphMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_217790123767 /* OpenGraphMetaData.swift */; };
+		BF_891482553594 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FR_690328767421 /* Assets.xcassets */; };
+		BF_914766450637 /* LoginViewController+GoogleCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_337285469931 /* LoginViewController+GoogleCalendar.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		249B8FBF1FFF730F00C3535E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = P_4792371632290 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 249B8FB61FFF730F00C3535E;
+			remoteInfo = AddCalendarAction;
+		};
+		CIP_98070802065 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = P_4792371632290 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = NT_479237163229;
+			remoteInfo = Pigeon;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		249B8FC51FFF730F00C3535E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				249B8FC11FFF730F00C3535E /* AddCalendarAction.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AddCalendarAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		249B8FB91FFF730F00C3535E /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		249B8FBC1FFF730F00C3535E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		249B8FBE1FFF730F00C3535E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9118A7D273452A756D713F8D /* Pods_Pigeon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PigeonTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98BA5EEEF8723F4EF3920EE2 /* Pods-PigeonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigeonTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests.release.xcconfig"; sourceTree = "<group>"; };
+		ADD249AFBA3A3939F4799921 /* Pods-Pigeon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon.debug.xcconfig"; sourceTree = "<group>"; };
+		B887CBDB3A52D24FB1486055 /* Pods-Pigeon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon.release.xcconfig"; sourceTree = "<group>"; };
+		D889F987E544AA34EEB191DC /* Pods-PigeonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigeonTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FR_106140571276 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FR_217790123767 /* OpenGraphMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphMetaData.swift; sourceTree = "<group>"; };
+		FR_243283262423 /* PigeonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigeonTests.swift; sourceTree = "<group>"; };
+		FR_270194438561 /* GoogleAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAccountRepository.swift; sourceTree = "<group>"; };
+		FR_306575360467 /* UserAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountRepository.swift; sourceTree = "<group>"; };
+		FR_314644839885 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FR_337285469931 /* LoginViewController+GoogleCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+GoogleCalendar.swift"; sourceTree = "<group>"; };
+		FR_366419411241 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FR_385422901303 /* CalendarListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarListViewController.swift; sourceTree = "<group>"; };
+		FR_404828084436 /* LoginViewController+EventKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+EventKit.swift"; sourceTree = "<group>"; };
+		FR_442452621321 /* OpenGraphParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphParser.swift; sourceTree = "<group>"; };
+		FR_460586586996 /* OpenGraphRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphRepository.swift; sourceTree = "<group>"; };
+		FR_479237163229 /* Pigeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pigeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FR_499683667281 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FR_500918527952 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FR_553055846822 /* SupportedProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedProvider.swift; sourceTree = "<group>"; };
+		FR_635198303258 /* rows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rows.swift; sourceTree = "<group>"; };
+		FR_672373638083 /* CalendarRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRepository.swift; sourceTree = "<group>"; };
+		FR_690328767421 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FR_767346830800 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FR_774826763097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FR_858121270346 /* PersistenceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceModel.swift; sourceTree = "<group>"; };
+		FR_974558396188 /* GoogleCalendarRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarRepository.swift; sourceTree = "<group>"; };
+		FR_980708020655 /* PigeonTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = file; path = PigeonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		16626550FFB9949AC4B52E26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45D4A72F4A3AD6047FB6A223 /* Pods_PigeonTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		249B8FB41FFF730F00C3535E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C32A97E22EEC5C445CBB2592 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6227C246712F32810EEA2AA8 /* Pods_Pigeon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		249B8FB81FFF730F00C3535E /* AddCalendarAction */ = {
+			isa = PBXGroup;
+			children = (
+				249B8FB91FFF730F00C3535E /* ActionViewController.swift */,
+				249B8FBB1FFF730F00C3535E /* MainInterface.storyboard */,
+				249B8FBE1FFF730F00C3535E /* Info.plist */,
+			);
+			path = AddCalendarAction;
+			sourceTree = "<group>";
+		};
+		AB7FFDB06A520119B26DAA4D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ADD249AFBA3A3939F4799921 /* Pods-Pigeon.debug.xcconfig */,
+				B887CBDB3A52D24FB1486055 /* Pods-Pigeon.release.xcconfig */,
+				D889F987E544AA34EEB191DC /* Pods-PigeonTests.debug.xcconfig */,
+				98BA5EEEF8723F4EF3920EE2 /* Pods-PigeonTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C95293F0CCF86137720CF84D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9118A7D273452A756D713F8D /* Pods_Pigeon.framework */,
+				94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		G_4792371632290 /* Pigeon */ = {
+			isa = PBXGroup;
+			children = (
+				G_7558546789801 /* Repositories */,
+				G_5265135149671 /* ViewControllers */,
+				FR_500918527952 /* AppDelegate.swift */,
+				FR_690328767421 /* Assets.xcassets */,
+				FR_314644839885 /* GoogleService-Info.plist */,
+				FR_366419411241 /* Info.plist */,
+				VG_774826763097 /* LaunchScreen.storyboard */,
+				VG_106140571276 /* Main.storyboard */,
+				FR_553055846822 /* SupportedProvider.swift */,
+			);
+			path = Pigeon;
+			sourceTree = "<group>";
+		};
+		G_5265135149671 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FR_385422901303 /* CalendarListViewController.swift */,
+				FR_404828084436 /* LoginViewController+EventKit.swift */,
+				FR_337285469931 /* LoginViewController+GoogleCalendar.swift */,
+				FR_767346830800 /* LoginViewController.swift */,
+				FR_635198303258 /* rows.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		G_7558546789801 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				FR_672373638083 /* CalendarRepository.swift */,
+				FR_270194438561 /* GoogleAccountRepository.swift */,
+				FR_974558396188 /* GoogleCalendarRepository.swift */,
+				FR_217790123767 /* OpenGraphMetaData.swift */,
+				FR_442452621321 /* OpenGraphParser.swift */,
+				FR_460586586996 /* OpenGraphRepository.swift */,
+				FR_858121270346 /* PersistenceModel.swift */,
+				FR_306575360467 /* UserAccountRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		G_8448771205358 = {
+			isa = PBXGroup;
+			children = (
+				G_4792371632290 /* Pigeon */,
+				G_9807080206559 /* PigeonTests */,
+				249B8FB81FFF730F00C3535E /* AddCalendarAction */,
+				G_8620238527590 /* Products */,
+				AB7FFDB06A520119B26DAA4D /* Pods */,
+				C95293F0CCF86137720CF84D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		G_8620238527590 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FR_479237163229 /* Pigeon.app */,
+				FR_980708020655 /* PigeonTests.xctest */,
+				249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		G_9807080206559 /* PigeonTests */ = {
+			isa = PBXGroup;
+			children = (
+				FR_499683667281 /* Info.plist */,
+				FR_243283262423 /* PigeonTests.swift */,
+			);
+			path = PigeonTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		249B8FB61FFF730F00C3535E /* AddCalendarAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 249B8FC41FFF730F00C3535E /* Build configuration list for PBXNativeTarget "AddCalendarAction" */;
+			buildPhases = (
+				249B8FB31FFF730F00C3535E /* Sources */,
+				249B8FB41FFF730F00C3535E /* Frameworks */,
+				249B8FB51FFF730F00C3535E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AddCalendarAction;
+			productName = AddCalendarAction;
+			productReference = 249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		NT_479237163229 /* Pigeon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = "CL_479237163229-1" /* Build configuration list for PBXNativeTarget "Pigeon" */;
+			buildPhases = (
+				31571FDA4C9E5C41AC75102A /* [CP] Check Pods Manifest.lock */,
+				SBP_47923716322 /* Sources */,
+				RBP_47923716322 /* Resources */,
+				C32A97E22EEC5C445CBB2592 /* Frameworks */,
+				FBD2BCD907441F6BEB7831C4 /* [CP] Embed Pods Frameworks */,
+				26FE4EEE82BAE491FADD1F3B /* [CP] Copy Pods Resources */,
+				249B8FC51FFF730F00C3535E /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				249B8FC01FFF730F00C3535E /* PBXTargetDependency */,
+			);
+			name = Pigeon;
+			productName = Pigeon;
+			productReference = FR_479237163229 /* Pigeon.app */;
+			productType = "com.apple.product-type.application";
+		};
+		NT_980708020655 /* PigeonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CL_980708020655 /* Build configuration list for PBXNativeTarget "PigeonTests" */;
+			buildPhases = (
+				4496E4C343219C826F80AE2D /* [CP] Check Pods Manifest.lock */,
+				SBP_98070802065 /* Sources */,
+				16626550FFB9949AC4B52E26 /* Frameworks */,
+				CE9319317A43A3892C4753EE /* [CP] Embed Pods Frameworks */,
+				2D6E1D81501D769EDFBE7B3E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				TD_789237052955 /* PBXTargetDependency */,
+			);
+			name = PigeonTests;
+			productName = PigeonTests;
+			productReference = FR_980708020655 /* PigeonTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		P_4792371632290 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				TargetAttributes = {
+					249B8FB61FFF730F00C3535E = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = CL_479237163229 /* Build configuration list for PBXProject "Pigeon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = ja;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+			);
+			mainGroup = G_8448771205358;
+			productRefGroup = G_8620238527590 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				NT_479237163229 /* Pigeon */,
+				NT_980708020655 /* PigeonTests */,
+				249B8FB61FFF730F00C3535E /* AddCalendarAction */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		249B8FB51FFF730F00C3535E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				249B8FBD1FFF730F00C3535E /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		RBP_47923716322 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF_891482553594 /* Assets.xcassets in Resources */,
+				BF_226169127571 /* GoogleService-Info.plist in Resources */,
+				BF_215061820840 /* LaunchScreen.storyboard in Resources */,
+				BF_512890763990 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		26FE4EEE82BAE491FADD1F3B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2D6E1D81501D769EDFBE7B3E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		31571FDA4C9E5C41AC75102A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pigeon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4496E4C343219C826F80AE2D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PigeonTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE9319317A43A3892C4753EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBD2BCD907441F6BEB7831C4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HydraAsync/Hydra.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hydra.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		249B8FB31FFF730F00C3535E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				249B8FBA1FFF730F00C3535E /* ActionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		SBP_47923716322 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF_629410552227 /* AppDelegate.swift in Sources */,
+				BF_670056304807 /* CalendarListViewController.swift in Sources */,
+				BF_748210087172 /* CalendarRepository.swift in Sources */,
+				BF_562737928675 /* GoogleAccountRepository.swift in Sources */,
+				BF_476957834166 /* GoogleCalendarRepository.swift in Sources */,
+				BF_694473157007 /* LoginViewController+EventKit.swift in Sources */,
+				BF_914766450637 /* LoginViewController+GoogleCalendar.swift in Sources */,
+				BF_666027296538 /* LoginViewController.swift in Sources */,
+				BF_855237681256 /* OpenGraphMetaData.swift in Sources */,
+				BF_440320040498 /* OpenGraphParser.swift in Sources */,
+				BF_596691187977 /* OpenGraphRepository.swift in Sources */,
+				BF_127051520179 /* PersistenceModel.swift in Sources */,
+				BF_165923807992 /* SupportedProvider.swift in Sources */,
+				BF_548894639379 /* UserAccountRepository.swift in Sources */,
+				BF_347189994367 /* rows.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		SBP_98070802065 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF_794404818034 /* PigeonTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		249B8FC01FFF730F00C3535E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 249B8FB61FFF730F00C3535E /* AddCalendarAction */;
+			targetProxy = 249B8FBF1FFF730F00C3535E /* PBXContainerItemProxy */;
+		};
+		TD_789237052955 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = NT_479237163229 /* Pigeon */;
+			targetProxy = CIP_98070802065 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		249B8FBB1FFF730F00C3535E /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				249B8FBC1FFF730F00C3535E /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		VG_106140571276 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FR_106140571276 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		VG_774826763097 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FR_774826763097 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		249B8FC21FFF730F00C3535E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AddCalendarAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.numa08.Pigeon.AddCalendarAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		249B8FC31FFF730F00C3535E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = AddCalendarAction/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = net.numa08.Pigeon.AddCalendarAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BC_187620597143 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D889F987E544AA34EEB191DC /* Pods-PigeonTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PigeonTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.numa08.PigeonTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BC_275709116434 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADD249AFBA3A3939F4799921 /* Pods-Pigeon.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Pigeon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.numa08.Pigeon;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BC_479945831424 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		BC_506828132044 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B887CBDB3A52D24FB1486055 /* Pods-Pigeon.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Pigeon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.numa08.Pigeon;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BC_699817386549 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98BA5EEEF8723F4EF3920EE2 /* Pods-PigeonTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PigeonTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.numa08.PigeonTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BC_881114754245 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		249B8FC41FFF730F00C3535E /* Build configuration list for PBXNativeTarget "AddCalendarAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				249B8FC21FFF730F00C3535E /* Debug */,
+				249B8FC31FFF730F00C3535E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CL_479237163229 /* Build configuration list for PBXProject "Pigeon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC_479945831424 /* Debug */,
+				BC_881114754245 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		"CL_479237163229-1" /* Build configuration list for PBXNativeTarget "Pigeon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC_275709116434 /* Debug */,
+				BC_506828132044 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "";
+		};
+		CL_980708020655 /* Build configuration list for PBXNativeTarget "PigeonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC_187620597143 /* Debug */,
+				BC_699817386549 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "";
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = P_4792371632290 /* Project object */;
+}
