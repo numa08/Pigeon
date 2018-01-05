@@ -7,7 +7,6 @@ target 'Pigeon' do
   use_frameworks!
 
   # Pods for Pigeon
-  pod 'Eureka'
   pod 'GoogleAPIClientForREST/Calendar', '~> 1.2.1'
   pod 'Google/SignIn', '~> 3.0.3'
   pod 'HydraAsync'

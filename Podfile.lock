@@ -1,5 +1,4 @@
 PODS:
-  - Eureka (4.0.1)
   - FirebaseAnalytics (3.9.0):
     - FirebaseCore (~> 3.6)
     - FirebaseInstanceID (~> 1.0)
@@ -43,13 +42,11 @@ PODS:
   - HydraAsync (1.2.1)
 
 DEPENDENCIES:
-  - Eureka
   - Google/SignIn (~> 3.0.3)
   - GoogleAPIClientForREST/Calendar (~> 1.2.1)
   - HydraAsync
 
 SPEC CHECKSUMS:
-  Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
   FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
@@ -61,6 +58,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   HydraAsync: 8f2ab62d57e140b4ca587ae0f66e1eb04e8e6965
 
-PODFILE CHECKSUM: 2f37d4aa4aeb7d752698d015daea81c7c175711b
+PODFILE CHECKSUM: 1c3cb66caef470ed590ab66efdb588c5f6b6a4ab
 
-COCOAPODS: 1.4.0.beta.2
+COCOAPODS: 1.4.0.rc.1
