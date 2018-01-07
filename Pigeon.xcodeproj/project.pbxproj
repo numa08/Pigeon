@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		249B8FBA1FFF730F00C3535E /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FB91FFF730F00C3535E /* ActionViewController.swift */; };
+		249B8FBA1FFF730F00C3535E /* AddCalendarActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FB91FFF730F00C3535E /* AddCalendarActionViewController.swift */; };
 		249B8FBD1FFF730F00C3535E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 249B8FBB1FFF730F00C3535E /* MainInterface.storyboard */; };
 		249B8FC11FFF730F00C3535E /* AddCalendarAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		45D4A72F4A3AD6047FB6A223 /* Pods_PigeonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */; };
@@ -32,6 +32,7 @@
 		BF_855237681256 /* OpenGraphMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_217790123767 /* OpenGraphMetaData.swift */; };
 		BF_891482553594 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FR_690328767421 /* Assets.xcassets */; };
 		BF_914766450637 /* LoginViewController+GoogleCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_337285469931 /* LoginViewController+GoogleCalendar.swift */; };
+		E88D7FA1C2259BA8C0776C35 /* Pods_Pigeon_AddCalendarAction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B38B1DD03A8C37B9F98B44 /* Pods_Pigeon_AddCalendarAction.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,10 +67,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		19BCA5B0B87A07A28D61990F /* Pods-Pigeon-AddCalendarAction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-AddCalendarAction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-AddCalendarAction/Pods-Pigeon-AddCalendarAction.debug.xcconfig"; sourceTree = "<group>"; };
 		249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AddCalendarAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		249B8FB91FFF730F00C3535E /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		249B8FB91FFF730F00C3535E /* AddCalendarActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalendarActionViewController.swift; sourceTree = "<group>"; };
 		249B8FBC1FFF730F00C3535E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		249B8FBE1FFF730F00C3535E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		454576ECE087B5988BFF5820 /* Pods-Pigeon-AddCalendarAction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-AddCalendarAction.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-AddCalendarAction/Pods-Pigeon-AddCalendarAction.release.xcconfig"; sourceTree = "<group>"; };
+		63B38B1DD03A8C37B9F98B44 /* Pods_Pigeon_AddCalendarAction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon_AddCalendarAction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9118A7D273452A756D713F8D /* Pods_Pigeon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PigeonTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98BA5EEEF8723F4EF3920EE2 /* Pods-PigeonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigeonTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E88D7FA1C2259BA8C0776C35 /* Pods_Pigeon_AddCalendarAction.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,11 +137,19 @@
 		249B8FB81FFF730F00C3535E /* AddCalendarAction */ = {
 			isa = PBXGroup;
 			children = (
-				249B8FB91FFF730F00C3535E /* ActionViewController.swift */,
+				249B8FC61FFF738300C3535E /* ViewControllers */,
 				249B8FBB1FFF730F00C3535E /* MainInterface.storyboard */,
 				249B8FBE1FFF730F00C3535E /* Info.plist */,
 			);
 			path = AddCalendarAction;
+			sourceTree = "<group>";
+		};
+		249B8FC61FFF738300C3535E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				249B8FB91FFF730F00C3535E /* AddCalendarActionViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		AB7FFDB06A520119B26DAA4D /* Pods */ = {
@@ -146,6 +159,8 @@
 				B887CBDB3A52D24FB1486055 /* Pods-Pigeon.release.xcconfig */,
 				D889F987E544AA34EEB191DC /* Pods-PigeonTests.debug.xcconfig */,
 				98BA5EEEF8723F4EF3920EE2 /* Pods-PigeonTests.release.xcconfig */,
+				19BCA5B0B87A07A28D61990F /* Pods-Pigeon-AddCalendarAction.debug.xcconfig */,
+				454576ECE087B5988BFF5820 /* Pods-Pigeon-AddCalendarAction.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -155,6 +170,7 @@
 			children = (
 				9118A7D273452A756D713F8D /* Pods_Pigeon.framework */,
 				94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */,
+				63B38B1DD03A8C37B9F98B44 /* Pods_Pigeon_AddCalendarAction.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -240,9 +256,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 249B8FC41FFF730F00C3535E /* Build configuration list for PBXNativeTarget "AddCalendarAction" */;
 			buildPhases = (
+				128437F759038735EA612933 /* [CP] Check Pods Manifest.lock */,
 				249B8FB31FFF730F00C3535E /* Sources */,
 				249B8FB41FFF730F00C3535E /* Frameworks */,
 				249B8FB51FFF730F00C3535E /* Resources */,
+				CF7BDE1325454E77B1379A92 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -255,7 +273,7 @@
 		};
 		NT_479237163229 /* Pigeon */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = "CL_479237163229-1" /* Build configuration list for PBXNativeTarget "Pigeon" */;
+			buildConfigurationList = CL_479237163229-1 /* Build configuration list for PBXNativeTarget "Pigeon" */;
 			buildPhases = (
 				31571FDA4C9E5C41AC75102A /* [CP] Check Pods Manifest.lock */,
 				SBP_47923716322 /* Sources */,
@@ -306,7 +324,11 @@
 				TargetAttributes = {
 					249B8FB61FFF730F00C3535E = {
 						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = K45ES832VB;
 						ProvisioningStyle = Automatic;
+					};
+					NT_479237163229 = {
+						DevelopmentTeam = K45ES832VB;
 					};
 				};
 			};
@@ -352,6 +374,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		128437F759038735EA612933 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pigeon-AddCalendarAction-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		26FE4EEE82BAE491FADD1F3B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -436,6 +476,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CF7BDE1325454E77B1379A92 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-AddCalendarAction/Pods-Pigeon-AddCalendarAction-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-AddCalendarAction/Pods-Pigeon-AddCalendarAction-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FBD2BCD907441F6BEB7831C4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -448,6 +506,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HydraAsync/Hydra.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -456,6 +515,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hydra.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -469,7 +529,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				249B8FBA1FFF730F00C3535E /* ActionViewController.swift in Sources */,
+				249B8FBA1FFF730F00C3535E /* AddCalendarActionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,9 +608,11 @@
 /* Begin XCBuildConfiguration section */
 		249B8FC21FFF730F00C3535E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19BCA5B0B87A07A28D61990F /* Pods-Pigeon-AddCalendarAction.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K45ES832VB;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -569,9 +631,11 @@
 		};
 		249B8FC31FFF730F00C3535E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 454576ECE087B5988BFF5820 /* Pods-Pigeon-AddCalendarAction.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K45ES832VB;
 				INFOPLIST_FILE = AddCalendarAction/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -606,6 +670,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = K45ES832VB;
 				INFOPLIST_FILE = Pigeon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -679,6 +744,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = K45ES832VB;
 				INFOPLIST_FILE = Pigeon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -770,7 +836,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		"CL_479237163229-1" /* Build configuration list for PBXNativeTarget "Pigeon" */ = {
+		CL_479237163229-1 /* Build configuration list for PBXNativeTarget "Pigeon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BC_275709116434 /* Debug */,

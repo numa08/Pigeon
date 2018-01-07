@@ -10,7 +10,12 @@ target 'Pigeon' do
   pod 'GoogleAPIClientForREST/Calendar', '~> 1.2.1'
   pod 'Google/SignIn', '~> 3.0.3'
   pod 'HydraAsync'
-  
+
+  target 'AddCalendarAction' do
+      
+    pod 'Eureka'
+  end
+
   target 'PigeonTests' do
     inherit! :search_paths
     # Pods for testing
