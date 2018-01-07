@@ -11,8 +11,6 @@
 		249104B62001F6B900106193 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249104B52001F6B900106193 /* UserDefaults+AppGroup.swift */; };
 		249104B72001F6C100106193 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249104B52001F6B900106193 /* UserDefaults+AppGroup.swift */; };
 		249104BD2001F76400106193 /* CalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_672373638083 /* CalendarRepository.swift */; };
-		249104BE2001F76400106193 /* GoogleAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_270194438561 /* GoogleAccountRepository.swift */; };
-		249104BF2001F76400106193 /* GoogleCalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_974558396188 /* GoogleCalendarRepository.swift */; };
 		249104C02001F76400106193 /* OpenGraphMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_217790123767 /* OpenGraphMetaData.swift */; };
 		249104C12001F76400106193 /* OpenGraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_442452621321 /* OpenGraphParser.swift */; };
 		249104C22001F76400106193 /* OpenGraphRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_460586586996 /* OpenGraphRepository.swift */; };
@@ -23,6 +21,10 @@
 		249B8FBA1FFF730F00C3535E /* AddCalendarActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FB91FFF730F00C3535E /* AddCalendarActionViewController.swift */; };
 		249B8FBD1FFF730F00C3535E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 249B8FBB1FFF730F00C3535E /* MainInterface.storyboard */; };
 		249B8FC11FFF730F00C3535E /* AddCalendarAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		249B8FC9200268A800C3535E /* CalendarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FC8200268A800C3535E /* CalendarRow.swift */; };
+		249B8FCB20026E8800C3535E /* AddcalendarViewController+BuildCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FCA20026E8800C3535E /* AddcalendarViewController+BuildCalendar.swift */; };
+		249B8FCE2002795100C3535E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FCC2002700200C3535E /* Event.swift */; };
+		249B8FCF20027B4500C3535E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FCC2002700200C3535E /* Event.swift */; };
 		45D4A72F4A3AD6047FB6A223 /* Pods_PigeonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */; };
 		6227C246712F32810EEA2AA8 /* Pods_Pigeon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118A7D273452A756D713F8D /* Pods_Pigeon.framework */; };
 		BF_127051520179 /* PersistenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_858121270346 /* PersistenceModel.swift */; };
@@ -31,10 +33,8 @@
 		BF_226169127571 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FR_314644839885 /* GoogleService-Info.plist */; };
 		BF_347189994367 /* rows.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_635198303258 /* rows.swift */; };
 		BF_440320040498 /* OpenGraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_442452621321 /* OpenGraphParser.swift */; };
-		BF_476957834166 /* GoogleCalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_974558396188 /* GoogleCalendarRepository.swift */; };
 		BF_512890763990 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = VG_106140571276 /* Main.storyboard */; };
 		BF_548894639379 /* UserAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_306575360467 /* UserAccountRepository.swift */; };
-		BF_562737928675 /* GoogleAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_270194438561 /* GoogleAccountRepository.swift */; };
 		BF_596691187977 /* OpenGraphRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_460586586996 /* OpenGraphRepository.swift */; };
 		BF_629410552227 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_500918527952 /* AppDelegate.swift */; };
 		BF_666027296538 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_767346830800 /* LoginViewController.swift */; };
@@ -90,6 +90,9 @@
 		249B8FB91FFF730F00C3535E /* AddCalendarActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalendarActionViewController.swift; sourceTree = "<group>"; };
 		249B8FBC1FFF730F00C3535E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		249B8FBE1FFF730F00C3535E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		249B8FC8200268A800C3535E /* CalendarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRow.swift; sourceTree = "<group>"; };
+		249B8FCA20026E8800C3535E /* AddcalendarViewController+BuildCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddcalendarViewController+BuildCalendar.swift"; sourceTree = "<group>"; };
+		249B8FCC2002700200C3535E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		454576ECE087B5988BFF5820 /* Pods-Pigeon-AddCalendarAction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-AddCalendarAction.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-AddCalendarAction/Pods-Pigeon-AddCalendarAction.release.xcconfig"; sourceTree = "<group>"; };
 		63B38B1DD03A8C37B9F98B44 /* Pods_Pigeon_AddCalendarAction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon_AddCalendarAction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9118A7D273452A756D713F8D /* Pods_Pigeon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +104,6 @@
 		FR_106140571276 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FR_217790123767 /* OpenGraphMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphMetaData.swift; sourceTree = "<group>"; };
 		FR_243283262423 /* PigeonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigeonTests.swift; sourceTree = "<group>"; };
-		FR_270194438561 /* GoogleAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAccountRepository.swift; sourceTree = "<group>"; };
 		FR_306575360467 /* UserAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountRepository.swift; sourceTree = "<group>"; };
 		FR_314644839885 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FR_337285469931 /* LoginViewController+GoogleCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+GoogleCalendar.swift"; sourceTree = "<group>"; };
@@ -120,7 +122,6 @@
 		FR_767346830800 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FR_774826763097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FR_858121270346 /* PersistenceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceModel.swift; sourceTree = "<group>"; };
-		FR_974558396188 /* GoogleCalendarRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarRepository.swift; sourceTree = "<group>"; };
 		FR_980708020655 /* PigeonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PigeonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -164,6 +165,7 @@
 		249B8FB81FFF730F00C3535E /* AddCalendarAction */ = {
 			isa = PBXGroup;
 			children = (
+				249B8FC72002689400C3535E /* CustomRow */,
 				249104B42001F37800106193 /* AddCalendarAction.entitlements */,
 				249104AD2001DCE200106193 /* Utils */,
 				249B8FC61FFF738300C3535E /* ViewControllers */,
@@ -177,8 +179,17 @@
 			isa = PBXGroup;
 			children = (
 				249B8FB91FFF730F00C3535E /* AddCalendarActionViewController.swift */,
+				249B8FCA20026E8800C3535E /* AddcalendarViewController+BuildCalendar.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		249B8FC72002689400C3535E /* CustomRow */ = {
+			isa = PBXGroup;
+			children = (
+				249B8FC8200268A800C3535E /* CalendarRow.swift */,
+			);
+			path = CustomRow;
 			sourceTree = "<group>";
 		};
 		AB7FFDB06A520119B26DAA4D /* Pods */ = {
@@ -238,13 +249,12 @@
 			isa = PBXGroup;
 			children = (
 				FR_672373638083 /* CalendarRepository.swift */,
-				FR_270194438561 /* GoogleAccountRepository.swift */,
-				FR_974558396188 /* GoogleCalendarRepository.swift */,
 				FR_217790123767 /* OpenGraphMetaData.swift */,
 				FR_442452621321 /* OpenGraphParser.swift */,
 				FR_460586586996 /* OpenGraphRepository.swift */,
 				FR_858121270346 /* PersistenceModel.swift */,
 				FR_306575360467 /* UserAccountRepository.swift */,
+				249B8FCC2002700200C3535E /* Event.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -574,18 +584,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				249B8FCB20026E8800C3535E /* AddcalendarViewController+BuildCalendar.swift in Sources */,
 				249104C22001F76400106193 /* OpenGraphRepository.swift in Sources */,
 				249104C32001F76400106193 /* PersistenceModel.swift in Sources */,
 				249104C02001F76400106193 /* OpenGraphMetaData.swift in Sources */,
 				249104C52001F78500106193 /* SupportedProvider.swift in Sources */,
 				249104C12001F76400106193 /* OpenGraphParser.swift in Sources */,
 				249ADBE52002187100D7F0AB /* Calendar+String.swift in Sources */,
-				249104BE2001F76400106193 /* GoogleAccountRepository.swift in Sources */,
 				249B8FBA1FFF730F00C3535E /* AddCalendarActionViewController.swift in Sources */,
 				249104C42001F76400106193 /* UserAccountRepository.swift in Sources */,
-				249104BF2001F76400106193 /* GoogleCalendarRepository.swift in Sources */,
+				249B8FC9200268A800C3535E /* CalendarRow.swift in Sources */,
 				249104BD2001F76400106193 /* CalendarRepository.swift in Sources */,
 				249104B72001F6C100106193 /* UserDefaults+AppGroup.swift in Sources */,
+				249B8FCE2002795100C3535E /* Event.swift in Sources */,
 				249104AF2001DCF800106193 /* NSItemProvider+Hydra.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,9 +608,8 @@
 				BF_629410552227 /* AppDelegate.swift in Sources */,
 				BF_670056304807 /* CalendarListViewController.swift in Sources */,
 				BF_748210087172 /* CalendarRepository.swift in Sources */,
-				BF_562737928675 /* GoogleAccountRepository.swift in Sources */,
-				BF_476957834166 /* GoogleCalendarRepository.swift in Sources */,
 				BF_694473157007 /* LoginViewController+EventKit.swift in Sources */,
+				249B8FCF20027B4500C3535E /* Event.swift in Sources */,
 				249104B62001F6B900106193 /* UserDefaults+AppGroup.swift in Sources */,
 				BF_914766450637 /* LoginViewController+GoogleCalendar.swift in Sources */,
 				BF_666027296538 /* LoginViewController.swift in Sources */,
@@ -699,15 +709,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = K45ES832VB;
 				INFOPLIST_FILE = AddCalendarAction/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.covelline.pigeon.AddCalendarAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "94a05cda-4ae6-486b-87f2-28b0c2fcf42a";
+				PROVISIONING_PROFILE_SPECIFIER = "Development Pigeon AddCalendarAction";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;

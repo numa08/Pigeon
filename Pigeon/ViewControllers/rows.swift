@@ -7,57 +7,7 @@
 
 import UIKit
 
-struct UserAccountRow {
-    let userAccount: UserAccount
-}
-
-struct CalendarRow {
-    let calendar: Calendar
-}
-
-extension UserAccountRow: Hashable {
-    var hashValue: Int {
-        get {
-            return userAccount.identifier.hashValue
-        }
-    }
-    
-    static func ==(rhs: UserAccountRow, lhs: UserAccountRow) -> Bool {
-        return rhs.userAccount.identifier == lhs.userAccount.identifier &&
-            rhs.userAccount.provider == lhs.userAccount.provider
-    }
-}
-
-extension CalendarRow: Hashable {
-    var hashValue: Int {
-        get {
-            return calendar.identifier.hashValue
-        }
-    }
-    
-    static func==(rhs: CalendarRow, lhs: CalendarRow) -> Bool {
-        return rhs.calendar.identifier == lhs.calendar.identifier &&
-            rhs.calendar.provider == lhs.calendar.provider
-    }
-}
-
-extension Calendar {
-    
-    func toRow() -> CalendarRow {
-        return CalendarRow(calendar: self)
-    }
-    
-}
-
-extension UserAccount {
-    
-    func toRow() -> UserAccountRow {
-        return UserAccountRow(userAccount: self)
-    }
-    
-}
-
-extension UserAccountRow {
+extension UserAccountValue {
     
     func sectionHeaderFor(_ tableView: UITableView) -> String? {
         switch userAccount.provider {
@@ -71,7 +21,7 @@ extension UserAccountRow {
     
 }
 
-extension CalendarRow {
+extension CalendarValue {
     
     func cellFor(_ tableView: UITableView) -> UITableViewCell {
         let cell = UITableViewCell()

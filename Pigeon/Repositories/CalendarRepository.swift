@@ -18,10 +18,38 @@ extension EKEventStore {
     
 }
 
-protocol Calendar: PersistenceModel {
+protocol Calendar: PersistenceModel, EventHogeHoge {
     var provider: SupportedProvider { get }
     var identifier: String { get }
     var account: UserAccount { get }
+}
+
+// Calendar プロトコルは Hashable を実装できないのでラッパーを作る
+struct CalendarValue {
+    let calendar: Calendar
+}
+
+extension CalendarValue: Hashable {
+    
+    var hashValue: Int {
+        get {
+            return calendar.identifier.hashValue
+        }
+    }
+    
+    static func==(rhs: CalendarValue, lhs: CalendarValue) -> Bool {
+        return rhs.calendar.identifier == lhs.calendar.identifier &&
+            rhs.calendar.provider == lhs.calendar.provider
+    }
+    
+}
+
+extension Calendar {
+    
+    func toValue() -> CalendarValue {
+        return CalendarValue(calendar: self)
+    }
+    
 }
 
 struct EventKitCalendar : Calendar {

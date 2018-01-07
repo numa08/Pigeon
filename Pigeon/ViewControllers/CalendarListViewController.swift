@@ -13,7 +13,7 @@ class CalendarListViewController: UITableViewController {
     var userAccountRepository: UserAccountRepository? = nil
     var calendarRepository: CalendarRepository? = nil
     
-    private var dataSet: [UserAccountRow: [CalendarRow]] = [:]
+    private var dataSet: [UserAccountValue: [CalendarValue]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +39,8 @@ extension CalendarListViewController {
             return all(promises)
         }).then(in: .main) {res in
             res.forEach({ (account, calendars) in
-                let accountRow = account.toRow()
-                let calendarRows = calendars.map({$0.toRow()})
+                let accountRow = account.toValue()
+                let calendarRows = calendars.map({$0.toValue()})
                 self.dataSet[accountRow] = calendarRows
             })
             self.tableView.reloadData()
@@ -53,7 +53,7 @@ extension CalendarListViewController {
 
 extension CalendarListViewController {
     
-    func calendar(forSection section: Int, index: Int) -> CalendarRow {
+    func calendar(forSection section: Int, index: Int) -> CalendarValue {
         let key = Array(dataSet.keys)[section]
         let calendars = dataSet[key]
         return calendars![index]

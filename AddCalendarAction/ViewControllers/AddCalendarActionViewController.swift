@@ -113,7 +113,7 @@ class AddCalendarActionViewController: FormViewController {
                 $0.hidden = dateRowPredicate
             }
             +++ Section()
-            <<< PushRow<String>("Calendar") {
+            <<< PushRow<CalendarValue>("Calendar") {
                 $0.title = "カレンダー"
                 $0.selectorTitle = "カレンダー"
                 $0.add(rule: RuleRequired())
@@ -124,7 +124,7 @@ class AddCalendarActionViewController: FormViewController {
                             return try await(self.calendarRepository.restore(forAccount: account))
                         })
                     }).then(in: .main, { (calendars: [Calendar]) in
-                        let array = calendars.map({ $0.toString() })
+                        let array = calendars.map({ $0.toValue() })
                         completion(array)
                     })
                 })
@@ -142,6 +142,36 @@ class AddCalendarActionViewController: FormViewController {
                     if !error.isEmpty {
                         error.forEach({ print($0.msg) })
                         return
+                    }
+                    var event: Event? = nil
+                    if let titleRow: TextRow = self.form.rowBy(tag: "Title"),
+                        let title = titleRow.value,
+                        let descriptionRow: TextAreaRow = self.form.rowBy(tag: "Description"),
+                        let description = descriptionRow.value,
+                        let allDayRow: SwitchRow = self.form.rowBy(tag: "AllDay"),
+                        let allDay = allDayRow.value {
+                        if allDay {
+                            if let startRow: DateRow = self.form.rowBy(tag: "StartDate"),
+                                let start = startRow.value,
+                                let endRow: DateRow = self.form.rowBy(tag: "EndDate"),
+                                let end = endRow.value {
+                                event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end)
+                            }
+                        } else {
+                            if let startRow: DateTimeRow = self.form.rowBy(tag: "StartDateTime"),
+                                let start = startRow.value,
+                                let endRow: DateTimeRow = self.form.rowBy(tag: "EndDateTime"),
+                                let end = endRow.value {
+                                event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end)
+                            }
+                        }
+                    }
+                    if let calendarRow: PushRow<CalendarValue> = self.form.rowBy(tag: "Calendar"),
+                        let calendar = calendarRow.value?.calendar,
+                        let event = event {
+                        calendar.insert(event: event).then(in: .main) {(_) in
+                            self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
+                        }
                     }
 //                    let calendarID: String = self.form.values["Calendar"]
 //                    let event = GTLRCalendar_Event()
@@ -190,4 +220,20 @@ class AddCalendarActionViewController: FormViewController {
         tableView.reloadData()
     }
 
+}
+
+extension CalendarValue: CustomStringConvertible {
+    
+    var description: String {
+        switch calendar.provider {
+        case .EventKit:
+            let calendar = self.calendar as! EventKitCalendar
+            return "iOS: \(calendar.calendar.title)"
+        case .Google:
+            let calendar = self.calendar as! GoogleCalendar
+            let account = self.calendar.account as! GoogleAccount
+            return "\(calendar.calendar.summary!) \(account.user.profile.email!)"
+        }
+    }
+    
 }

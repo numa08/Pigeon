@@ -14,6 +14,31 @@ protocol UserAccount: PersistenceModel, CalendarProvider {
     var identifier: String { get }
 }
 
+struct UserAccountValue {
+    let userAccount: UserAccount
+}
+
+extension UserAccountValue: Hashable {
+    
+    var hashValue: Int {
+        get {
+            return userAccount.identifier.hashValue
+        }
+    }
+    
+    static func ==(rhs: UserAccountValue, lhs: UserAccountValue) -> Bool {
+        return rhs.userAccount.identifier == lhs.userAccount.identifier &&
+            rhs.userAccount.provider == lhs.userAccount.provider
+    }
+
+}
+
+extension UserAccount {
+    func toValue() -> UserAccountValue {
+        return UserAccountValue(userAccount: self)
+    }
+}
+
 struct EventKitAccount : UserAccount {
     let identifier: String = "eventKit"
     let provider: SupportedProvider = .EventKit
