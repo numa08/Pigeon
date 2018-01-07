@@ -3,25 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>520461717930-7jps03v0gsb7e186mcbo83rfjm1vnaln.apps.googleusercontent.com</string>
+	<string>520461717930-gt1cnp2ecjmk3dvjtdpnbqau36tv06lk.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.520461717930-7jps03v0gsb7e186mcbo83rfjm1vnaln</string>
+	<string>com.googleusercontent.apps.520461717930-gt1cnp2ecjmk3dvjtdpnbqau36tv06lk</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>net.numa08</string>
-	<key>PROJECT_ID</key>
-	<string>pigeon-190208</string>
-	<key>IS_ADS_ENABLED</key>
-	<false></false>
-	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
-	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
-	<key>IS_GCM_ENABLED</key>
-	<false></false>
-	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<string>com.covelline.pigeon</string>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:520461717930:ios:9205db2c7b6bf2f2</string>
 </dict>

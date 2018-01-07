@@ -16,6 +16,9 @@ struct CalendarTemplate {
 }
 
 class AddCalendarActionViewController: FormViewController {
+
+    let calendarRepository: CalendarRepository = UserDefaultsCalendarRepository(userDefaults: UserDefaults.shared)
+    let userAccountRepository: UserAccountRepository = UserDefaultsUserAccountRepository(userDefaults: UserDefaults.shared)
     
     var calendarTemplate: CalendarTemplate? = nil {
         didSet {
@@ -25,6 +28,7 @@ class AddCalendarActionViewController: FormViewController {
     
     override func loadView() {
         super.loadView()
+        
         let promises = extensionContext?.inputItems.flatMap({ (item) -> [Promise<CalendarTemplate>] in
             guard let item = item as? NSExtensionItem else {
                 return []
@@ -113,19 +117,17 @@ class AddCalendarActionViewController: FormViewController {
                 $0.title = "カレンダー"
                 $0.selectorTitle = "カレンダー"
                 $0.add(rule: RuleRequired())
-//                $0.optionsProvider = .lazy({(_, completion) in
-//
-//                    self.calendarRepository.fetchCalendarList(uiDelegate: self, completion: {(list, error) in
-//                        if let error = error {
-//                            print("fetch calendar error \(error.localizedDescription)")
-//                            return
-//                        }
-//                        let calendars = list.map({ $0.identifier! })
-//                        DispatchQueue.main.async {
-//                            completion(calendars)
-//                        }
-//                    })
-//                })
+                $0.optionsProvider = .lazy({(_, completion) in
+                    async(in: .background, {_ -> [Calendar] in
+                        let accounts = try await(self.userAccountRepository.restore())
+                        return try accounts.flatMap({account in
+                            return try await(self.calendarRepository.restore(forAccount: account))
+                        })
+                    }).then(in: .main, { (calendars: [Calendar]) in
+                        let array = calendars.map({ $0.toString() })
+                        completion(array)
+                    })
+                })
             }
             
             +++ Section()
