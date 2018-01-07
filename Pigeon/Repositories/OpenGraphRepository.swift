@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Hydra
 
 protocol OpenGraphRepository {
-    func openGraph(forURL url: URL, completion:@escaping (OpenGraph?, Error?) -> Void)
+    func openGraph(forURL url: URL) -> Promise<OpenGraph>
 }
 
 public enum OpenGraphResponseError: Error {
@@ -72,6 +73,23 @@ struct HttpOpenGraphRepository: OpenGraphRepository {
     static let shared: OpenGraphRepository = {
         return HttpOpenGraphRepository()
     }()
+    
+    func openGraph(forURL url: URL) -> Promise<OpenGraph> {
+        return Promise(in: .background) { (resolve, reject, _) in
+            let configuration = URLSessionConfiguration.default
+            let session = URLSession(configuration: configuration)
+            let task = session.dataTask(with: url, completionHandler: { (data, response, error) in
+                self.handleHttpGET(data: data, response: response, error: error, callback: {(og, error) in
+                    if let error = error {
+                        reject(error)
+                        return
+                    }
+                    resolve(og!)
+                })
+            })
+            task.resume()
+        }
+    }
     
     func openGraph(forURL url: URL, completion:@escaping (OpenGraph?, Error?) -> Void) {
         let configuration = URLSessionConfiguration.default

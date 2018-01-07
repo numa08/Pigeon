@@ -12,7 +12,7 @@ target 'Pigeon' do
   pod 'HydraAsync'
 
   target 'AddCalendarAction' do
-      
+    pod 'HydraAsync'
     pod 'Eureka'
   end
 

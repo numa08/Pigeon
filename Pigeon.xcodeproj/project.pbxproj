@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		249104AF2001DCF800106193 /* NSItemProvider+Hydra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249104AE2001DCF800106193 /* NSItemProvider+Hydra.swift */; };
+		249104B02001E1A500106193 /* OpenGraphRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_460586586996 /* OpenGraphRepository.swift */; };
+		249104B12001E1B100106193 /* OpenGraphMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_217790123767 /* OpenGraphMetaData.swift */; };
+		249104B22001E1C300106193 /* OpenGraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_442452621321 /* OpenGraphParser.swift */; };
 		249B8FBA1FFF730F00C3535E /* AddCalendarActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FB91FFF730F00C3535E /* AddCalendarActionViewController.swift */; };
 		249B8FBD1FFF730F00C3535E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 249B8FBB1FFF730F00C3535E /* MainInterface.storyboard */; };
 		249B8FC11FFF730F00C3535E /* AddCalendarAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -68,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		19BCA5B0B87A07A28D61990F /* Pods-Pigeon-AddCalendarAction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-AddCalendarAction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-AddCalendarAction/Pods-Pigeon-AddCalendarAction.debug.xcconfig"; sourceTree = "<group>"; };
+		249104AE2001DCF800106193 /* NSItemProvider+Hydra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSItemProvider+Hydra.swift"; sourceTree = "<group>"; };
 		249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AddCalendarAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		249B8FB91FFF730F00C3535E /* AddCalendarActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalendarActionViewController.swift; sourceTree = "<group>"; };
 		249B8FBC1FFF730F00C3535E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -134,9 +139,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		249104AD2001DCE200106193 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				249104AE2001DCF800106193 /* NSItemProvider+Hydra.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		249B8FB81FFF730F00C3535E /* AddCalendarAction */ = {
 			isa = PBXGroup;
 			children = (
+				249104AD2001DCE200106193 /* Utils */,
 				249B8FC61FFF738300C3535E /* ViewControllers */,
 				249B8FBB1FFF730F00C3535E /* MainInterface.storyboard */,
 				249B8FBE1FFF730F00C3535E /* Info.plist */,
@@ -273,7 +287,7 @@
 		};
 		NT_479237163229 /* Pigeon */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CL_479237163229-1 /* Build configuration list for PBXNativeTarget "Pigeon" */;
+			buildConfigurationList = "CL_479237163229-1" /* Build configuration list for PBXNativeTarget "Pigeon" */;
 			buildPhases = (
 				31571FDA4C9E5C41AC75102A /* [CP] Check Pods Manifest.lock */,
 				SBP_47923716322 /* Sources */,
@@ -529,7 +543,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				249104B02001E1A500106193 /* OpenGraphRepository.swift in Sources */,
 				249B8FBA1FFF730F00C3535E /* AddCalendarActionViewController.swift in Sources */,
+				249104AF2001DCF800106193 /* NSItemProvider+Hydra.swift in Sources */,
+				249104B12001E1B100106193 /* OpenGraphMetaData.swift in Sources */,
+				249104B22001E1C300106193 /* OpenGraphParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,7 +854,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		CL_479237163229-1 /* Build configuration list for PBXNativeTarget "Pigeon" */ = {
+		"CL_479237163229-1" /* Build configuration list for PBXNativeTarget "Pigeon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BC_275709116434 /* Debug */,

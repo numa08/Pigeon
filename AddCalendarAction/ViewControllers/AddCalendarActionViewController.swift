@@ -7,13 +7,64 @@
 
 import UIKit
 import Eureka
+import Hydra
 import MobileCoreServices
 
-class AddCalendarActionViewController: FormViewController {
+struct CalendarTemplate {
+    var title: String? = nil
+    var description: String? = nil
+}
 
+class AddCalendarActionViewController: FormViewController {
+    
+    var calendarTemplate: CalendarTemplate? = nil {
+        didSet {
+            updateRowContent()
+        }
+    }
+    
+    override func loadView() {
+        super.loadView()
+        let promises = extensionContext?.inputItems.flatMap({ (item) -> [Promise<CalendarTemplate>] in
+            guard let item = item as? NSExtensionItem else {
+                return []
+            }
+            return item.attachments?.map({ (provider) -> Promise<CalendarTemplate> in
+                guard let provider = provider as? NSItemProvider else {
+                    return Promise.init(resolved: CalendarTemplate())
+                }
+                if provider.hasItemConformingToTypeIdentifier((kUTTypeURL as String)) {
+                    return provider.loadItem(forTypeIdentifier: (kUTTypeURL as String)).then({ (url) -> (Promise<OpenGraph>)in
+                        guard let url = url as? URL else {
+                            fatalError("invalid item")
+                        }
+                        return HttpOpenGraphRepository.shared.openGraph(forURL: url)
+                    }).then({ (openGraph) -> CalendarTemplate in
+                        let description = "\(openGraph[.url] ?? "")\n\(openGraph[.description] ?? "")"
+                        return CalendarTemplate(title: openGraph[.title], description: description)
+                    })
+                }
+                fatalError("provider doesn't have expected type item")
+            }) ?? []
+        }) ?? []
+        
+        all(promises).then(in: .main) { (templates) in
+            var calendarTemplate = CalendarTemplate()
+            templates.forEach({
+                if let title = $0.title {
+                    calendarTemplate.title = title
+                }
+                if let description = $0.description {
+                    calendarTemplate.description = description
+                }
+            })
+            self.calendarTemplate = calendarTemplate
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let dateTimeRowPredicate = Condition.function(["AllDay"]) { form in
             guard let switchRow: SwitchRow = form.rowBy(tag: "AllDay") else {
                 fatalError("invalid tag")
@@ -28,7 +79,7 @@ class AddCalendarActionViewController: FormViewController {
         })
         form +++ Section()
             <<< TextRow("Title") {
-//                $0.value = self.openGraph?[.title]
+                $0.value = self.calendarTemplate?.title
                 $0.add(rule: RuleRequired())
             }
             +++ Section()
@@ -78,7 +129,9 @@ class AddCalendarActionViewController: FormViewController {
             }
             
             +++ Section()
-            <<< TextAreaRow("Description")
+            <<< TextAreaRow("Description") {
+                $0.value = self.calendarTemplate?.description
+            }
             +++ Section()
             <<< ButtonRow("Register") {
                 $0.title = "追加"
@@ -123,6 +176,16 @@ class AddCalendarActionViewController: FormViewController {
         // Return any edited content to the host app.
         // This template doesn't do anything, so we just echo the passed in items.
         self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
+    }
+    
+    private func updateRowContent() {
+        if let title: TextRow = form.rowBy(tag: "Title") {
+            title.value = calendarTemplate?.title
+        }
+        if let description: TextAreaRow = form.rowBy(tag: "Description") {
+            description.value = calendarTemplate?.description
+        }
+        tableView.reloadData()
     }
 
 }
