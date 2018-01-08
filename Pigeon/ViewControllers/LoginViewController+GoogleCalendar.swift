@@ -34,8 +34,21 @@ extension LoginViewController {
                 completion(nil, error)
                 return
             }
-            if let user = notif.userInfo?["user"] as? GIDGoogleUser {
-                completion(GoogleAccount(user: user), nil)
+            guard let user = notif.userInfo?["user"] as? GIDGoogleUser else {
+                fatalError("Notification has not userinfo")
+            }
+            let query = GTLRCalendarQuery_ColorsGet.query()
+            let service = GTLRCalendarService()
+            service.authorizer = user.authentication.fetcherAuthorizer()
+            service.executeQuery(query) {(_, response, error) in
+                if let error = error {
+                    completion(nil, error)
+                }
+                guard let colors = response as? GTLRCalendar_Colors else {
+                    fatalError("unknown response")
+                }
+                let account = GoogleAccount(user: user, colors: colors)
+                completion(account, nil)
             }
         })
         googleSignIn.signIn()

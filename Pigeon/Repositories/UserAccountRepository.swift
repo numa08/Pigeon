@@ -8,6 +8,7 @@
 import Foundation
 import GoogleSignIn
 import Hydra
+import GoogleAPIClientForREST
 
 protocol UserAccount: PersistenceModel, CalendarProvider {
     var provider: SupportedProvider { get }
@@ -53,29 +54,39 @@ extension EventKitAccount: UserDefaultsStorableModel {
 struct GoogleAccount: UserAccount {
     let provider: SupportedProvider = .Google
     let user: GIDGoogleUser
+    let colors: GTLRCalendar_Colors
     var identifier: String {
         get {
             return user.userID
         }
     }
-    init(user: GIDGoogleUser) {
-        self.user = user
-    }
 }
 
 extension GoogleAccount: NSCodingStorableModel {
     init?(userDefaults: UserDefaults, modelIdentifier identifier: String) {
-        guard let model = userDefaults.data(forKey: identifier),
-            let user = NSKeyedUnarchiver.unarchiveObject(with: model) as? GIDGoogleUser else {
+        guard let userModel = userDefaults.data(forKey: identifier),
+            let user = NSKeyedUnarchiver.unarchiveObject(with: userModel) as? GIDGoogleUser else {
+                return nil
+        }
+        guard let colorModel = userDefaults.data(forKey: "\(identifier):color"),
+            let colors = NSKeyedUnarchiver.unarchiveObject(with: colorModel) as? GTLRCalendar_Colors else {
                 return nil
         }
         self.user = user
+        self.colors = colors
     }
     
     var persistanceDate: NSCoding {
         get {
             return self.user
         }
+    }
+    
+    func store(toUserDefaults userDefaults: UserDefaults, forKey key: String) {
+        let data = persistanceDate.archivedData()
+        userDefaults.set(data, forKey: key)
+        let colorData = colors.archivedData()
+        userDefaults.set(colorData, forKey: "\(key):color")
     }
 }
 

@@ -76,7 +76,7 @@ extension CalendarListViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let calendar = self.calendar(forSection: indexPath.section, index: indexPath.row)
-        let cell = calendar.cellFor(tableView)
+        let cell = calendar.cellFor(tableView, rowAt: indexPath)
         return cell
     }
 }
