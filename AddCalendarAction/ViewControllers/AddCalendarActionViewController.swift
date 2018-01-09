@@ -13,6 +13,7 @@ import MobileCoreServices
 struct CalendarTemplate {
     var title: String? = nil
     var description: String? = nil
+    var url: URL? = nil
 }
 
 class AddCalendarActionViewController: FormViewController {
@@ -38,14 +39,13 @@ class AddCalendarActionViewController: FormViewController {
                     return Promise.init(resolved: CalendarTemplate())
                 }
                 if provider.hasItemConformingToTypeIdentifier((kUTTypeURL as String)) {
-                    return provider.loadItem(forTypeIdentifier: (kUTTypeURL as String)).then({ (url) -> (Promise<OpenGraph>)in
-                        guard let url = url as? URL else {
-                            fatalError("invalid item")
+                    return async(in: .background, {_ -> CalendarTemplate in
+                        guard let urlString = try? await(provider.loadItem(forTypeIdentifier: (kUTTypeURL as String))),
+                            let url = urlString as? URL else {
+                                fatalError("invalid item provided")
                         }
-                        return HttpOpenGraphRepository.shared.openGraph(forURL: url)
-                    }).then({ (openGraph) -> CalendarTemplate in
-                        let description = "\(openGraph[.url] ?? "")\n\(openGraph[.description] ?? "")"
-                        return CalendarTemplate(title: openGraph[.title], description: description)
+                        let openGraph = try? await(HttpOpenGraphRepository.shared.openGraph(forURL: url))
+                        return CalendarTemplate(title: openGraph?[.title], description: openGraph?[.description], url: url)
                     })
                 }
                 fatalError("provider doesn't have expected type item")
@@ -60,6 +60,9 @@ class AddCalendarActionViewController: FormViewController {
                 }
                 if let description = $0.description {
                     calendarTemplate.description = description
+                }
+                if let url = $0.url {
+                    calendarTemplate.url = url
                 }
             })
             self.calendarTemplate = calendarTemplate
@@ -131,6 +134,7 @@ class AddCalendarActionViewController: FormViewController {
             }
             
             +++ Section()
+            <<< URLRow("URL")
             <<< TextAreaRow("Description") {
                 $0.value = self.calendarTemplate?.description
             }
@@ -148,6 +152,8 @@ class AddCalendarActionViewController: FormViewController {
                         let title = titleRow.value,
                         let descriptionRow: TextAreaRow = self.form.rowBy(tag: "Description"),
                         let description = descriptionRow.value,
+                        let urlRow: URLRow = self.form.rowBy(tag: "URL"),
+                        let url = urlRow.value,
                         let allDayRow: SwitchRow = self.form.rowBy(tag: "AllDay"),
                         let allDay = allDayRow.value {
                         if allDay {
@@ -155,14 +161,14 @@ class AddCalendarActionViewController: FormViewController {
                                 let start = startRow.value,
                                 let endRow: DateRow = self.form.rowBy(tag: "EndDate"),
                                 let end = endRow.value {
-                                event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end)
+                                event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end, url: url)
                             }
                         } else {
                             if let startRow: DateTimeRow = self.form.rowBy(tag: "StartDateTime"),
                                 let start = startRow.value,
                                 let endRow: DateTimeRow = self.form.rowBy(tag: "EndDateTime"),
                                 let end = endRow.value {
-                                event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end)
+                                event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end, url: url)
                             }
                         }
                     }
@@ -173,34 +179,6 @@ class AddCalendarActionViewController: FormViewController {
                             self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
                         }
                     }
-//                    let calendarID: String = self.form.values["Calendar"]
-//                    let event = GTLRCalendar_Event()
-//                    event.summary = self.form.valueFor(tag: "Title")
-//                    let allDay: Bool = self.form.valueFor(tag: "AllDay")
-//                    if allDay {
-//                        let start: Date = self.form.valueFor(tag: "StartDate")
-//                        let end: Date = self.form.valueFor(tag: "EndDate")
-//                        event.start = GTLRCalendar_EventDateTime()
-//                        event.start?.dateTime = GTLRDateTime(date: start)
-//                        event.end = GTLRCalendar_EventDateTime()
-//                        event.end?.dateTime = GTLRDateTime(date: end)
-//                        event.originalStartTime = GTLRCalendar_EventDateTime()
-//                        event.originalStartTime?.date = GTLRDateTime(date: start)
-//                    } else {
-//                        let start: Date = self.form.valueFor(tag: "StartDateTime")
-//                        let end: Date = self.form.valueFor(tag: "EndDateTime")
-//                        event.start = GTLRCalendar_EventDateTime()
-//                        event.start?.dateTime = GTLRDateTime(date: start)
-//                        event.end = GTLRCalendar_EventDateTime()
-//                        event.end?.dateTime = GTLRDateTime(date: end)
-//                    }
-//                    self.calendarRepository.insertEvent(uiDelegate: self, event: event, calendarID: calendarID, completion: { (_, error) in
-//                        if let error = error {
-//                            prFormViewControllerint("insert error: \(error)")
-//                        } else {
-//                            print("insert complete")
-//                        }
-//                    })
                 })
     }
     
@@ -216,6 +194,9 @@ class AddCalendarActionViewController: FormViewController {
         }
         if let description: TextAreaRow = form.rowBy(tag: "Description") {
             description.value = calendarTemplate?.description
+        }
+        if let url: URLRow = form.rowBy(tag: "URL") {
+            url.value = calendarTemplate?.url
         }
         tableView.reloadData()
     }

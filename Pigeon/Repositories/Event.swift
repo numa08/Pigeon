@@ -16,6 +16,7 @@ struct Event {
     let allDay: Bool
     let startDateTime: Date
     let endDateTime: Date
+    let url: URL?
 }
 
 protocol EventHogeHoge {

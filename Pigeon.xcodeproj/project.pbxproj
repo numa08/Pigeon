@@ -22,9 +22,9 @@
 		249B8FBD1FFF730F00C3535E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 249B8FBB1FFF730F00C3535E /* MainInterface.storyboard */; };
 		249B8FC11FFF730F00C3535E /* AddCalendarAction.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		249B8FC9200268A800C3535E /* CalendarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FC8200268A800C3535E /* CalendarRow.swift */; };
-		249B8FCB20026E8800C3535E /* AddcalendarViewController+BuildCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FCA20026E8800C3535E /* AddcalendarViewController+BuildCalendar.swift */; };
 		249B8FCE2002795100C3535E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FCC2002700200C3535E /* Event.swift */; };
 		249B8FCF20027B4500C3535E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B8FCC2002700200C3535E /* Event.swift */; };
+		24F6B1A920044B82008CE554 /* CalendarSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F6B1A820044B82008CE554 /* CalendarSelectorViewController.swift */; };
 		45D4A72F4A3AD6047FB6A223 /* Pods_PigeonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */; };
 		6227C246712F32810EEA2AA8 /* Pods_Pigeon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118A7D273452A756D713F8D /* Pods_Pigeon.framework */; };
 		BF_127051520179 /* PersistenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_858121270346 /* PersistenceModel.swift */; };
@@ -91,8 +91,8 @@
 		249B8FBC1FFF730F00C3535E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		249B8FBE1FFF730F00C3535E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		249B8FC8200268A800C3535E /* CalendarRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRow.swift; sourceTree = "<group>"; };
-		249B8FCA20026E8800C3535E /* AddcalendarViewController+BuildCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddcalendarViewController+BuildCalendar.swift"; sourceTree = "<group>"; };
 		249B8FCC2002700200C3535E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		24F6B1A820044B82008CE554 /* CalendarSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSelectorViewController.swift; sourceTree = "<group>"; };
 		454576ECE087B5988BFF5820 /* Pods-Pigeon-AddCalendarAction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-AddCalendarAction.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-AddCalendarAction/Pods-Pigeon-AddCalendarAction.release.xcconfig"; sourceTree = "<group>"; };
 		63B38B1DD03A8C37B9F98B44 /* Pods_Pigeon_AddCalendarAction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon_AddCalendarAction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9118A7D273452A756D713F8D /* Pods_Pigeon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				249B8FB91FFF730F00C3535E /* AddCalendarActionViewController.swift */,
-				249B8FCA20026E8800C3535E /* AddcalendarViewController+BuildCalendar.swift */,
+				24F6B1A820044B82008CE554 /* CalendarSelectorViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -584,7 +584,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				249B8FCB20026E8800C3535E /* AddcalendarViewController+BuildCalendar.swift in Sources */,
+				24F6B1A920044B82008CE554 /* CalendarSelectorViewController.swift in Sources */,
 				249104C22001F76400106193 /* OpenGraphRepository.swift in Sources */,
 				249104C32001F76400106193 /* PersistenceModel.swift in Sources */,
 				249104C02001F76400106193 /* OpenGraphMetaData.swift in Sources */,
