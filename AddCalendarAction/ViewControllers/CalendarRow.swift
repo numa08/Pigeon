@@ -13,7 +13,6 @@ public class CalendarCell: PushSelectorCell<CalendarValue> {
     
     public override func update() {
         super.update()
-        print("update")
         if let value = row.value {
             show(calendar: value)
         }
