@@ -147,37 +147,34 @@ class AddCalendarActionViewController: FormViewController {
                         error.forEach({ print($0.msg) })
                         return
                     }
-                    var event: Event? = nil
-                    if let titleRow: TextRow = self.form.rowBy(tag: "Title"),
+                    guard let titleRow: TextRow = self.form.rowBy(tag: "Title"),
                         let title = titleRow.value,
                         let descriptionRow: TextAreaRow = self.form.rowBy(tag: "Description"),
                         let description = descriptionRow.value,
                         let urlRow: URLRow = self.form.rowBy(tag: "URL"),
                         let url = urlRow.value,
                         let allDayRow: SwitchRow = self.form.rowBy(tag: "AllDay"),
-                        let allDay = allDayRow.value {
+                        let allDay = allDayRow.value,
+                        let calendarRow: PushRow<CalendarValue> = self.form.rowBy(tag: "Calendar"),
+                        let calendar = calendarRow.value?.calendar else { fatalError("check tag") }
+                    let (start, end) = {() -> (Date, Date) in
                         if allDay {
-                            if let startRow: DateRow = self.form.rowBy(tag: "StartDate"),
+                            guard let startRow: DateRow = self.form.rowBy(tag: "StartDate"),
                                 let start = startRow.value,
                                 let endRow: DateRow = self.form.rowBy(tag: "EndDate"),
-                                let end = endRow.value {
-                                event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end, url: url)
-                            }
+                                let end = endRow.value else { fatalError("check tag") }
+                            return (start, end)
                         } else {
-                            if let startRow: DateTimeRow = self.form.rowBy(tag: "StartDateTime"),
+                            guard let startRow: DateTimeRow = self.form.rowBy(tag: "StartDateTime"),
                                 let start = startRow.value,
                                 let endRow: DateTimeRow = self.form.rowBy(tag: "EndDateTime"),
-                                let end = endRow.value {
-                                event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end, url: url)
-                            }
+                                let end = endRow.value else { fatalError("check tag") }
+                            return (start, end)
                         }
-                    }
-                    if let calendarRow: PushRow<CalendarValue> = self.form.rowBy(tag: "Calendar"),
-                        let calendar = calendarRow.value?.calendar,
-                        let event = event {
-                        calendar.insert(event: event).then(in: .main) {(_) in
-                            self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
-                        }
+                    }()
+                    let event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end, url: url)
+                    calendar.insert(event: event).then(in: .main) {(_) in
+                        self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
                     }
                 })
     }
