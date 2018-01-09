@@ -116,21 +116,10 @@ class AddCalendarActionViewController: FormViewController {
                 $0.hidden = dateRowPredicate
             }
             +++ Section()
-            <<< PushRow<CalendarValue>("Calendar") {
+            <<< CalendarRow("Calendar") {
                 $0.title = "カレンダー"
                 $0.selectorTitle = "カレンダー"
                 $0.add(rule: RuleRequired())
-                $0.optionsProvider = .lazy({(_, completion) in
-                    async(in: .background, {_ -> [Calendar] in
-                        let accounts = try await(self.userAccountRepository.restore())
-                        return try accounts.flatMap({account in
-                            return try await(self.calendarRepository.restore(forAccount: account))
-                        })
-                    }).then(in: .main, { (calendars: [Calendar]) in
-                        let array = calendars.map({ $0.toValue() })
-                        completion(array)
-                    })
-                })
             }
             
             +++ Section()
@@ -203,7 +192,7 @@ class AddCalendarActionViewController: FormViewController {
 
 extension CalendarValue: CustomStringConvertible {
     
-    var description: String {
+    public var description: String {
         switch calendar.provider {
         case .EventKit:
             let calendar = self.calendar as! EventKitCalendar

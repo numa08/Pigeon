@@ -7,21 +7,24 @@
 
 import UIKit
 import Hydra
+import Eureka
 
-class CalendarListViewController: UITableViewController {
+// Eureka で使うので open とする
+open class CalendarListViewController: UITableViewController, TypedRowControllerType {
     
-    var userAccountRepository: UserAccountRepository? = nil
-    var calendarRepository: CalendarRepository? = nil
+    public var onDismissCallback: ((UIViewController) -> Void)?
+    public var row: RowOf<CalendarValue>!
     
     private var dataSet: [UserAccountValue: [CalendarValue]] = [:]
+    let calendarRepository: CalendarRepository = UserDefaultsCalendarRepository(userDefaults: UserDefaults.shared)
+    let userAccountRepository: UserAccountRepository = UserDefaultsUserAccountRepository(userDefaults: UserDefaults.shared)
+
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
-        userAccountRepository = (UIApplication.shared.delegate as? AppDelegate)?.userAccountRepository
-        calendarRepository = (UIApplication.shared.delegate as? AppDelegate)?.calendarRepository
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadRepository()
     }
@@ -30,9 +33,9 @@ class CalendarListViewController: UITableViewController {
 extension CalendarListViewController {
     
     func loadRepository() {
-        userAccountRepository?.restore().then({ (userAccounts) -> Promise<[(UserAccount, [Calendar])]> in
+        userAccountRepository.restore().then({ (userAccounts) -> Promise<[(UserAccount, [Calendar])]> in
             let promises = userAccounts.map({ (account) in
-                return self.calendarRepository?.restore(forAccount: account).then({ (calendars) in
+                return self.calendarRepository.restore(forAccount: account).then({ (calendars) in
                     return (account, calendars)
                 })
             }).filter({$0 != nil}).map({$0!})
@@ -59,24 +62,30 @@ extension CalendarListViewController {
         return calendars![index]
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    open override func numberOfSections(in tableView: UITableView) -> Int {
         return dataSet.keys.count
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let account = Array(dataSet.keys)[section]
         return account.sectionHeaderFor(tableView)
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let key = Array(dataSet.keys)[section]
         let calendars = dataSet[key]
         return calendars!.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let calendar = self.calendar(forSection: indexPath.section, index: indexPath.row)
         let cell = calendar.cellFor(tableView, rowAt: indexPath)
         return cell
+    }
+    
+    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let calendar = self.calendar(forSection: indexPath.section, index: indexPath.row)
+        row.value = calendar
+        onDismissCallback?(self)
     }
 }

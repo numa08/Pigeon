@@ -25,19 +25,24 @@ protocol Calendar: PersistenceModel, EventHogeHoge {
 }
 
 // Calendar プロトコルは Hashable を実装できないのでラッパーを作る
-struct CalendarValue {
+// Eureka で使うので open とする
+open class CalendarValue {
     let calendar: Calendar
+    
+    init(calendar: Calendar) {
+        self.calendar = calendar
+    }
 }
 
 extension CalendarValue: Hashable {
     
-    var hashValue: Int {
+    public var hashValue: Int {
         get {
             return calendar.identifier.hashValue
         }
     }
     
-    static func==(rhs: CalendarValue, lhs: CalendarValue) -> Bool {
+    static public func==(rhs: CalendarValue, lhs: CalendarValue) -> Bool {
         return rhs.calendar.identifier == lhs.calendar.identifier &&
             rhs.calendar.provider == lhs.calendar.provider
     }
