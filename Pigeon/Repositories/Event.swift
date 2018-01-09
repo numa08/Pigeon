@@ -77,7 +77,7 @@ private extension Event {
     func toGoogleCalendarEvent() -> GTLRCalendar_Event {
         let event = GTLRCalendar_Event()
         event.summary = title
-        event.descriptionProperty = description
+        event.descriptionProperty = "\(url?.absoluteString ?? "")\n\(description ?? "")"
         event.start = GTLRCalendar_EventDateTime()
         event.end = GTLRCalendar_EventDateTime()
         if allDay {
