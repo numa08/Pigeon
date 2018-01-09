@@ -149,8 +149,6 @@ class AddCalendarActionViewController: FormViewController {
                     }
                     guard let titleRow: TextRow = self.form.rowBy(tag: "Title"),
                         let title = titleRow.value,
-                        let descriptionRow: TextAreaRow = self.form.rowBy(tag: "Description"),
-                        let description = descriptionRow.value,
                         let urlRow: URLRow = self.form.rowBy(tag: "URL"),
                         let url = urlRow.value,
                         let allDayRow: SwitchRow = self.form.rowBy(tag: "AllDay"),
@@ -172,6 +170,9 @@ class AddCalendarActionViewController: FormViewController {
                             return (start, end)
                         }
                     }()
+                    let descriptionRow: TextAreaRow? = self.form.rowBy(tag: "Description")
+                    let description = descriptionRow?.value
+
                     let event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end, url: url)
                     calendar.insert(event: event).then(in: .main) {(_) in
                         self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
