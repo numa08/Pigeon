@@ -85,7 +85,9 @@ extension CalendarListViewController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let calendar = self.calendar(forSection: indexPath.section, index: indexPath.row)
-        row.value = calendar
+        row?.value = calendar
+        row?.updateCell()
         onDismissCallback?(self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -9,7 +9,19 @@ import Foundation
 import UIKit
 import Eureka
 
-open class _CalendarRow: OptionsRow<PushSelectorCell<CalendarValue>>, PresenterRowType {
+public class CalendarCell: PushSelectorCell<CalendarValue> {
+    
+    public override func update() {
+        super.update()
+        print("update")
+        if let value = row.value {
+            show(calendar: value)
+        }
+    }
+    
+}
+
+open class _CalendarRow: OptionsRow<CalendarCell>, PresenterRowType {
     public var onPresentCallback: ((FormViewController, CalendarListViewController) -> Void)?
     
     public typealias PresentedControllerType = CalendarListViewController
@@ -17,14 +29,12 @@ open class _CalendarRow: OptionsRow<PushSelectorCell<CalendarValue>>, PresenterR
     
     public required init(tag: String?) {
         super.init(tag: tag)
+        cellStyle = UITableViewCellStyle.subtitle
         self.presentationMode = .show(controllerProvider: ControllerProvider.callback(builder: { () -> CalendarListViewController in
             let vc = CalendarListViewController(style: .grouped)
             return vc
         })) { vc in
             let _ = vc.navigationController?.popViewController(animated: true)
-        }
-        self.displayValueFor = {
-            return $0?.calendar.identifier
         }
     }
  

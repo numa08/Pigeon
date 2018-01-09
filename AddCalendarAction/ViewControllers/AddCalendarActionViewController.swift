@@ -142,7 +142,7 @@ class AddCalendarActionViewController: FormViewController {
                         let url = urlRow.value,
                         let allDayRow: SwitchRow = self.form.rowBy(tag: "AllDay"),
                         let allDay = allDayRow.value,
-                        let calendarRow: PushRow<CalendarValue> = self.form.rowBy(tag: "Calendar"),
+                        let calendarRow: CalendarRow = self.form.rowBy(tag: "Calendar"),
                         let calendar = calendarRow.value?.calendar else { fatalError("check tag") }
                     let (start, end) = {() -> (Date, Date) in
                         if allDay {
@@ -164,7 +164,7 @@ class AddCalendarActionViewController: FormViewController {
 
                     let event = Event(title: title, description: description, allDay: allDay, startDateTime: start, endDateTime: end, url: url)
                     calendar.insert(event: event).then(in: .main) {(_) in
-                        self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
+                        self.extensionContext?.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
                     }
                 })
     }

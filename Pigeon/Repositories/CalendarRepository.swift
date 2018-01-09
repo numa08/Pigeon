@@ -190,7 +190,6 @@ struct UserDefaultsCalendarRepository: CalendarRepository {
             let userDefaults = self.userDefaults
             let modelIdentifiers = userDefaults.stringArray(forKey: accountIdentifier) ?? []
             let calendars: [Calendar] = modelIdentifiers.map({identifier in
-                print("restore calendarIdentifier: \(identifier)")
                 let providerKey = "\(identifier):provider"
                 guard let providerName = userDefaults.string(forKey: providerKey) else {
                     fatalError("provider name is not stored. key: \(providerKey)")
