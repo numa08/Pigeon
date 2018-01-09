@@ -79,12 +79,13 @@ private extension Event {
         event.summary = title
         event.descriptionProperty = description
         event.start = GTLRCalendar_EventDateTime()
-        event.start?.dateTime = GTLRDateTime(date: startDateTime)
         event.end = GTLRCalendar_EventDateTime()
-        event.end?.dateTime = GTLRDateTime(date: endDateTime)
         if allDay {
-            event.originalStartTime = GTLRCalendar_EventDateTime()
-            event.originalStartTime?.date = GTLRDateTime(date: startDateTime)
+            event.start?.date = GTLRDateTime(forAllDayWith: startDateTime)
+            event.end?.date = GTLRDateTime(forAllDayWith: endDateTime)
+        } else {
+            event.start?.dateTime = GTLRDateTime(date: startDateTime)
+            event.end?.dateTime = GTLRDateTime(date: endDateTime)
         }
         return event
     }
