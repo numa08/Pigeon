@@ -86,6 +86,7 @@ class AddCalendarActionViewController: FormViewController {
         })
         form +++ Section()
             <<< TextRow("Title") {
+                $0.placeholder = "タイトル(必須)"
                 $0.value = self.calendarTemplate?.title
                 $0.add(rule: RuleRequired())
             }
@@ -117,25 +118,25 @@ class AddCalendarActionViewController: FormViewController {
             }
             +++ Section()
             <<< CalendarRow("Calendar") {
-                $0.title = "カレンダー"
+                $0.title = "カレンダー(必須)"
                 $0.selectorTitle = "カレンダー"
                 $0.add(rule: RuleRequired())
             }
             
             +++ Section()
-            <<< URLRow("URL")
+            <<< URLRow("URL") {
+                $0.placeholder = "URL"
+            }
             <<< TextAreaRow("Description") {
+                $0.placeholder = "メモ"
                 $0.value = self.calendarTemplate?.description
             }
             +++ Section()
             <<< ButtonRow("Register") {
-                $0.title = "追加"
+                    $0.title = "追加"
                 }.onCellSelection({(_, _) in
-                    let error = self.form.validate()
-                    if !error.isEmpty {
-                        error.forEach({ print($0.msg) })
-                        return
-                    }
+                    let error = !self.form.validate().isEmpty
+                    if error { return }
                     guard let titleRow: TextRow = self.form.rowBy(tag: "Title"),
                         let title = titleRow.value,
                         let urlRow: URLRow = self.form.rowBy(tag: "URL"),
