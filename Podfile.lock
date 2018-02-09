@@ -1,4 +1,5 @@
 PODS:
+  - Differentiator (3.0.2)
   - Eureka (4.0.1)
   - FirebaseAnalytics (3.9.0):
     - FirebaseCore (~> 3.6)
@@ -41,14 +42,27 @@ PODS:
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
   - HydraAsync (1.2.1)
+  - ReactorKit (1.1.0):
+    - RxSwift (>= 4.0.0)
+  - RxCocoa (4.1.0):
+    - RxSwift (~> 4.0)
+  - RxDataSources (3.0.2):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxSwift (4.1.0)
 
 DEPENDENCIES:
   - Eureka
   - Google/SignIn (~> 3.0.3)
   - GoogleAPIClientForREST/Calendar (~> 1.2.1)
   - HydraAsync
+  - ReactorKit
+  - RxCocoa
+  - RxDataSources (~> 3.0)
 
 SPEC CHECKSUMS:
+  Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
   FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
@@ -60,7 +74,11 @@ SPEC CHECKSUMS:
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   HydraAsync: 8f2ab62d57e140b4ca587ae0f66e1eb04e8e6965
+  ReactorKit: 26470a9eff5094fae909a30af0be7cd0cf8a182d
+  RxCocoa: cc1fec49cdc8fabe645964de7c51c099a36c2aa8
+  RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
+  RxSwift: 4219941c1244c88002901bd87a69d3aea9ae71f0
 
-PODFILE CHECKSUM: 67fd80868db386fe5e8dc39e59418a949d3a9dc3
+PODFILE CHECKSUM: 65d8782d1010b6032f157d70847c969edef95c74
 
 COCOAPODS: 1.4.0.rc.1

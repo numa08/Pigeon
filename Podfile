@@ -10,10 +10,17 @@ target 'Pigeon' do
   pod 'GoogleAPIClientForREST/Calendar', '~> 1.2.1'
   pod 'Google/SignIn', '~> 3.0.3'
   pod 'HydraAsync'
+  pod 'ReactorKit'
+  pod 'RxCocoa'
+  pod 'RxDataSources', '~> 3.0'
+
 
   target 'AddCalendarAction' do
     pod 'HydraAsync'
     pod 'Eureka'
+    pod 'ReactorKit'
+    pod 'RxCocoa'
+    pod 'RxDataSources', '~> 3.0'
   end
 
   target 'PigeonTests' do
