@@ -24,6 +24,9 @@ struct EventKitCalendarRepository: CalendarRepositoryType {
         get {
             return Observable.create({emitter -> Disposable in
                 func observeCalendar()  {
+                    if EKEventStore.authorizationStatus(for: .event) != .authorized {
+                        return
+                    }
                     let calendars = self.eventStore.calendars(for: .event)
                         .filter { $0.allowsContentModifications }
                         .map({ c -> CalendarEntity in
@@ -36,9 +39,9 @@ struct EventKitCalendarRepository: CalendarRepositoryType {
                         })
                     emitter.onNext([(CalendarProviderEntity(name: "iOS") ,calendars)])
                 }
-//                NotificationCenter.default.addObserver(forName: Notification.Name.EventStoreAuthorized, object: nil, queue: nil, using: {_ in
-//                    observeCalendar()
-//                })
+                NotificationCenter.default.addObserver(forName: Notification.Name.EventStoreAuthorized, object: nil, queue: nil, using: {_ in
+                    observeCalendar()
+                })
                 observeCalendar()
                 return Disposables.create()
             })
