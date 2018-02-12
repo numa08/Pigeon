@@ -42,7 +42,6 @@
 		24085BCD202EC8C0000B4066 /* LoginReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BCC202EC8C0000B4066 /* LoginReactor.swift */; };
 		24085BCF202ECD66000B4066 /* CalendarProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BCE202ECD66000B4066 /* CalendarProviderService.swift */; };
 		243F1AC2202EE22E0030EFE2 /* ToastSwiftFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243F1AC1202EE22E0030EFE2 /* ToastSwiftFramework.framework */; };
-		243F1AC3202EE3020030EFE2 /* Toast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243F1ABF202EE0A70030EFE2 /* Toast.framework */; };
 		243F1AC6202EEAE50030EFE2 /* LoginViewController+EventKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1AC5202EEAE50030EFE2 /* LoginViewController+EventKit.swift */; };
 		243F1AC8202EEB050030EFE2 /* LoginViewController+GoogleCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1AC7202EEB050030EFE2 /* LoginViewController+GoogleCalendar.swift */; };
 		243F1ACA202F05E40030EFE2 /* GoogleAccountStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1AC9202F05E40030EFE2 /* GoogleAccountStoreService.swift */; };
@@ -179,7 +178,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				243F1AC3202EE3020030EFE2 /* Toast.framework in Frameworks */,
 				243F1AC2202EE22E0030EFE2 /* ToastSwiftFramework.framework in Frameworks */,
 				24085BAF202DE170000B4066 /* ReactorKit.framework in Frameworks */,
 				24085BAD202DE170000B4066 /* ReactorKitRuntime.framework in Frameworks */,
@@ -576,7 +574,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ReactorKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactorKitRuntime.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ToastSwiftFramework.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Toast.framework",
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
@@ -588,7 +585,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactorKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactorKitRuntime.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ToastSwiftFramework.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Toast.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

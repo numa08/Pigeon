@@ -9,7 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReactorKit
-import Toast
 import GoogleSignIn
 
 class LoginViewController: UITableViewController, View {
@@ -26,7 +25,7 @@ class LoginViewController: UITableViewController, View {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+        
     func bind(reactor: LoginReactor) {
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
         tableView.rx.itemSelected.map {
@@ -69,14 +68,18 @@ class LoginViewController: UITableViewController, View {
                 switch state {
                 case .success:
                     print("success")
-                case .failed:
-                    print("failed")
+                case let .failed(error):
+                    print("failed \(error)")
                 case .loggingin:
                     break
                 }
             }
         })
         .disposed(by: disposeBag)
+        
+        reactor.state.asObservable().map { $0.title }
+            .subscribe(onNext: { self.title = $0 })
+            .disposed(by: disposeBag)
     }
     
 }

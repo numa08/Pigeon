@@ -15,7 +15,6 @@ final class LoginReactor: Reactor {
         case login(SupportedProvider)
         case loggedInEventKit
         case loggedInGoogle(GIDGoogleUser)
-        case loggedInFailed
     }
     
     enum Mutation {
@@ -25,13 +24,14 @@ final class LoginReactor: Reactor {
 
     enum LoginState {
         case success
-        case failed
+        case failed(Error)
         case loggingin
     }
     
     struct State {
         var loggingingService: SupportedProvider?
         var loginState: LoginState?
+        var title: String?
     }
     
     public let initialState: LoginReactor.State
@@ -41,7 +41,8 @@ final class LoginReactor: Reactor {
         self.provider = serviceProvider
         self.initialState = State(
             loggingingService: nil,
-            loginState: nil
+            loginState: nil,
+            title: "ログイン"
         )
     }
     
@@ -51,10 +52,12 @@ final class LoginReactor: Reactor {
             return Observable.just(Mutation.loginToProvider(provider))
         case .loggedInEventKit:
             return Observable.just(Mutation.loggedInFinished(.success))
-        case .loggedInGoogle(_):
-            fatalError("TODO")
-        case .loggedInFailed:
-            return Observable.just(Mutation.loggedInFinished(.failed))
+        case let .loggedInGoogle(user):
+            return provider.googleAccountStorage.store(user: user)
+            .subscribeOn(OperationQueueScheduler(operationQueue: OperationQueue()))
+            .observeOn(OperationQueueScheduler(operationQueue: OperationQueue.main))
+            .map({ _ in Mutation.loggedInFinished(.success) })
+            .catchError({ Observable.just(Mutation.loggedInFinished(.failed($0))) })
         }
     }
 
@@ -66,6 +69,7 @@ final class LoginReactor: Reactor {
             state.loginState = .loggingin
             
         case let .loggedInFinished(result):
+            state.loggingingService = nil
             state.loginState  = result
         }
         return state

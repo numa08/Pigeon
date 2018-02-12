@@ -9,8 +9,10 @@ import Foundation
 
 protocol ServiceProviderType {
     var calendarProviderService: CalendarProviderServiceType { get }
+    var googleAccountStorage: GoogleAccountStorageType { get }
 }
 
 struct ServiceProvider: ServiceProviderType {
-    var calendarProviderService: CalendarProviderServiceType = CalendarProviderService()
+    let calendarProviderService: CalendarProviderServiceType
+    let googleAccountStorage: GoogleAccountStorageType
 }

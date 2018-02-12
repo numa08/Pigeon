@@ -20,7 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize sign-in
         GIDSignIn.sharedInstance().clientID = "520461717930-gt1cnp2ecjmk3dvjtdpnbqau36tv06lk.apps.googleusercontent.com"
         
-        let rootReactor = LoginReactor(ServiceProvider())
+        let userDefaults = UserDefaults.shared
+        let rootReactor = LoginReactor(
+            ServiceProvider(calendarProviderService: CalendarProviderService(), googleAccountStorage: GoogleAccountStorage(userDefaults: userDefaults))
+        )
         let rootViewController = LoginViewController(rootReactor)
         let main = UINavigationController(rootViewController: rootViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
