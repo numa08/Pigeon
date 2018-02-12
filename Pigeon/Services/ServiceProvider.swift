@@ -8,5 +8,9 @@
 import Foundation
 
 protocol ServiceProviderType {
-    var calendarService: CalendarServiceType { get }
+    var calendarProviderService: CalendarProviderServiceType { get }
+}
+
+struct ServiceProvider: ServiceProviderType {
+    var calendarProviderService: CalendarProviderServiceType = CalendarProviderService()
 }

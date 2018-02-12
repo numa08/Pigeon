@@ -11,7 +11,7 @@ import RxSwift
 import RxDataSources
 
 public struct CalendarSection {
-    let section: String
+    let section: CalendarProviderCellModel
     public var items: [CalendarCellReactor]
 }
 
@@ -43,7 +43,7 @@ final public class CalendarListReactor: Reactor {
     
     public struct State {
         var calendarSections: [CalendarSection]
-        var selectedCalendar: IndexPath?
+        var selectedCalendar: CalendarCellReactor?
     }
     
     init(
@@ -58,11 +58,21 @@ final public class CalendarListReactor: Reactor {
     public func mutate(action: CalendarListReactor.Action) -> Observable<CalendarListReactor.Mutation> {
         switch action {
         case .loadCalendarSections:
-            return self.provider.calendarService
-            .fetchCalendars()
-                .map({ (_) -> Mutation in
-                    return Mutation.setCalendarSections([])
-                })
+            fatalError("todo")
+//            return self.provider.calendarService.refreshCalendars().asObservable()
+//                .flatMap({ _ in
+//                    return self.provider.calendarService.fetchCalendars()
+//                })
+//                .map({ results in
+//                    let sections = results.map({ (arg) -> CalendarSection in
+//                        let (provider, calendars) = arg
+//                        let reactors = calendars.map({ CalendarCellReactor(calendar: $0) })
+//                        return CalendarSection(section: provider, items: reactors)
+//                    })
+//                    return Mutation.setCalendarSections(sections)
+//                })
+//                .subscribeOn(OperationQueueScheduler(operationQueue: OperationQueue()))
+//                .observeOn(OperationQueueScheduler(operationQueue: OperationQueue.current ?? OperationQueue.main))
         case let .selectedCalendar(indexPath):
             return Observable.just(Mutation.selectedCalendar(indexPath))
         }
@@ -76,7 +86,8 @@ final public class CalendarListReactor: Reactor {
             state.calendarSections = calendarSections
             return state
         case let .selectedCalendar(indexPath):
-            state.selectedCalendar = indexPath
+            let cellReactor = state.calendarSections[indexPath.section].items[indexPath.row]
+            state.selectedCalendar = cellReactor
             return state
         }
     }

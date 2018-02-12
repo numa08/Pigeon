@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public struct CalendarEntityId {
     let value: String
@@ -13,4 +14,7 @@ public struct CalendarEntityId {
 
 public struct CalendarEntity {
     let id: CalendarEntityId
+    let title: String
+    let detail: String
+    let color: UIColor
 }

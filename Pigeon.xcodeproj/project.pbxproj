@@ -11,11 +11,8 @@
 		24085B86202D39B3000B4066 /* CalendarCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B85202D39B3000B4066 /* CalendarCellReactor.swift */; };
 		24085B8A202D3BBD000B4066 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B89202D3BBD000B4066 /* ServiceProvider.swift */; };
 		24085B8C202D3BE1000B4066 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B8B202D3BE1000B4066 /* CalendarService.swift */; };
-		24085B8F202D4CD6000B4066 /* CalendarListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B81202D1FE8000B4066 /* CalendarListReactor.swift */; };
-		24085B90202D4CE4000B4066 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B89202D3BBD000B4066 /* ServiceProvider.swift */; };
 		24085B91202D4CE8000B4066 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B8B202D3BE1000B4066 /* CalendarService.swift */; };
 		24085B92202D4D14000B4066 /* CalendarCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B85202D39B3000B4066 /* CalendarCellReactor.swift */; };
-		24085B93202D78CC000B4066 /* CalendarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_385422901303 /* CalendarListViewController.swift */; };
 		24085B96202D861B000B4066 /* CalendarListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B95202D861B000B4066 /* CalendarListCell.swift */; };
 		24085B97202D8720000B4066 /* CalendarListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B95202D861B000B4066 /* CalendarListCell.swift */; };
 		24085B9A202D8C15000B4066 /* CalendarEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B99202D8C15000B4066 /* CalendarEntity.swift */; };
@@ -24,6 +21,33 @@
 		24085B9E202D9470000B4066 /* CalendarRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B9C202D93EB000B4066 /* CalendarRepository.swift */; };
 		24085BA1202DD946000B4066 /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BA0202DD946000B4066 /* UIColor+Image.swift */; };
 		24085BA2202DD946000B4066 /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BA0202DD946000B4066 /* UIColor+Image.swift */; };
+		24085BA3202DDA61000B4066 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F578DE202D17AA00ED7E5D /* RxBlocking.framework */; };
+		24085BA4202DDA61000B4066 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F578DD202D17AA00ED7E5D /* RxCocoa.framework */; };
+		24085BA5202DDA61000B4066 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F578DB202D17AA00ED7E5D /* RxSwift.framework */; };
+		24085BA9202DDD4E000B4066 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24085BA7202DDD4D000B4066 /* RxDataSources.framework */; };
+		24085BAA202DDD4E000B4066 /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24085BA8202DDD4D000B4066 /* Differentiator.framework */; };
+		24085BAC202DE09D000B4066 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24085BAB202DE09D000B4066 /* Eureka.framework */; };
+		24085BAD202DE170000B4066 /* ReactorKitRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F578DA202D17AA00ED7E5D /* ReactorKitRuntime.framework */; };
+		24085BAF202DE170000B4066 /* ReactorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24085BAE202DE170000B4066 /* ReactorKit.framework */; };
+		24085BBB202E797C000B4066 /* CalendarProviderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BBA202E797C000B4066 /* CalendarProviderEntity.swift */; };
+		24085BBC202E797C000B4066 /* CalendarProviderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BBA202E797C000B4066 /* CalendarProviderEntity.swift */; };
+		24085BBE202E7C14000B4066 /* CalendarCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BBD202E7C14000B4066 /* CalendarCellModel.swift */; };
+		24085BBF202E7C14000B4066 /* CalendarCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BBD202E7C14000B4066 /* CalendarCellModel.swift */; };
+		24085BC1202E7C30000B4066 /* CalendarProviderSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BC0202E7C30000B4066 /* CalendarProviderSectionModel.swift */; };
+		24085BC2202E7C30000B4066 /* CalendarProviderSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BC0202E7C30000B4066 /* CalendarProviderSectionModel.swift */; };
+		24085BC4202EBBA8000B4066 /* ProviderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BC3202EBBA8000B4066 /* ProviderRepository.swift */; };
+		24085BC5202EBBA8000B4066 /* ProviderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BC3202EBBA8000B4066 /* ProviderRepository.swift */; };
+		24085BC7202EBFD2000B4066 /* GoogleCalendarProviderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BC6202EBFD2000B4066 /* GoogleCalendarProviderRepository.swift */; };
+		24085BCA202EC87C000B4066 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BC9202EC87C000B4066 /* LoginViewController.swift */; };
+		24085BCD202EC8C0000B4066 /* LoginReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BCC202EC8C0000B4066 /* LoginReactor.swift */; };
+		24085BCF202ECD66000B4066 /* CalendarProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085BCE202ECD66000B4066 /* CalendarProviderService.swift */; };
+		243F1AC2202EE22E0030EFE2 /* ToastSwiftFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243F1AC1202EE22E0030EFE2 /* ToastSwiftFramework.framework */; };
+		243F1AC3202EE3020030EFE2 /* Toast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243F1ABF202EE0A70030EFE2 /* Toast.framework */; };
+		243F1AC6202EEAE50030EFE2 /* LoginViewController+EventKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1AC5202EEAE50030EFE2 /* LoginViewController+EventKit.swift */; };
+		243F1AC8202EEB050030EFE2 /* LoginViewController+GoogleCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1AC7202EEB050030EFE2 /* LoginViewController+GoogleCalendar.swift */; };
+		243F1ACA202F05E40030EFE2 /* GoogleAccountStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1AC9202F05E40030EFE2 /* GoogleAccountStoreService.swift */; };
+		243F1ACB202F05E90030EFE2 /* GoogleAccountStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1AC9202F05E40030EFE2 /* GoogleAccountStoreService.swift */; };
+		243F1ACD202F064C0030EFE2 /* GoogleAccountStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1ACC202F064C0030EFE2 /* GoogleAccountStorage.swift */; };
 		249104B62001F6B900106193 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249104B52001F6B900106193 /* UserDefaults+AppGroup.swift */; };
 		249104B72001F6C100106193 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249104B52001F6B900106193 /* UserDefaults+AppGroup.swift */; };
 		249104C52001F78500106193 /* SupportedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_553055846822 /* SupportedProvider.swift */; };
@@ -35,7 +59,6 @@
 		BF_165923807992 /* SupportedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_553055846822 /* SupportedProvider.swift */; };
 		BF_215061820840 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = VG_774826763097 /* LaunchScreen.storyboard */; };
 		BF_226169127571 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FR_314644839885 /* GoogleService-Info.plist */; };
-		BF_512890763990 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = VG_106140571276 /* Main.storyboard */; };
 		BF_629410552227 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_500918527952 /* AppDelegate.swift */; };
 		BF_670056304807 /* CalendarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_385422901303 /* CalendarListViewController.swift */; };
 		BF_794404818034 /* PigeonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_243283262423 /* PigeonTests.swift */; };
@@ -84,6 +107,24 @@
 		24085B99202D8C15000B4066 /* CalendarEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEntity.swift; sourceTree = "<group>"; };
 		24085B9C202D93EB000B4066 /* CalendarRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRepository.swift; sourceTree = "<group>"; };
 		24085BA0202DD946000B4066 /* UIColor+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
+		24085BA7202DDD4D000B4066 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
+		24085BA8202DDD4D000B4066 /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
+		24085BAB202DE09D000B4066 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = Carthage/Build/iOS/Eureka.framework; sourceTree = "<group>"; };
+		24085BAE202DE170000B4066 /* ReactorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactorKit.framework; path = Carthage/Build/iOS/ReactorKit.framework; sourceTree = "<group>"; };
+		24085BBA202E797C000B4066 /* CalendarProviderEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarProviderEntity.swift; sourceTree = "<group>"; };
+		24085BBD202E7C14000B4066 /* CalendarCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCellModel.swift; sourceTree = "<group>"; };
+		24085BC0202E7C30000B4066 /* CalendarProviderSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarProviderSectionModel.swift; sourceTree = "<group>"; };
+		24085BC3202EBBA8000B4066 /* ProviderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderRepository.swift; sourceTree = "<group>"; };
+		24085BC6202EBFD2000B4066 /* GoogleCalendarProviderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarProviderRepository.swift; sourceTree = "<group>"; };
+		24085BC9202EC87C000B4066 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		24085BCC202EC8C0000B4066 /* LoginReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReactor.swift; sourceTree = "<group>"; };
+		24085BCE202ECD66000B4066 /* CalendarProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarProviderService.swift; sourceTree = "<group>"; };
+		243F1ABF202EE0A70030EFE2 /* Toast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Toast.framework; path = Carthage/Build/iOS/Toast.framework; sourceTree = "<group>"; };
+		243F1AC1202EE22E0030EFE2 /* ToastSwiftFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ToastSwiftFramework.framework; path = Carthage/Build/iOS/ToastSwiftFramework.framework; sourceTree = "<group>"; };
+		243F1AC5202EEAE50030EFE2 /* LoginViewController+EventKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+EventKit.swift"; sourceTree = "<group>"; };
+		243F1AC7202EEB050030EFE2 /* LoginViewController+GoogleCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+GoogleCalendar.swift"; sourceTree = "<group>"; };
+		243F1AC9202F05E40030EFE2 /* GoogleAccountStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAccountStoreService.swift; sourceTree = "<group>"; };
+		243F1ACC202F064C0030EFE2 /* GoogleAccountStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAccountStorage.swift; sourceTree = "<group>"; };
 		249104B32001F33400106193 /* Pigeon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pigeon.entitlements; sourceTree = "<group>"; };
 		249104B42001F37800106193 /* AddCalendarAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AddCalendarAction.entitlements; sourceTree = "<group>"; };
 		249104B52001F6B900106193 /* UserDefaults+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+AppGroup.swift"; sourceTree = "<group>"; };
@@ -104,7 +145,6 @@
 		ADD249AFBA3A3939F4799921 /* Pods-Pigeon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon.debug.xcconfig"; sourceTree = "<group>"; };
 		B887CBDB3A52D24FB1486055 /* Pods-Pigeon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon.release.xcconfig"; sourceTree = "<group>"; };
 		D889F987E544AA34EEB191DC /* Pods-PigeonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigeonTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FR_106140571276 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FR_243283262423 /* PigeonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigeonTests.swift; sourceTree = "<group>"; };
 		FR_314644839885 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FR_366419411241 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,6 +179,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				243F1AC3202EE3020030EFE2 /* Toast.framework in Frameworks */,
+				243F1AC2202EE22E0030EFE2 /* ToastSwiftFramework.framework in Frameworks */,
+				24085BAF202DE170000B4066 /* ReactorKit.framework in Frameworks */,
+				24085BAD202DE170000B4066 /* ReactorKitRuntime.framework in Frameworks */,
+				24085BAC202DE09D000B4066 /* Eureka.framework in Frameworks */,
+				24085BA9202DDD4E000B4066 /* RxDataSources.framework in Frameworks */,
+				24085BAA202DDD4E000B4066 /* Differentiator.framework in Frameworks */,
+				24085BA3202DDA61000B4066 /* RxBlocking.framework in Frameworks */,
+				24085BA4202DDA61000B4066 /* RxCocoa.framework in Frameworks */,
+				24085BA5202DDA61000B4066 /* RxSwift.framework in Frameworks */,
 				6227C246712F32810EEA2AA8 /* Pods_Pigeon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +211,7 @@
 			children = (
 				24085B81202D1FE8000B4066 /* CalendarListReactor.swift */,
 				24085B85202D39B3000B4066 /* CalendarCellReactor.swift */,
+				24085BCC202EC8C0000B4066 /* LoginReactor.swift */,
 			);
 			path = Reactors;
 			sourceTree = "<group>";
@@ -170,6 +221,10 @@
 			children = (
 				24085B89202D3BBD000B4066 /* ServiceProvider.swift */,
 				24085B8B202D3BE1000B4066 /* CalendarService.swift */,
+				24085BBD202E7C14000B4066 /* CalendarCellModel.swift */,
+				24085BC0202E7C30000B4066 /* CalendarProviderSectionModel.swift */,
+				24085BCE202ECD66000B4066 /* CalendarProviderService.swift */,
+				243F1AC9202F05E40030EFE2 /* GoogleAccountStoreService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -178,6 +233,9 @@
 			isa = PBXGroup;
 			children = (
 				FR_385422901303 /* CalendarListViewController.swift */,
+				24085BC9202EC87C000B4066 /* LoginViewController.swift */,
+				243F1AC5202EEAE50030EFE2 /* LoginViewController+EventKit.swift */,
+				243F1AC7202EEB050030EFE2 /* LoginViewController+GoogleCalendar.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -193,8 +251,9 @@
 		24085B98202D8BE2000B4066 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				24085BB0202E71D4000B4066 /* Data */,
 				24085B99202D8C15000B4066 /* CalendarEntity.swift */,
-				24085B9C202D93EB000B4066 /* CalendarRepository.swift */,
+				24085BBA202E797C000B4066 /* CalendarProviderEntity.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -205,6 +264,25 @@
 				24085BA0202DD946000B4066 /* UIColor+Image.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		24085BB0202E71D4000B4066 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				24085BB9202E7332000B4066 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		24085BB9202E7332000B4066 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				24085B9C202D93EB000B4066 /* CalendarRepository.swift */,
+				24085BC3202EBBA8000B4066 /* ProviderRepository.swift */,
+				24085BC6202EBFD2000B4066 /* GoogleCalendarProviderRepository.swift */,
+				243F1ACC202F064C0030EFE2 /* GoogleAccountStorage.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		249104AD2001DCE200106193 /* Utils */ = {
@@ -258,6 +336,12 @@
 		C95293F0CCF86137720CF84D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				243F1AC1202EE22E0030EFE2 /* ToastSwiftFramework.framework */,
+				243F1ABF202EE0A70030EFE2 /* Toast.framework */,
+				24085BAE202DE170000B4066 /* ReactorKit.framework */,
+				24085BAB202DE09D000B4066 /* Eureka.framework */,
+				24085BA8202DDD4D000B4066 /* Differentiator.framework */,
+				24085BA7202DDD4D000B4066 /* RxDataSources.framework */,
 				24F578DA202D17AA00ED7E5D /* ReactorKitRuntime.framework */,
 				24F578DE202D17AA00ED7E5D /* RxBlocking.framework */,
 				24F578DD202D17AA00ED7E5D /* RxCocoa.framework */,
@@ -283,7 +367,6 @@
 				FR_314644839885 /* GoogleService-Info.plist */,
 				FR_366419411241 /* Info.plist */,
 				VG_774826763097 /* LaunchScreen.storyboard */,
-				VG_106140571276 /* Main.storyboard */,
 				FR_553055846822 /* SupportedProvider.swift */,
 				249104B52001F6B900106193 /* UserDefaults+AppGroup.swift */,
 			);
@@ -354,6 +437,7 @@
 				FBD2BCD907441F6BEB7831C4 /* [CP] Embed Pods Frameworks */,
 				26FE4EEE82BAE491FADD1F3B /* [CP] Copy Pods Resources */,
 				249B8FC51FFF730F00C3535E /* Embed App Extensions */,
+				24085BA6202DDA72000B4066 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -453,7 +537,6 @@
 				BF_891482553594 /* Assets.xcassets in Resources */,
 				BF_226169127571 /* GoogleService-Info.plist in Resources */,
 				BF_215061820840 /* LaunchScreen.storyboard in Resources */,
-				BF_512890763990 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +560,39 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		24085BA6202DDA72000B4066 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Eureka.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactorKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactorKitRuntime.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ToastSwiftFramework.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Toast.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxDataSources.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Eureka.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactorKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactorKitRuntime.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ToastSwiftFramework.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Toast.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		26FE4EEE82BAE491FADD1F3B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -587,31 +703,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/HydraAsync/Hydra.framework",
-				"${BUILT_PRODUCTS_DIR}/ReactorKit/ReactorKit.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hydra.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactorKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -626,17 +728,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				24085B9B202D8C70000B4066 /* CalendarEntity.swift in Sources */,
+				24085BC2202E7C30000B4066 /* CalendarProviderSectionModel.swift in Sources */,
 				24085BA2202DD946000B4066 /* UIColor+Image.swift in Sources */,
-				24085B8F202D4CD6000B4066 /* CalendarListReactor.swift in Sources */,
 				249104C52001F78500106193 /* SupportedProvider.swift in Sources */,
 				24085B97202D8720000B4066 /* CalendarListCell.swift in Sources */,
-				24085B93202D78CC000B4066 /* CalendarListViewController.swift in Sources */,
+				24085BBC202E797C000B4066 /* CalendarProviderEntity.swift in Sources */,
 				249B8FBA1FFF730F00C3535E /* AddCalendarActionViewController.swift in Sources */,
-				24085B90202D4CE4000B4066 /* ServiceProvider.swift in Sources */,
 				24085B92202D4D14000B4066 /* CalendarCellReactor.swift in Sources */,
 				249104B72001F6C100106193 /* UserDefaults+AppGroup.swift in Sources */,
 				24085B9E202D9470000B4066 /* CalendarRepository.swift in Sources */,
 				24085B91202D4CE8000B4066 /* CalendarService.swift in Sources */,
+				24085BC5202EBBA8000B4066 /* ProviderRepository.swift in Sources */,
+				243F1ACB202F05E90030EFE2 /* GoogleAccountStoreService.swift in Sources */,
+				24085BBF202E7C14000B4066 /* CalendarCellModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,18 +748,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24085BCA202EC87C000B4066 /* LoginViewController.swift in Sources */,
 				24085B9A202D8C15000B4066 /* CalendarEntity.swift in Sources */,
+				24085BC1202E7C30000B4066 /* CalendarProviderSectionModel.swift in Sources */,
 				24085B82202D1FE8000B4066 /* CalendarListReactor.swift in Sources */,
 				BF_629410552227 /* AppDelegate.swift in Sources */,
 				BF_670056304807 /* CalendarListViewController.swift in Sources */,
+				24085BC7202EBFD2000B4066 /* GoogleCalendarProviderRepository.swift in Sources */,
 				24085B8C202D3BE1000B4066 /* CalendarService.swift in Sources */,
+				24085BBB202E797C000B4066 /* CalendarProviderEntity.swift in Sources */,
 				24085BA1202DD946000B4066 /* UIColor+Image.swift in Sources */,
 				24085B8A202D3BBD000B4066 /* ServiceProvider.swift in Sources */,
 				249104B62001F6B900106193 /* UserDefaults+AppGroup.swift in Sources */,
+				243F1AC6202EEAE50030EFE2 /* LoginViewController+EventKit.swift in Sources */,
+				243F1ACD202F064C0030EFE2 /* GoogleAccountStorage.swift in Sources */,
 				24085B86202D39B3000B4066 /* CalendarCellReactor.swift in Sources */,
+				24085BCD202EC8C0000B4066 /* LoginReactor.swift in Sources */,
+				243F1ACA202F05E40030EFE2 /* GoogleAccountStoreService.swift in Sources */,
 				24085B96202D861B000B4066 /* CalendarListCell.swift in Sources */,
 				24085B9D202D93EB000B4066 /* CalendarRepository.swift in Sources */,
 				BF_165923807992 /* SupportedProvider.swift in Sources */,
+				24085BC4202EBBA8000B4066 /* ProviderRepository.swift in Sources */,
+				24085BCF202ECD66000B4066 /* CalendarProviderService.swift in Sources */,
+				24085BBE202E7C14000B4066 /* CalendarCellModel.swift in Sources */,
+				243F1AC8202EEB050030EFE2 /* LoginViewController+GoogleCalendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,14 +805,6 @@
 				249B8FBC1FFF730F00C3535E /* Base */,
 			);
 			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
-		VG_106140571276 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FR_106140571276 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		VG_774826763097 /* LaunchScreen.storyboard */ = {

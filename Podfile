@@ -7,20 +7,11 @@ target 'Pigeon' do
   use_frameworks!
 
   # Pods for Pigeon
-  pod 'GoogleAPIClientForREST/Calendar', '~> 1.2.1'
-  pod 'Google/SignIn', '~> 3.0.3'
-  pod 'HydraAsync'
-  pod 'ReactorKit'
-  pod 'RxCocoa'
-  pod 'RxDataSources', '~> 3.0'
+  pod 'GoogleAPIClientForREST/Calendar', '~> 1.3.1'
+  pod 'GoogleSignIn', '~> 4.1.1'
 
 
   target 'AddCalendarAction' do
-    pod 'HydraAsync'
-    pod 'Eureka'
-    pod 'ReactorKit'
-    pod 'RxCocoa'
-    pod 'RxDataSources', '~> 3.0'
   end
 
   target 'PigeonTests' do

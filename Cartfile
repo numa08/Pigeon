@@ -1,0 +1,5 @@
+github "ReactiveX/RxSwift" ~> 4.1.2
+github "RxSwiftCommunity/RxDataSources" ~> 3.0.2
+github "xmartlabs/Eureka" ~> 4.0.1
+github "ReactorKit/ReactorKit" ~> 1.1.0
+github "scalessec/Toast-Swift" ~> 3.0.1

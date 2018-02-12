@@ -5,7 +5,6 @@
 //  Created by numa08 on 2017/12/26.
 //  Copyright © 2017年 numa08. All rights reserved.
 //
-import Google
 import GoogleSignIn
 import GoogleAPIClientForREST
 import UIKit
@@ -14,16 +13,19 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     static let userDefaults: UserDefaults = UserDefaults.shared
-//    let userAccountRepository: UserAccountRepository = UserDefaultsUserAccountRepository(userDefaults: AppDelegate.userDefaults)
-//    let calendarRepository: CalendarRepository = UserDefaultsCalendarRepository(userDefaults: AppDelegate.userDefaults)
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Initialize sign-in
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError!)")
+        GIDSignIn.sharedInstance().clientID = "520461717930-gt1cnp2ecjmk3dvjtdpnbqau36tv06lk.apps.googleusercontent.com"
+        
+        let rootReactor = LoginReactor(ServiceProvider())
+        let rootViewController = LoginViewController(rootReactor)
+        let main = UINavigationController(rootViewController: rootViewController)
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = main
+        window?.makeKeyAndVisible()
         return true
     }
 
