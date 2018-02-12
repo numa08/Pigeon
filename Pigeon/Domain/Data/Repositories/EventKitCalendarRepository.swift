@@ -25,7 +25,7 @@ struct EventKitCalendarRepository: CalendarRepositoryType {
             return Observable.create({emitter -> Disposable in
                 func observeCalendar()  {
                     let calendars = self.eventStore.calendars(for: .event)
-                        .filter { $0.isImmutable }
+                        .filter { $0.allowsContentModifications }
                         .map({ c -> CalendarEntity in
                             return CalendarEntity(
                                 id: CalendarEntityId(value: c.calendarIdentifier),

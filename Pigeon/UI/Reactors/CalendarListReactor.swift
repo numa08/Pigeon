@@ -89,7 +89,15 @@ final public class CalendarListReactor: Reactor {
         state.selectedCalendar = nil
         switch mutation {
         case let .setCalendarSections(calendarSections):
-            state.calendarSections = calendarSections
+            calendarSections.forEach({section in
+                // 同じセクションの物を削除する
+                if let idx = state.calendarSections.index(where: {$0.section == section.section}) {
+                    print("\(idx) \(section.section.name)")
+                    state.calendarSections.remove(at: idx)
+                }
+                state.calendarSections += [section]
+            })
+            
             return state
         case let .selectedCalendar(indexPath):
             let cellReactor = state.calendarSections[indexPath.section].items[indexPath.row]
