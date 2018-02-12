@@ -8,13 +8,18 @@
 import UIKit
 import EventKit
 
+enum EventKitError: Error {
+    case AuthorizationStatusRestricted
+    case AccessRequestDenied
+}
+
 extension LoginViewController {
     
     func loginToEventKit() {
         let state = EKEventStore.authorizationStatus(for: .event)
         switch state {
         case .restricted:
-            onLoginEventKit.onError(EventKitProviderRepositoryError.AuthorizationStatusRestricted)
+            onLoginEventKit.onError(EventKitError.AuthorizationStatusRestricted)
             return
         case .authorized:
             onLoginEventKit.onNext(())
@@ -28,7 +33,7 @@ extension LoginViewController {
                 return
             }
             if !granted {
-                self.onLoginEventKit.onError(EventKitProviderRepositoryError.AccessRequestDenied)
+                self.onLoginEventKit.onError(EventKitError.AccessRequestDenied)
                 return
             }
             self.onLoginEventKit.onNext(())

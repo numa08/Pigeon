@@ -29,21 +29,27 @@ extension CalendarSection: SectionModelType {
 final public class CalendarListReactor: Reactor {
     
     public let initialState: CalendarListReactor.State
-    private let provider: ServiceProviderType
+    let provider: ServiceProviderType
     
     public enum Action {
         case loadCalendarSections
         case selectedCalendar(IndexPath)
+        case setTitle(String)
+        case setShowAddCalendarButton(Bool)
     }
     
     public enum Mutation {
         case setCalendarSections([CalendarSection])
         case selectedCalendar(IndexPath)
+        case setTitle(String)
+        case setShowAddCalendarButton(Bool)
     }
     
     public struct State {
         var calendarSections: [CalendarSection]
         var selectedCalendar: CalendarCellReactor?
+        var title: String?
+        var showAddCalendarButton: Bool
     }
     
     init(
@@ -52,29 +58,29 @@ final public class CalendarListReactor: Reactor {
         self.provider = serviceProvider
         self.initialState = State(
             calendarSections: [],
-            selectedCalendar: nil)
+            selectedCalendar: nil,
+            title: nil,
+            showAddCalendarButton: false)
     }
     
     public func mutate(action: CalendarListReactor.Action) -> Observable<CalendarListReactor.Mutation> {
         switch action {
+        case let .setTitle(title):
+            return Observable.just(Mutation.setTitle(title))
         case .loadCalendarSections:
-            fatalError("todo")
-//            return self.provider.calendarService.refreshCalendars().asObservable()
-//                .flatMap({ _ in
-//                    return self.provider.calendarService.fetchCalendars()
-//                })
-//                .map({ results in
-//                    let sections = results.map({ (arg) -> CalendarSection in
-//                        let (provider, calendars) = arg
-//                        let reactors = calendars.map({ CalendarCellReactor(calendar: $0) })
-//                        return CalendarSection(section: provider, items: reactors)
-//                    })
-//                    return Mutation.setCalendarSections(sections)
-//                })
-//                .subscribeOn(OperationQueueScheduler(operationQueue: OperationQueue()))
-//                .observeOn(OperationQueueScheduler(operationQueue: OperationQueue.current ?? OperationQueue.main))
+            return provider.calendarService.refreshCalendars().flatMap { _ in self.provider.calendarService.calendars }
+                .map({ (cellModels) -> [CalendarSection] in
+                    return cellModels.map({ (arg) -> CalendarSection in
+                        let (provider, cells) = arg
+                        let reactors = cells.map({ CalendarCellReactor(calendar: $0) })
+                        return CalendarSection(section: provider, items: reactors)
+                    })
+                })
+                .map({ Mutation.setCalendarSections($0) })
         case let .selectedCalendar(indexPath):
             return Observable.just(Mutation.selectedCalendar(indexPath))
+        case let .setShowAddCalendarButton(showAddCalendarButton):
+            return Observable.just(Mutation.setShowAddCalendarButton(showAddCalendarButton))
         }
     }
     
@@ -88,6 +94,12 @@ final public class CalendarListReactor: Reactor {
         case let .selectedCalendar(indexPath):
             let cellReactor = state.calendarSections[indexPath.section].items[indexPath.row]
             state.selectedCalendar = cellReactor
+            return state
+        case let .setTitle(title):
+            state.title = title
+            return state
+        case let .setShowAddCalendarButton(showAddCalendarButton):
+            state.showAddCalendarButton = showAddCalendarButton
             return state
         }
     }

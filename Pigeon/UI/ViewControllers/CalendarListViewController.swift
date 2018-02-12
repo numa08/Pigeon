@@ -33,6 +33,7 @@ View {
         cell.reactor = reactor
         return cell
     })
+    var navigationManager: NavigationManagerType = NavigationManager()
     
     init(_ reactor: CalendarListReactor) {
         super.init(style: .grouped)
@@ -50,6 +51,26 @@ View {
                 .just(Reactor.Action.loadCalendarSections)
                 .bind(to: reactor.action)
                 .disposed(by: self.disposeBag)
+            
+            Observable
+                .just(onDismissCallback)
+                .map { cb -> Reactor.Action in
+                    if let _ = cb {
+                        return Reactor.Action.setTitle("カレンダーを選択")
+                    } else {
+                        return Reactor.Action.setTitle("カレンダー一覧")
+                    }
+                }
+                .bind(to: reactor.action)
+                .disposed(by: disposeBag)
+            
+            Observable
+                .just(onDismissCallback)
+                .map { cb -> Reactor.Action in
+                    return Reactor.Action.setShowAddCalendarButton(cb == nil)
+                }
+                .bind(to: reactor.action)
+                .disposed(by: disposeBag)
         }
     }
     
@@ -59,8 +80,31 @@ View {
             .map { Reactor.Action.selectedCalendar($0) }
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
-        self.dataSource.titleForHeaderInSection = {dataSource, section in
+        dataSource.titleForHeaderInSection = {dataSource, section in
             return dataSource[section].section.name
+        }
+        
+        reactor.state.asObservable().map {$0.title}
+            .subscribe(onNext: { self.title = $0 })
+            .disposed(by: disposeBag)
+        reactor.state.asObservable().map { $0.calendarSections }
+        .bind(to: tableView.rx.items(dataSource: dataSource))
+        .disposed(by: disposeBag)
+        reactor.state.asObservable().map { $0.showAddCalendarButton }
+            .subscribe(onNext: { (showAddCalendarButton) in
+                if showAddCalendarButton {
+                    let button = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.addCalendar))
+                    self.navigationItem.rightBarButtonItem = button
+                } else {
+                    self.navigationItem.rightBarButtonItem = nil
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    @objc private func addCalendar(sender: Any) {
+        if let navigationController = self.navigationController {
+            navigationManager.navigationToLoginViewController(current: navigationController)
         }
     }
 }

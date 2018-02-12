@@ -6,14 +6,19 @@
 //
 
 import Foundation
+import RxSwift
 import GoogleSignIn
 import GoogleAPIClientForREST
-import RxSwift
+import GTMOAuth2
 
 protocol GoogleAccountStorageType {
     var accounts: [(GIDGoogleUser, GTLRCalendar_Colors)] { get }
     func refresh() -> Observable<Void>
     func store(user: GIDGoogleUser) -> Observable<Void>
+}
+
+enum GoogleAccountStorageError: Error {
+    case unknownResponseError
 }
 
 struct GoogleAccountStorage: GoogleAccountStorageType {
@@ -30,9 +35,9 @@ struct GoogleAccountStorage: GoogleAccountStorageType {
         get {
             let users = userDefaults.stringArray(forKey: UserDefaultsKeys.GoogleUsers.rawValue) ?? []
             return users.map { userID -> (GIDGoogleUser, GTLRCalendar_Colors) in
-                guard let userData = self.userDefaults.data(forKey: "\(userID).\(UserDefaultsKeys.UserIdentifier)"),
+                guard let userData = self.userDefaults.data(forKey: "\(userID).\(UserDefaultsKeys.UserIdentifier.rawValue)"),
                 let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? GIDGoogleUser,
-                let colorData = self.userDefaults.data(forKey: "\(userID).\(UserDefaultsKeys.CalendarColors)"),
+                let colorData = self.userDefaults.data(forKey: "\(userID).\(UserDefaultsKeys.CalendarColors.rawValue)"),
                     let color = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? GTLRCalendar_Colors else {
                         fatalError("failed unarchive from user defaults")
                 }
@@ -71,7 +76,7 @@ struct GoogleAccountStorage: GoogleAccountStorageType {
                     emitter.onError(error)
                 }
                 guard let colors = response as? GTLRCalendar_Colors else {
-                    emitter.onError(GoogleCalendarProviderRepositoryError.unknownResponseError())
+                    emitter.onError(GoogleAccountStorageError.unknownResponseError)
                     return
                 }
                 emitter.onNext(colors)
@@ -82,14 +87,14 @@ struct GoogleAccountStorage: GoogleAccountStorageType {
     
     private func store(user: GIDGoogleUser, andColor color: GTLRCalendar_Colors) {
         let userData = NSKeyedArchiver.archivedData(withRootObject: user)
-        let userIdentifier = "\(user.userID).\(UserDefaultsKeys.UserIdentifier)"
+        let userIdentifier = "\(user.userID!).\(UserDefaultsKeys.UserIdentifier.rawValue)"
         userDefaults.set(userData, forKey: userIdentifier)
         let colorData = NSKeyedArchiver.archivedData(withRootObject: color)
-        let colorIdentifier = "\(user.userID).\(UserDefaultsKeys.CalendarColors)"
+        let colorIdentifier = "\(user.userID!).\(UserDefaultsKeys.CalendarColors.rawValue)"
         userDefaults.set(colorData, forKey: colorIdentifier)
         // 保存しているユーザー一覧へ追加する
         var users = userDefaults.stringArray(forKey: UserDefaultsKeys.GoogleUsers.rawValue) ?? []
-        users.append(user.userID)
+        users.append(user.userID!)
         userDefaults.set(users, forKey: UserDefaultsKeys.GoogleUsers.rawValue)
     }
 

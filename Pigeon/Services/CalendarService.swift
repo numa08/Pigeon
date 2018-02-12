@@ -9,37 +9,35 @@ import RxSwift
 import UIKit
 
 protocol CalendarServiceType {
-    func fetch(calendarForIdentifier identifier: CalendarEntityId, forProvider provider: CalendarProviderCellModel) -> Observable<CalendarCellModel>
-    func fetchCalendars() -> Observable<[CalendarProviderCellModel :[CalendarCellModel]]>
-    func refreshCalendars() -> Completable
+    var calendars: Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]> { get }
+    func refreshCalendars() -> Observable<Void>
 }
 
 struct CalendarService: CalendarServiceType {
     
-    var repositories: [CalendarRepository] = []
+    let repositories: [CalendarRepositoryType]
     
-    func fetch(calendarForIdentifier identifier: CalendarEntityId, forProvider provider: CalendarProviderCellModel) -> Observable<CalendarCellModel> {
-        fatalError("TODO")
-    }
-    
-    func fetchCalendars() -> Observable<[CalendarProviderCellModel : [CalendarCellModel]]> {
-        let r = repositories.map{ repo in
-            repo.calendars.asObservable().map { entities -> [CalendarProviderCellModel : [CalendarCellModel]] in
-                let cells = entities.map{ e -> CalendarCellModel in
-                    CalendarCellModel(id: e.id, title: e.title, detail: e.detail, color: e.color)
-                }
-                return [
-                  CalendarProviderCellModel(name: repo.providerName)
-                    : cells
-                ]
+    var calendars: Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]> {
+        get {
+            let r = repositories.map{ repo -> Observable<[(CalendarProviderCellModel, [CalendarCellModel])]> in
+                return repo.calendars.map({ (entities) -> [(CalendarProviderCellModel, [CalendarCellModel])] in
+                    return entities.map({ (provider, calendars) -> (CalendarProviderCellModel, [CalendarCellModel]) in
+                        let providerCell = CalendarProviderCellModel(name: provider.name)
+                        let calendarCells = calendars.map({ (c) -> CalendarCellModel in
+                            return CalendarCellModel(id: c.id, title: c.title, detail: c.detail, color: c.color)
+                        })
+                        return (providerCell, calendarCells)
+                    })
+                })
             }
+            return Observable.merge(r)
         }
-        return Observable.merge(r)
     }
     
-    func refreshCalendars() -> Completable {
-        return Completable.merge(
-            repositories.map{ $0.refresh() }
+    func refreshCalendars() -> Observable<Void> {
+        return Observable.merge(
+            repositories.map { $0.refresh() }
         )
     }
+    
 }

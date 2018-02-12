@@ -8,23 +8,35 @@
 import GoogleSignIn
 import GoogleAPIClientForREST
 import UIKit
+import EventKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    static let userDefaults: UserDefaults = UserDefaults.shared
+    static var serviceProvider: ServiceProviderType {
+        get {
+            let userDefaults = UserDefaults.shared
+            let googleAccountStorage = GoogleAccountStorage(userDefaults: userDefaults)
+            let serviceProvider = ServiceProvider(
+                googleAccountStorage: googleAccountStorage,
+                calendarService: CalendarService(repositories: [
+                    EventKitCalendarRepository(eventStore: EKEventStore()),
+                    GoogleCalendarRepository(accountStorage: googleAccountStorage, googleService: { GTLRCalendarService() }, userDefaults: userDefaults)
+                    ]))
+            return serviceProvider
+        }
+    }
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Initialize sign-in
         GIDSignIn.sharedInstance().clientID = "520461717930-gt1cnp2ecjmk3dvjtdpnbqau36tv06lk.apps.googleusercontent.com"
-        
-        let userDefaults = UserDefaults.shared
-        let rootReactor = LoginReactor(
-            ServiceProvider(calendarProviderService: CalendarProviderService(), googleAccountStorage: GoogleAccountStorage(userDefaults: userDefaults))
-        )
-        let rootViewController = LoginViewController(rootReactor)
+
+        let rootReactor = CalendarListReactor(AppDelegate.serviceProvider)
+        let rootViewController = CalendarListViewController(rootReactor)
+//        let rootReactor = LoginReactor(AppDelegate.serviceProvider)
+//        let rootViewController = LoginViewController(rootReactor)
         let main = UINavigationController(rootViewController: rootViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = main
