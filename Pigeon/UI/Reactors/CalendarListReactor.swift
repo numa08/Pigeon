@@ -68,7 +68,10 @@ final public class CalendarListReactor: Reactor {
         case let .setTitle(title):
             return Observable.just(Mutation.setTitle(title))
         case .loadCalendarSections:
-            return provider.calendarService.refreshCalendars().flatMap { _ in self.provider.calendarService.calendars }
+            return provider.calendarService.refreshCalendars().flatMap { _ -> Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]> in
+                print("flatmap")
+                return self.provider.calendarService.calendars
+                }
                 .map({ (cellModels) -> [CalendarSection] in
                     return cellModels.map({ (arg) -> CalendarSection in
                         let (provider, cells) = arg

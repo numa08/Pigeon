@@ -17,10 +17,13 @@ struct CalendarService: CalendarServiceType {
     
     let repositories: [CalendarRepositoryType]
     
-    var calendars: Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]> {
-        get {
-            let r = repositories.map{ repo -> Observable<[(CalendarProviderCellModel, [CalendarCellModel])]> in
-                return repo.calendars.map({ (entities) -> [(CalendarProviderCellModel, [CalendarCellModel])] in
+    var calendars: Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]>
+    
+    init(repositories: [CalendarRepositoryType] ) {
+        self.repositories = repositories
+        self.calendars = Observable.merge(
+            repositories.map { (repository) -> Observable<[(CalendarProviderCellModel, [CalendarCellModel])]> in
+                repository.calendars.map({ (entities) -> [(CalendarProviderCellModel, [CalendarCellModel])] in
                     return entities.map({ (provider, calendars) -> (CalendarProviderCellModel, [CalendarCellModel]) in
                         let providerCell = CalendarProviderCellModel(name: provider.name)
                         let calendarCells = calendars.map({ (c) -> CalendarCellModel in
@@ -29,10 +32,9 @@ struct CalendarService: CalendarServiceType {
                         return (providerCell, calendarCells)
                     })
                 })
-            }
-            return Observable.merge(r)
-        }
+            })
     }
+    
     
     func refreshCalendars() -> Observable<Void> {
         return Observable.merge(
