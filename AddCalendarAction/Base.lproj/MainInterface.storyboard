@@ -39,7 +39,7 @@
                     <navigationItem key="navigationItem" id="WZj-wC-OfQ">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" style="done" id="oRn-ny-kJk">
                             <connections>
-                                <action selector="cancel" destination="T2C-W3-9vH" id="nxY-Zo-xwn"/>
+                                <action selector="onClickCancel:" destination="T2C-W3-9vH" id="g3D-gK-aIh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

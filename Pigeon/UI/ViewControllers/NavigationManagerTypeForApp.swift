@@ -16,4 +16,6 @@ struct NavigationManager: NavigationManagerType {
         current.pushViewController(viewController, animated: true)
     }
     
+    func navigationToAddCalendarCancell(current: UIViewController) {}
+    func navigationToOnCompleteEventRegister(current: UIViewController) {}
 }
