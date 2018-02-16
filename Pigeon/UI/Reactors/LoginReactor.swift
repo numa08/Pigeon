@@ -51,13 +51,11 @@ final class LoginReactor: Reactor {
         case let .login(provider):
             return Observable.just(Mutation.loginToProvider(provider))
         case .loggedInEventKit:
+            provider.calendarService.refreshCalendars()
             return Observable.just(Mutation.loggedInFinished(.success))
         case let .loggedInGoogle(user):
-            return provider.googleAccountStorage.store(user: user)
-            .subscribeOn(OperationQueueScheduler(operationQueue: OperationQueue()))
-            .observeOn(OperationQueueScheduler(operationQueue: OperationQueue.main))
-            .map({ _ in Mutation.loggedInFinished(.success) })
-            .catchError({ Observable.just(Mutation.loggedInFinished(.failed($0))) })
+            provider.googleAccountStorage.store(user: user)
+            return Observable.just(Mutation.loggedInFinished(.success))
         }
     }
 

@@ -12,16 +12,16 @@ import GoogleAPIClientForREST
 import GTMOAuth2
 
 protocol GoogleAccountStorageType {
-    var accounts: [(GIDGoogleUser, GTLRCalendar_Colors)] { get }
-    func refresh() -> Observable<Void>
-    func store(user: GIDGoogleUser) -> Observable<Void>
+    var accounts: Observable<[(GIDGoogleUser, GTLRCalendar_Colors)]> { get }
+    func refresh()
+    func store(user: GIDGoogleUser)
 }
 
 enum GoogleAccountStorageError: Error {
     case unknownResponseError
 }
 
-struct GoogleAccountStorage: GoogleAccountStorageType {
+class GoogleAccountStorage: GoogleAccountStorageType {
     
     private enum UserDefaultsKeys: String {
         case GoogleUsers = "google_users"
@@ -30,43 +30,57 @@ struct GoogleAccountStorage: GoogleAccountStorageType {
     }
     
     let userDefaults: UserDefaults
+    lazy var accountsSubject : BehaviorSubject<[(GIDGoogleUser, GTLRCalendar_Colors)]> = {
+        let subject = BehaviorSubject(value: restore())
+        return subject
+    }()
+    lazy var accounts: Observable<[(GIDGoogleUser, GTLRCalendar_Colors)]> = {
+        return accountsSubject.share(replay: 1)
+    }()
     
-    var accounts: [(GIDGoogleUser, GTLRCalendar_Colors)] {
-        get {
-            let users = userDefaults.stringArray(forKey: UserDefaultsKeys.GoogleUsers.rawValue) ?? []
-            return users.map { userID -> (GIDGoogleUser, GTLRCalendar_Colors) in
-                guard let userData = self.userDefaults.data(forKey: "\(userID).\(UserDefaultsKeys.UserIdentifier.rawValue)"),
-                let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? GIDGoogleUser,
-                let colorData = self.userDefaults.data(forKey: "\(userID).\(UserDefaultsKeys.CalendarColors.rawValue)"),
-                    let color = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? GTLRCalendar_Colors else {
-                        fatalError("failed unarchive from user defaults")
-                }
-                return (user, color)
-            }
-        }
+    init(userDefaults: UserDefaults) {
+        self.userDefaults = userDefaults
     }
     
-    func refresh() -> Observable<Void> {
-        let observables = accounts.map({args -> Observable<Void> in
-            let (user, _) = args
-            return self.fetchColors(forUser: user)
-            .map({colors -> Void in
-                self.store(user: user, andColor: colors)
-                return ()
-            })
+    func refresh() {
+        let _ = Observable.from(
+        restore().map({(user, _) in
+            self.fetchColors(forUser: user)
+            .map({(user, $0)})
+            .do(onNext: {(user, color) in self.store(user: user, andColor: color) })
+        })).merge()
+        .reduce([], accumulator: {(list, account) -> [(GIDGoogleUser, GTLRCalendar_Colors)] in
+            var l = list
+            l.append(account)
+            return l
         })
-        return Observable<Void>.merge(observables)
+        .subscribe(onNext: { accounts in
+            self.accountsSubject.onNext(accounts)
+        })
     }
     
-    func store(user: GIDGoogleUser) -> Observable<Void> {
-        return fetchColors(forUser: user)
-        .map({colors in
+    func store(user: GIDGoogleUser) {
+        let _ = fetchColors(forUser: user)
+        .subscribe(onNext: {colors in
             self.store(user: user, andColor: colors)
-            return ()
+            self.accountsSubject.onNext(self.restore())
         })
     }
 
-    private func fetchColors(forUser user: GIDGoogleUser) -> Observable<GTLRCalendar_Colors> {
+    func restore() -> [(GIDGoogleUser, GTLRCalendar_Colors)] {
+        let users = userDefaults.stringArray(forKey: UserDefaultsKeys.GoogleUsers.rawValue) ?? []
+        return users.map { userID -> (GIDGoogleUser, GTLRCalendar_Colors) in
+            guard let userData = self.userDefaults.data(forKey: "\(userID).\(UserDefaultsKeys.UserIdentifier.rawValue)"),
+                let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? GIDGoogleUser,
+                let colorData = self.userDefaults.data(forKey: "\(userID).\(UserDefaultsKeys.CalendarColors.rawValue)"),
+                let color = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? GTLRCalendar_Colors else {
+                    fatalError("failed unarchive from user defaults")
+            }
+            return (user, color)
+        }
+    }
+    
+    func fetchColors(forUser user: GIDGoogleUser) -> Observable<GTLRCalendar_Colors> {
         return Observable.create({emitter in
             let query = GTLRCalendarQuery_ColorsGet.query()
             let service = GTLRCalendarService()
@@ -80,6 +94,7 @@ struct GoogleAccountStorage: GoogleAccountStorageType {
                     return
                 }
                 emitter.onNext(colors)
+                emitter.onCompleted()
             }
             return Disposables.create()
         })

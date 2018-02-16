@@ -10,27 +10,26 @@ import EventKit
 import RxSwift
 import UIKit
 
-struct EventKitCalendarRepository: CalendarRepositoryType {
-    
+class EventKitCalendarRepository: CalendarRepositoryType {
+
     let eventStore: EKEventStore
-    private var _calendars: BehaviorSubject<[(CalendarProviderEntity, [CalendarEntity])]>!
-    
+    lazy var calendarSubject : BehaviorSubject<[(CalendarProviderEntity, [CalendarEntity])]> = {
+        let subject = BehaviorSubject(value: getCalendars())
+        return subject
+    }()
+    lazy var calendars: Observable<[(CalendarProviderEntity, [CalendarEntity])]> = {
+        return calendarSubject.share(replay: 1)
+    }()
+
     init(eventStore: EKEventStore) {
         self.eventStore = eventStore
         self.previousAuthorizationState = EKEventStore.authorizationStatus(for: .event)
-        self._calendars = BehaviorSubject(value: getCalendars())
         subscribeAuthorizationStateChanged()
     }
     
-    var calendars: Observable<[(CalendarProviderEntity, [CalendarEntity])]> {
-        return _calendars
-    }
     
-    func refresh() -> Observable<Void> {
-        return Observable.just(()).map { _ in
-            self._calendars.onNext(self.getCalendars())
-            return ()
-        }
+    func refresh() {
+        calendarSubject.onNext(getCalendars())
     }
     
     func getCalendars() -> [(CalendarProviderEntity, [CalendarEntity])] {
@@ -59,7 +58,7 @@ struct EventKitCalendarRepository: CalendarRepositoryType {
         let currentState = EKEventStore.authorizationStatus(for: .event)
         if currentState == .authorized {
             let calendars = getCalendars()
-            _calendars.onNext(calendars)
+            calendarSubject.onNext(calendars)
             return
         }
         DispatchQueue(label: "").asyncAfter(deadline: .now() + 1.0, execute: { self.subscribeAuthorizationStateChanged() })

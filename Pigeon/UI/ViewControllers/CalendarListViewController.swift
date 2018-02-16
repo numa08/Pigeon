@@ -71,6 +71,11 @@ View {
                 }
                 .bind(to: reactor.action)
                 .disposed(by: disposeBag)
+            
+            Observable
+                .just(Reactor.Action.refreshCalendars)
+                .bind(to: reactor.action)
+                .disposed(by: disposeBag)
         }
     }
     

@@ -10,36 +10,41 @@ import UIKit
 
 protocol CalendarServiceType {
     var calendars: Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]> { get }
-    func refreshCalendars() -> Observable<Void>
+    func refreshCalendars()
 }
 
-struct CalendarService: CalendarServiceType {
+class CalendarService: CalendarServiceType {
     
     let repositories: [CalendarRepositoryType]
-    
-    var calendars: Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]>
+    let disposeBag = DisposeBag()
+    let calendarSubjects: PublishSubject<[(CalendarProviderCellModel ,[CalendarCellModel])]> = PublishSubject()
+    lazy var calendars: Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]> = {
+        return calendarSubjects.share(replay: 1)
+    }()
     
     init(repositories: [CalendarRepositoryType] ) {
         self.repositories = repositories
-        self.calendars = Observable.merge(
-            repositories.map { (repository) -> Observable<[(CalendarProviderCellModel, [CalendarCellModel])]> in
-                repository.calendars.map({ (entities) -> [(CalendarProviderCellModel, [CalendarCellModel])] in
-                    return entities.map({ (provider, calendars) -> (CalendarProviderCellModel, [CalendarCellModel]) in
-                        let providerCell = CalendarProviderCellModel(name: provider.name)
-                        let calendarCells = calendars.map({ (c) -> CalendarCellModel in
-                            return CalendarCellModel(id: c.id, title: c.title, detail: c.detail, color: c.color)
-                        })
-                        return (providerCell, calendarCells)
+        Observable.from(repositories.map({ $0.calendars }))
+            .merge()
+            .map({ (entries) -> [(CalendarProviderCellModel, [CalendarCellModel])] in
+                return entries.map({(provider, calendars) -> (CalendarProviderCellModel, [CalendarCellModel]) in
+                    let providerCell = CalendarProviderCellModel(name: provider.name)
+                    let calendarCells = calendars.map({ (c) -> CalendarCellModel in
+                        return CalendarCellModel(id: c.id, title: c.title, detail: c.detail, color: c.color)
                     })
+                    return (providerCell, calendarCells)
                 })
             })
+            .subscribe(onNext: { (entries) in
+                self.calendarSubjects.onNext(entries)
+            })
+            .disposed(by: disposeBag)
+
     }
     
     
-    func refreshCalendars() -> Observable<Void> {
-        return Observable.merge(
-            repositories.map { $0.refresh() }
-        )
+    func refreshCalendars() {
+        repositories.forEach({ $0.refresh() })
     }
     
 }

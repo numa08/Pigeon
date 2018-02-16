@@ -36,6 +36,7 @@ final public class CalendarListReactor: Reactor {
         case selectedCalendar(IndexPath)
         case setTitle(String)
         case setShowAddCalendarButton(Bool)
+        case refreshCalendars
     }
     
     public enum Mutation {
@@ -43,6 +44,7 @@ final public class CalendarListReactor: Reactor {
         case selectedCalendar(IndexPath)
         case setTitle(String)
         case setShowAddCalendarButton(Bool)
+        case refreshedCalendars
     }
     
     public struct State {
@@ -68,11 +70,9 @@ final public class CalendarListReactor: Reactor {
         case let .setTitle(title):
             return Observable.just(Mutation.setTitle(title))
         case .loadCalendarSections:
-            return provider.calendarService.refreshCalendars().flatMap { _ -> Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]> in
-                print("flatmap")
-                return self.provider.calendarService.calendars
-                }
-                .map({ (cellModels) -> [CalendarSection] in
+            return
+                provider.calendarService.calendars
+                    .map({ (cellModels) -> [CalendarSection] in
                     return cellModels.map({ (arg) -> CalendarSection in
                         let (provider, cells) = arg
                         let reactors = cells.map({ CalendarCellReactor(calendar: $0) })
@@ -84,6 +84,9 @@ final public class CalendarListReactor: Reactor {
             return Observable.just(Mutation.selectedCalendar(indexPath))
         case let .setShowAddCalendarButton(showAddCalendarButton):
             return Observable.just(Mutation.setShowAddCalendarButton(showAddCalendarButton))
+        case .refreshCalendars:
+            provider.calendarService.refreshCalendars()
+            return Observable.just(Mutation.refreshedCalendars)
         }
     }
     
@@ -95,7 +98,6 @@ final public class CalendarListReactor: Reactor {
             calendarSections.forEach({section in
                 // 同じセクションの物を削除する
                 if let idx = state.calendarSections.index(where: {$0.section == section.section}) {
-                    print("\(idx) \(section.section.name)")
                     state.calendarSections.remove(at: idx)
                 }
                 state.calendarSections += [section]
@@ -111,6 +113,8 @@ final public class CalendarListReactor: Reactor {
             return state
         case let .setShowAddCalendarButton(showAddCalendarButton):
             state.showAddCalendarButton = showAddCalendarButton
+            return state
+        case .refreshedCalendars:
             return state
         }
     }

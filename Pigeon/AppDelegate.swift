@@ -13,19 +13,17 @@ import EventKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    static var serviceProvider: ServiceProviderType {
-        get {
+    static var serviceProvider: ServiceProviderType = {
             let userDefaults = UserDefaults.shared
             let googleAccountStorage = GoogleAccountStorage(userDefaults: userDefaults)
             let serviceProvider = ServiceProvider(
                 googleAccountStorage: googleAccountStorage,
                 calendarService: CalendarService(repositories: [
-                    EventKitCalendarRepository(eventStore: EKEventStore()),
-                    GoogleCalendarRepository(accountStorage: googleAccountStorage, googleService: { GTLRCalendarService() }, userDefaults: userDefaults)
+                    EventKitCalendarRepository(eventStore: EKEventStore())
+                    ,GoogleCalendarRepository(accountStorage: googleAccountStorage, googleService: { GTLRCalendarService() }, userDefaults: userDefaults)
                     ]))
             return serviceProvider
-        }
-    }
+    }()
     var window: UIWindow?
 
 
