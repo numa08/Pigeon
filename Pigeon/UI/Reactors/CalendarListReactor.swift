@@ -49,7 +49,7 @@ final public class CalendarListReactor: Reactor {
     
     public struct State {
         var calendarSections: [CalendarSection]
-        var selectedCalendar: CalendarCellReactor?
+        var selectedCalendar: (CalendarProviderCellModel, CalendarCellReactor)?
         var title: String?
         var showAddCalendarButton: Bool
     }
@@ -105,8 +105,10 @@ final public class CalendarListReactor: Reactor {
             
             return state
         case let .selectedCalendar(indexPath):
-            let cellReactor = state.calendarSections[indexPath.section].items[indexPath.row]
-            state.selectedCalendar = cellReactor
+            let section = state.calendarSections[indexPath.section]
+            let provider = section.section
+            let cell = section.items[indexPath.row]
+            state.selectedCalendar = (provider, cell)
             return state
         case let .setTitle(title):
             state.title = title

@@ -103,11 +103,14 @@ open class AddCalendarActionViewController: FormViewController, View {
                     observeAction(action: action).disposed(by: self.disposeBag)
             }
             +++ Section()
-//            <<< CalendarRow("Calendar") {
-//                $0.title = "カレンダー(必須)"
-//                $0.selectorTitle = "カレンダー"
-//                $0.add(rule: RuleRequired())
-//            }
+            <<< CalendarRow("Calendar") {
+                $0.title = "カレンダー(必須)"
+                $0.selectorTitle = "カレンダー"
+                $0.add(rule: RuleRequired())
+                }.onChange { row in
+                    let action = Reactor.Action.updateCalendar(calendar: row.value?.calendar)
+                    observeAction(action: action).disposed(by: self.disposeBag)
+            }
             
             +++ Section()
             <<< URLRow("URL") {

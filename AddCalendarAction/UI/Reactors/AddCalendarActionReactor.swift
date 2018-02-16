@@ -27,7 +27,7 @@ public final class AddCalendarActionReactor: Reactor {
         case updateEndTime(date: Date?)
         case updateURL(url: URL?)
         case updateDescription(description: String)
-        case updateCalendar(calendar: CalendarEntity?)
+        case updateCalendar(calendar: CalendarCellModel?)
         case register
     }
     
@@ -40,7 +40,7 @@ public final class AddCalendarActionReactor: Reactor {
         case setEndTime(date: Date?)
         case setURL(url: URL?)
         case setDescription(description: String)
-        case setCalendar(calendar: CalendarEntity?)
+        case setCalendar(calendar: CalendarCellModel?)
         case register(state: RegisteredState)
     }
     
@@ -53,7 +53,7 @@ public final class AddCalendarActionReactor: Reactor {
         var endTime: Date?
         var url: URL?
         var description: String?
-        var calendar: CalendarEntity?
+        var calendar: CalendarCellModel?
         var registerd: RegisteredState?
     }
     

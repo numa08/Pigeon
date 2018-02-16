@@ -22,7 +22,7 @@ View {
     
     public var disposeBag: DisposeBag = DisposeBag()
     public var onDismissCallback: ((UIViewController) -> Void)?
-    public var row: RowOf<String>!
+    public var row: RowOf<CalendarCellValue>!
     public let dataSource = RxTableViewSectionedReloadDataSource<CalendarSection>(configureCell: {_, tableView, indexPath, reactor in
         let cell: CalendarListCell = {
             if let cell = tableView.dequeueReusableCell(withIdentifier: reactor.currentState.id.value) as? CalendarListCell {
@@ -105,6 +105,15 @@ View {
                 }
             })
             .disposed(by: disposeBag)
+        reactor.state.asObservable().map { $0.selectedCalendar }.filter { $0 != nil }.map { $0! }
+            .subscribe(onNext: { (provider, cell) in
+                let calendar = cell.initialState
+                let value = CalendarCellValue(provider: provider, calendar: calendar)
+                self.row?.value = value
+                self.row?.updateCell()
+                self.onDismissCallback?(self)
+            })
+        .disposed(by: disposeBag)
     }
     
     @objc private func addCalendar(sender: Any) {
@@ -117,6 +126,7 @@ View {
 extension CalendarListViewController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
