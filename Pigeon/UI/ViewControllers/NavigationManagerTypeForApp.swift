@@ -11,7 +11,7 @@ import UIKit
 struct NavigationManager: NavigationManagerType {
     
     func navigationToLoginViewController(current: UINavigationController) {
-        let reactor = LoginReactor(AppDelegate.serviceProvider)
+        let reactor = LoginReactor(ServiceProvider.serviceProvider)
         let viewController = LoginViewController(reactor)
         current.pushViewController(viewController, animated: true)
     }

@@ -12,26 +12,13 @@ import EventKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    static var serviceProvider: ServiceProviderType = {
-            let userDefaults = UserDefaults.shared
-            let googleAccountStorage = GoogleAccountStorage(userDefaults: userDefaults)
-            let serviceProvider = ServiceProvider(
-                googleAccountStorage: googleAccountStorage,
-                calendarService: CalendarService(repositories: [
-                    EventKitCalendarRepository(eventStore: EKEventStore())
-                    ,GoogleCalendarRepository(accountStorage: googleAccountStorage, googleService: { GTLRCalendarService() }, userDefaults: userDefaults)
-                    ]))
-            return serviceProvider
-    }()
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Initialize sign-in
         GIDSignIn.sharedInstance().clientID = "520461717930-gt1cnp2ecjmk3dvjtdpnbqau36tv06lk.apps.googleusercontent.com"
 
-        let rootReactor = CalendarListReactor(AppDelegate.serviceProvider)
+        let rootReactor = CalendarListReactor(ServiceProvider.serviceProvider)
         let rootViewController = CalendarListViewController(rootReactor)
 //        let rootReactor = LoginReactor(AppDelegate.serviceProvider)
 //        let rootViewController = LoginViewController(rootReactor)
