@@ -19,10 +19,22 @@ open class AddCalendarActionViewController: FormViewController, View {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.reactor = AddCalendarActionReactor(ServiceProvider.serviceProvider)
+        reactor = AddCalendarActionReactor(ServiceProvider.serviceProvider)
+        if let reactor = reactor,
+            let context = extensionContext {
+            Observable.just(Reactor.Action.handleAppAction(context: context))
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        }
     }
     
     public func bind(reactor: AddCalendarActionReactor) {
+        if let context = extensionContext {
+            Observable.just(Reactor.Action.handleAppAction(context: context))
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        }
+        
         reactor.state.asObservable().map { $0.registerd }
             .filter { $0 != nil }.map { $0! }
             .observeOn(OperationQueueScheduler(operationQueue: OperationQueue.main))
@@ -57,75 +69,45 @@ open class AddCalendarActionViewController: FormViewController, View {
             <<< TextRow("Title") { row in
                 row.placeholder = "タイトル(必須)"
                 row.add(rule: RuleRequired())
-                reactor.state.asObservable().map { $0.title }.subscribe(onNext: { row.value = $0 }).disposed(by: self.disposeBag)
-                }.onChange {row in
-                    let action = Reactor.Action.updateTitle(title: row.value)
-                    observeAction(action: action)
-                    .disposed(by: self.disposeBag)
-            }
+                }
             +++ Section()
             <<< SwitchRow("AllDay") { row in
                 row.title = "終日"
                 row.add(rule: RuleRequired())
-                reactor.state.asObservable().map { $0.allDay }.subscribe(onNext: { row.value = $0 }).disposed(by: self.disposeBag)
-                }.onChange { row in
-                    let action = Reactor.Action.updateAllDay(allDay: row.value!)
-                    observeAction(action: action).disposed(by: self.disposeBag)            }
+                }
             <<< DateTimeRow("StartDateTime") { row in
                 row.title = "開始"
                 row.hidden = dateTimeRowPredicate
-                }.onChange { row in
-                    let action = Reactor.Action.updateStartTime(date: row.value)
-                    observeAction(action: action).disposed(by: self.disposeBag)
-            }
+                }
             <<< DateTimeRow("EndDateTime") { row in
                 row.title = "終了"
-                reactor.state.asObservable().map { $0.endDate }.subscribe(onNext: { row.value = $0 }).disposed(by: self.disposeBag)
-                row.hidden = dateTimeRowPredicate
-                }.onChange {row in
-                    let action = Reactor.Action.updateEndTime(date: row.value)
-                    observeAction(action: action).disposed(by: self.disposeBag)
-            }
+                            row.hidden = dateTimeRowPredicate
+                }
             <<< DateRow("StartDate") { row in
                 row.title = "開始"
-                reactor.state.asObservable().map { $0.startDate }.subscribe(onNext: { row.value = $0 }).disposed(by: self.disposeBag)
+                
                 row.hidden = dateRowPredicate
-                }.onChange { row in
-                    let action = Reactor.Action.updateStartDate(date: row.value!)
-                    observeAction(action: action).disposed(by: self.disposeBag)
-            }
+                }
             <<< DateRow("EndDate") { row in
                 row.title = "終了"
-                reactor.state.asObservable().map { $0.endDate }.subscribe(onNext: { row.value = $0 }).disposed(by: self.disposeBag)
+                
                 row.hidden = dateRowPredicate
-                }.onChange { row in
-                    let action = Reactor.Action.updateEndDate(date: row.value!)
-                    observeAction(action: action).disposed(by: self.disposeBag)
-            }
+                }
             +++ Section()
             <<< CalendarRow("Calendar") {
                 $0.title = "カレンダー(必須)"
                 $0.selectorTitle = "カレンダー"
                 $0.add(rule: RuleRequired())
-                }.onChange { row in
-                    let action = Reactor.Action.updateCalendar(calendar: row.value?.calendar)
-                    observeAction(action: action).disposed(by: self.disposeBag)
-            }
+                }
             
             +++ Section()
             <<< URLRow("URL") {
                 $0.placeholder = "URL"
-                }.onChange { row in
-                    let action = Reactor.Action.updateURL(url: row.value)
-                    observeAction(action: action).disposed(by: self.disposeBag)
-            }
-            <<< TextAreaRow("Description") { row in
+                }
+            <<< TextAreaRow("Memo") { row in
                 row.placeholder = "メモ"
-                reactor.state.asObservable().map { $0.description }.subscribe(onNext: { row.value = $0 }).disposed(by: self.disposeBag)
-                }.onChange {row in
-                    let action = Reactor.Action.updateDescription(description: row.value!)
-                    observeAction(action: action).disposed(by: self.disposeBag)
-            }
+                
+                }
             +++ Section()
             <<< ButtonRow("Register") { row in
                 row.title = "登録"
@@ -133,6 +115,30 @@ open class AddCalendarActionViewController: FormViewController, View {
                     let action = Reactor.Action.register
                     observeAction(action: action).disposed(by: self.disposeBag)
         }
+        
+        reactor.state.asObservable().map { $0.eventTemplate }
+        .subscribe(onNext: {template in
+            if let title: TextRow = self.form.rowBy(tag: "Title") {
+                title.value = template.title
+            }
+            if let url: URLRow = self.form.rowBy(tag: "URL") {
+                url.value = template.url
+            }
+            if let memo: TextAreaRow = self.form.rowBy(tag: "Memo") {
+                memo.value = template.memo
+            }
+            if let allDay: SwitchRow = self.form.rowBy(tag: "AllDay") {
+                allDay.value = template.allDay
+            }
+            if let startDate: DateRow = self.form.rowBy(tag: "StartDate") {
+                startDate.value = template.startDate.value
+            }
+            if let endDate: DateRow = self.form.rowBy(tag: "EndDate") {
+                endDate.value = template.endDate.value
+            }
+            self.tableView.reloadData()
+        })
+        .disposed(by: disposeBag)
     }
 
     @IBAction func onClickCancel(_ sender: Any) {

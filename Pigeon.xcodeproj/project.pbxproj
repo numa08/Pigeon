@@ -41,6 +41,19 @@
 		243F1ACA202F05E40030EFE2 /* GoogleAccountStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1AC9202F05E40030EFE2 /* GoogleAccountStoreService.swift */; };
 		243F1ACB202F05E90030EFE2 /* GoogleAccountStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1AC9202F05E40030EFE2 /* GoogleAccountStoreService.swift */; };
 		243F1ACD202F064C0030EFE2 /* GoogleAccountStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F1ACC202F064C0030EFE2 /* GoogleAccountStorage.swift */; };
+		245CDE8F2039498A005AE796 /* OpenGraphMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDE8E2039498A005AE796 /* OpenGraphMetadata.swift */; };
+		245CDE902039498A005AE796 /* OpenGraphMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDE8E2039498A005AE796 /* OpenGraphMetadata.swift */; };
+		245CDE92203949A7005AE796 /* OpenGraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDE91203949A7005AE796 /* OpenGraphParser.swift */; };
+		245CDE93203949A7005AE796 /* OpenGraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDE91203949A7005AE796 /* OpenGraphParser.swift */; };
+		2461E36B2037EDCE0029C23C /* OpenGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2461E36A2037EDCE0029C23C /* OpenGraph.framework */; };
+		2461E36C2037EDE10029C23C /* OpenGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2461E36A2037EDCE0029C23C /* OpenGraph.framework */; };
+		2461E36F2037EFDD0029C23C /* WebPageActionHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2461E36E2037EFDD0029C23C /* WebPageActionHandler.js */; };
+		2461E3762037F4120029C23C /* EventTemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2461E3752037F4120029C23C /* EventTemplateModel.swift */; };
+		2461E3772037F4120029C23C /* EventTemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2461E3752037F4120029C23C /* EventTemplateModel.swift */; };
+		2461E3792037F84B0029C23C /* EventTemplateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2461E3782037F84B0029C23C /* EventTemplateRepository.swift */; };
+		2461E37A2037F84B0029C23C /* EventTemplateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2461E3782037F84B0029C23C /* EventTemplateRepository.swift */; };
+		2461E37C2037F86F0029C23C /* EventTemplateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2461E37B2037F86F0029C23C /* EventTemplateEntity.swift */; };
+		2461E37D2037F86F0029C23C /* EventTemplateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2461E37B2037F86F0029C23C /* EventTemplateEntity.swift */; };
 		249104B62001F6B900106193 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249104B52001F6B900106193 /* UserDefaults+AppGroup.swift */; };
 		249104B72001F6C100106193 /* UserDefaults+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249104B52001F6B900106193 /* UserDefaults+AppGroup.swift */; };
 		249104C52001F78500106193 /* SupportedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_553055846822 /* SupportedProvider.swift */; };
@@ -139,6 +152,13 @@
 		243F1AC7202EEB050030EFE2 /* LoginViewController+GoogleCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+GoogleCalendar.swift"; sourceTree = "<group>"; };
 		243F1AC9202F05E40030EFE2 /* GoogleAccountStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAccountStoreService.swift; sourceTree = "<group>"; };
 		243F1ACC202F064C0030EFE2 /* GoogleAccountStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAccountStorage.swift; sourceTree = "<group>"; };
+		245CDE8E2039498A005AE796 /* OpenGraphMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphMetadata.swift; sourceTree = "<group>"; };
+		245CDE91203949A7005AE796 /* OpenGraphParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphParser.swift; sourceTree = "<group>"; };
+		2461E36A2037EDCE0029C23C /* OpenGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGraph.framework; path = Carthage/Build/iOS/OpenGraph.framework; sourceTree = "<group>"; };
+		2461E36E2037EFDD0029C23C /* WebPageActionHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WebPageActionHandler.js; sourceTree = "<group>"; };
+		2461E3752037F4120029C23C /* EventTemplateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTemplateModel.swift; sourceTree = "<group>"; };
+		2461E3782037F84B0029C23C /* EventTemplateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTemplateRepository.swift; sourceTree = "<group>"; };
+		2461E37B2037F86F0029C23C /* EventTemplateEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTemplateEntity.swift; sourceTree = "<group>"; };
 		249104B32001F33400106193 /* Pigeon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pigeon.entitlements; sourceTree = "<group>"; };
 		249104B42001F37800106193 /* AddCalendarAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AddCalendarAction.entitlements; sourceTree = "<group>"; };
 		249104B52001F6B900106193 /* UserDefaults+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+AppGroup.swift"; sourceTree = "<group>"; };
@@ -193,6 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2461E36B2037EDCE0029C23C /* OpenGraph.framework in Frameworks */,
 				24A91CC9203709450000870B /* Differentiator.framework in Frameworks */,
 				24A91CCA203709450000870B /* Eureka.framework in Frameworks */,
 				24A91CCB203709450000870B /* ReactorKit.framework in Frameworks */,
@@ -209,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2461E36C2037EDE10029C23C /* OpenGraph.framework in Frameworks */,
 				243F1AC2202EE22E0030EFE2 /* ToastSwiftFramework.framework in Frameworks */,
 				24085BAF202DE170000B4066 /* ReactorKit.framework in Frameworks */,
 				24085BAD202DE170000B4066 /* ReactorKitRuntime.framework in Frameworks */,
@@ -253,6 +275,7 @@
 				24085BBD202E7C14000B4066 /* CalendarCellModel.swift */,
 				24085BC0202E7C30000B4066 /* CalendarProviderSectionModel.swift */,
 				243F1AC9202F05E40030EFE2 /* GoogleAccountStoreService.swift */,
+				2461E3752037F4120029C23C /* EventTemplateModel.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -283,6 +306,7 @@
 			children = (
 				24085BB0202E71D4000B4066 /* Data */,
 				24085B99202D8C15000B4066 /* CalendarEntity.swift */,
+				2461E37B2037F86F0029C23C /* EventTemplateEntity.swift */,
 				24085BBA202E797C000B4066 /* CalendarProviderEntity.swift */,
 			);
 			path = Domain;
@@ -299,6 +323,7 @@
 		24085BB0202E71D4000B4066 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				245CDE8D2039497B005AE796 /* OpenGraph */,
 				24085BB9202E7332000B4066 /* Repositories */,
 			);
 			path = Data;
@@ -311,13 +336,48 @@
 				24D1009620317AC90011F32D /* EventKitCalendarRepository.swift */,
 				24D1009920317EDA0011F32D /* CalendarRepository.swift */,
 				24D1009C203181AD0011F32D /* GoogleCalendarRepository.swift */,
+				2461E3782037F84B0029C23C /* EventTemplateRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		245CDE8D2039497B005AE796 /* OpenGraph */ = {
+			isa = PBXGroup;
+			children = (
+				245CDE8E2039498A005AE796 /* OpenGraphMetadata.swift */,
+				245CDE91203949A7005AE796 /* OpenGraphParser.swift */,
+			);
+			path = OpenGraph;
+			sourceTree = "<group>";
+		};
+		2461E36D2037EF8A0029C23C /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				2461E36E2037EFDD0029C23C /* WebPageActionHandler.js */,
+			);
+			path = Handler;
+			sourceTree = "<group>";
+		};
+		2461E3702037F3BF0029C23C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				2461E3712037F3C70029C23C /* Data */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		2461E3712037F3C70029C23C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		249B8FB81FFF730F00C3535E /* AddCalendarAction */ = {
 			isa = PBXGroup;
 			children = (
+				2461E3702037F3BF0029C23C /* Domain */,
+				2461E36D2037EF8A0029C23C /* Handler */,
 				24A91CC6203708DB0000870B /* UI */,
 				249104B42001F37800106193 /* AddCalendarAction.entitlements */,
 				249B8FBB1FFF730F00C3535E /* MainInterface.storyboard */,
@@ -369,6 +429,7 @@
 		C95293F0CCF86137720CF84D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2461E36A2037EDCE0029C23C /* OpenGraph.framework */,
 				243F1AC1202EE22E0030EFE2 /* ToastSwiftFramework.framework */,
 				243F1ABF202EE0A70030EFE2 /* Toast.framework */,
 				24085BAE202DE170000B4066 /* ReactorKit.framework */,
@@ -561,6 +622,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				249B8FBD1FFF730F00C3535E /* MainInterface.storyboard in Resources */,
+				2461E36F2037EFDD0029C23C /* WebPageActionHandler.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,6 +672,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ReactorKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactorKitRuntime.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ToastSwiftFramework.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/OpenGraph.framework",
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
@@ -621,6 +684,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactorKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactorKitRuntime.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ToastSwiftFramework.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OpenGraphk.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -789,8 +853,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2461E37A2037F84B0029C23C /* EventTemplateRepository.swift in Sources */,
+				2461E37D2037F86F0029C23C /* EventTemplateEntity.swift in Sources */,
 				24085B9B202D8C70000B4066 /* CalendarEntity.swift in Sources */,
+				245CDE902039498A005AE796 /* OpenGraphMetadata.swift in Sources */,
 				24085BC2202E7C30000B4066 /* CalendarProviderSectionModel.swift in Sources */,
+				245CDE93203949A7005AE796 /* OpenGraphParser.swift in Sources */,
 				24085BA2202DD946000B4066 /* UIColor+Image.swift in Sources */,
 				249104C52001F78500106193 /* SupportedProvider.swift in Sources */,
 				24D1009F2031820F0011F32D /* GoogleAccountStorage.swift in Sources */,
@@ -799,6 +867,7 @@
 				24085B97202D8720000B4066 /* CalendarListCell.swift in Sources */,
 				24D1009E203181AD0011F32D /* GoogleCalendarRepository.swift in Sources */,
 				24D1009820317AC90011F32D /* EventKitCalendarRepository.swift in Sources */,
+				2461E3772037F4120029C23C /* EventTemplateModel.swift in Sources */,
 				24085BBC202E797C000B4066 /* CalendarProviderEntity.swift in Sources */,
 				249B8FBA1FFF730F00C3535E /* AddCalendarActionViewController.swift in Sources */,
 				24085B92202D4D14000B4066 /* CalendarCellReactor.swift in Sources */,
@@ -828,10 +897,14 @@
 				24085B82202D1FE8000B4066 /* CalendarListReactor.swift in Sources */,
 				24D1009D203181AD0011F32D /* GoogleCalendarRepository.swift in Sources */,
 				BF_629410552227 /* AppDelegate.swift in Sources */,
+				245CDE92203949A7005AE796 /* OpenGraphParser.swift in Sources */,
 				BF_670056304807 /* CalendarListViewController.swift in Sources */,
 				24E59CA920372C630097333E /* CalendarRow.swift in Sources */,
 				24085B8C202D3BE1000B4066 /* CalendarService.swift in Sources */,
+				2461E3792037F84B0029C23C /* EventTemplateRepository.swift in Sources */,
 				24085BBB202E797C000B4066 /* CalendarProviderEntity.swift in Sources */,
+				2461E3762037F4120029C23C /* EventTemplateModel.swift in Sources */,
+				245CDE8F2039498A005AE796 /* OpenGraphMetadata.swift in Sources */,
 				24D1009A20317EDA0011F32D /* CalendarRepository.swift in Sources */,
 				24085BA1202DD946000B4066 /* UIColor+Image.swift in Sources */,
 				24085B8A202D3BBD000B4066 /* ServiceProvider.swift in Sources */,
@@ -843,6 +916,7 @@
 				243F1ACA202F05E40030EFE2 /* GoogleAccountStoreService.swift in Sources */,
 				24085B96202D861B000B4066 /* CalendarListCell.swift in Sources */,
 				BF_165923807992 /* SupportedProvider.swift in Sources */,
+				2461E37C2037F86F0029C23C /* EventTemplateEntity.swift in Sources */,
 				24085BBE202E7C14000B4066 /* CalendarCellModel.swift in Sources */,
 				243F1AC8202EEB050030EFE2 /* LoginViewController+GoogleCalendar.swift in Sources */,
 			);
