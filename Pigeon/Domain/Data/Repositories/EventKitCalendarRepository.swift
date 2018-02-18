@@ -11,6 +11,10 @@ import RxSwift
 import UIKit
 
 class EventKitCalendarRepository: CalendarRepositoryType {
+    
+    enum Errors: Error {
+        case NoCalendarError(forCalendar: CalendarEntity)
+    }
 
     let eventStore: EKEventStore
     lazy var calendarSubject : BehaviorSubject<[(CalendarProviderEntity, [CalendarEntity])]> = {
@@ -46,9 +50,27 @@ class EventKitCalendarRepository: CalendarRepositoryType {
                     color: UIColor(cgColor: c.cgColor)
                 )
             })
-        return [(CalendarProviderEntity(name: "iOS") ,calendars)]
+        return [(CalendarProviderEntity(name: "iOS", ownerIdentifier: nil, provider: .EventKit) ,calendars)]
     }
     
+    func register(event: EventEntity, inCalendar calendar: CalendarEntity, forProvider _: CalendarProviderEntity) -> Observable<Void> {
+        return Observable.create({ (emitter) -> Disposable in
+            guard let eventKitCalendar = self.eventStore.calendars(for: .event).first(where: { $0.calendarIdentifier == calendar.id.value }) else {
+                emitter.onError(Errors.NoCalendarError(forCalendar: calendar))
+                return Disposables.create()
+            }
+            let eventKitEvent = event.event(forStore: self.eventStore, withCalendar: eventKitCalendar)
+            do {
+                try self.eventStore.save(eventKitEvent, span: EKSpan.futureEvents)
+                emitter.onNext(())
+                emitter.onCompleted()
+            } catch {
+                emitter.onError(error)
+            }
+            return Disposables.create()
+        })
+    }
+
     private var previousAuthorizationState: EKAuthorizationStatus
     
     private func subscribeAuthorizationStateChanged() {
@@ -63,6 +85,20 @@ class EventKitCalendarRepository: CalendarRepositoryType {
         }
         DispatchQueue(label: "").asyncAfter(deadline: .now() + 1.0, execute: { self.subscribeAuthorizationStateChanged() })
     }
-    
 }
 
+extension EventEntity {
+    
+    func event(forStore: EKEventStore, withCalendar calendar: EKCalendar) -> EKEvent {
+        let event = EKEvent(eventStore: forStore)
+        event.title = title
+        event.isAllDay = allDay
+        event.startDate = start
+        event.endDate = end
+        event.calendar = calendar
+        event.url = url
+        event.notes = memo
+        return event
+    }
+    
+}

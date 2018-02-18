@@ -27,10 +27,8 @@ struct ServiceProvider: ServiceProviderType {
         let googleAccountStorage = GoogleAccountStorage(userDefaults: userDefaults)
         let serviceProvider = ServiceProvider(
             googleAccountStorage: googleAccountStorage,
-            calendarService: CalendarService(repositories: [
-                EventKitCalendarRepository(eventStore: EKEventStore())
-                ,GoogleCalendarRepository(accountStorage: googleAccountStorage, googleService: { GTLRCalendarService() }, userDefaults: userDefaults)
-                ]),
+            calendarService: CalendarService(
+                eventKitCalendarRepository: EventKitCalendarRepository(eventStore: EKEventStore()), googleCalendarRepository: GoogleCalendarRepository(accountStorage: googleAccountStorage, googleService: { GTLRCalendarService() }, userDefaults: userDefaults)),
             eventTemplateRepository: EventTemplateRepository(DefaultOpenGraphParser()))
         return serviceProvider
     }()

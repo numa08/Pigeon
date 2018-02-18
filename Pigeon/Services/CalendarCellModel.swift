@@ -12,4 +12,5 @@ public struct CalendarCellModel {
     var title: String
     var detail: String
     var color: UIColor
+    let entity: CalendarEntity
 }

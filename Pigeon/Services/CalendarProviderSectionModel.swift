@@ -9,6 +9,8 @@ import Foundation
 
 public struct CalendarProviderCellModel {
     let name: String
+    let provider: SupportedProvider
+    let entity: CalendarProviderEntity
 }
 
 extension CalendarProviderCellModel: Hashable {

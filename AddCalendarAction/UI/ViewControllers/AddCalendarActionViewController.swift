@@ -112,7 +112,20 @@ open class AddCalendarActionViewController: FormViewController, View {
             <<< ButtonRow("Register") { row in
                 row.title = "登録"
                 }.onCellSelection { (_, _) in
-                    let action = Reactor.Action.register
+                    
+                    guard let title: TextRow = self.form.rowBy(tag: "Title"),
+                        let allDay: SwitchRow = self.form.rowBy(tag: "AllDay"),
+                    let startDate: DateRow = self.form.rowBy(tag: "StartDate"),
+                        let endDate: DateRow = self.form.rowBy(tag: "EndDate"),
+                        let startDateTime: DateTimeRow = self.form.rowBy(tag: "StartDateTime"),
+                        let endDateTime: DateTimeRow = self.form.rowBy(tag: "EndDateTime"),
+                        let calendar: CalendarRow = self.form.rowBy(tag: "Calendar"),
+                        let url: URLRow = self.form.rowBy(tag: "URL"),
+                        let memo: TextAreaRow = self.form.rowBy(tag: "Memo") else {
+                            return
+                    }
+                    let template = EventTemplateModel(title: title.value, startDate: StartDate(value: startDate.value ?? Date()), endDate: EndDate(value: endDate.value ?? Date()), allDay: allDay.value!, startTime: StartTime(value: startDateTime.value ?? Date()), endTime: EndTime(value: endDateTime.value ?? Date()), url: url.value, calendar: calendar.value, memo: memo.value)
+                    let action = Reactor.Action.register(event: template)
                     observeAction(action: action).disposed(by: self.disposeBag)
         }
         
@@ -139,6 +152,7 @@ open class AddCalendarActionViewController: FormViewController, View {
             self.tableView.reloadData()
         })
         .disposed(by: disposeBag)
+        
     }
 
     @IBAction func onClickCancel(_ sender: Any) {

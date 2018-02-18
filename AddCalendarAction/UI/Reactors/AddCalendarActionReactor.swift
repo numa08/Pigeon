@@ -21,7 +21,7 @@ public final class AddCalendarActionReactor: Reactor {
     
     public enum Action {
         case handleAppAction(context: NSExtensionContext)
-        case register
+        case register(event: EventTemplateModel)
     }
     
     public enum Mutation {
@@ -47,8 +47,11 @@ public final class AddCalendarActionReactor: Reactor {
             return provider.eventTemplateRepository.acquireEventTemplateFrom(context: context)
             .observeOn(OperationQueueScheduler(operationQueue: OperationQueue.main))
             .map { Mutation.update(title: $0.title, url: $0.url, description: $0.description) }
-        case .register:
-            return Observable.just(Mutation.register(state: .success))
+        case let .register(template):
+            return provider.calendarService.register(event: template).debug()
+            .asObservable()
+            .map { _ in Mutation.register(state: .success) }
+            .catchError { Observable.just(Mutation.register(state: .failure(e: $0))) }
         }
     }
     

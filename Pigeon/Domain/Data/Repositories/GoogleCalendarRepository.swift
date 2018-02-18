@@ -12,8 +12,7 @@ import GTMOAuth2
 import RxSwift
 
 class GoogleCalendarRepository: CalendarRepositoryType {
-    
-    
+        
     let accountStorage: GoogleAccountStorageType
     let googleService: () -> GTLRCalendarService
     let userDefaults: UserDefaults
@@ -102,14 +101,7 @@ class GoogleCalendarRepository: CalendarRepositoryType {
     }
     
     func restoreCalendar(forUser user: GIDGoogleUser, withColors colors: GTLRCalendar_Colors) -> (CalendarProviderEntity, [CalendarEntity]) {
-        let identifiers = userDefaults.stringArray(forKey: "\(user.userID).\(UserDefaultsKeys.CalendarIdentifier.rawValue)") ?? []
-        let calendars = try! identifiers.map({ (identifier) -> GTLRCalendar_CalendarListEntry in
-            guard let data = self.userDefaults.data(forKey: identifier),
-                let entry = NSKeyedUnarchiver.unarchiveObject(with: data) as? GTLRCalendar_CalendarListEntry else {
-                    throw Errors.InvalidObjectStoredError
-            }
-            return entry
-        })
+        let calendars = restoreCalendar(forUser: user)
         .map({ (entry) -> CalendarEntity in
                 let colorId = entry.colorId ?? ""
                 let colors = colors.calendar?.jsonValue(forKey: colorId) as? [String: String]
@@ -118,8 +110,68 @@ class GoogleCalendarRepository: CalendarRepositoryType {
                 let uiColor = UIColor(hex: hex) ?? UIColor.clear
                 return CalendarEntity(id: CalendarEntityId(value: entry.identifier!), title: entry.summary!, detail: "", color: uiColor)
             })
-        let provider = CalendarProviderEntity(name: user.profile.email)
+        let provider = CalendarProviderEntity(name: user.profile.email, ownerIdentifier: CalendarOwnerIdentifier(value: user.userID), provider: .Google)
         return (provider, calendars)
+    }
+    
+    func register(event: EventEntity, inCalendar calendar: CalendarEntity, forProvider provider: CalendarProviderEntity) -> Observable<Void> {
+        return accountStorage.find(forProvider: provider).map { user -> (GIDGoogleUser, GTLRCalendar_CalendarListEntry) in
+            guard let user = user else {
+                fatalError()
+            }
+            guard let googleCalendar = self.restoreCalendar(forUser: user).first(where: { $0.identifier == calendar.id.value }) else {
+                fatalError()
+            }
+            return (user, googleCalendar)
+        }.asObservable()
+        .flatMap { (arg) -> Observable<Void> in
+                let (user, calendar) = arg
+            return Observable.create({emitter in
+                    let service = self.googleService()
+                    service.authorizer = user.authentication.fetcherAuthorizer()
+                    let object = event.event()
+                    let query = GTLRCalendarQuery_EventsInsert.query(withObject: object, calendarId: calendar.identifier!)
+                    service.executeQuery(query, completionHandler: {(_, response, error) in
+                        if let error = error {
+                            emitter.onError(error)
+                        }
+                        emitter.onNext(())
+                        emitter.onCompleted()
+                    })
+                    return Disposables.create()
+                })
+        }
+    }
+    
+    private func restoreCalendar(forUser user: GIDGoogleUser) -> [GTLRCalendar_CalendarListEntry] {
+        let identifiers = userDefaults.stringArray(forKey: "\(user.userID).\(UserDefaultsKeys.CalendarIdentifier.rawValue)") ?? []
+        let calendars = try! identifiers.map({ (identifier) -> GTLRCalendar_CalendarListEntry in
+            guard let data = self.userDefaults.data(forKey: identifier),
+                let entry = NSKeyedUnarchiver.unarchiveObject(with: data) as? GTLRCalendar_CalendarListEntry else {
+                    throw Errors.InvalidObjectStoredError
+            }
+            return entry
+        })
+        return calendars
+    }
+}
+
+extension EventEntity {
+    
+    func event() -> GTLRCalendar_Event {
+        let event = GTLRCalendar_Event()
+        event.summary = title
+        event.descriptionProperty = "\(url?.absoluteString ?? "")\n\(memo ?? "")"
+        event.start = GTLRCalendar_EventDateTime()
+        event.end = GTLRCalendar_EventDateTime()
+        if allDay {
+            event.start?.date = GTLRDateTime(forAllDayWith: start)
+            event.end?.date = GTLRDateTime(forAllDayWith: end)
+        } else {
+            event.start?.dateTime = GTLRDateTime(date: start)
+            event.end?.dateTime = GTLRDateTime(date: end)
+        }
+        return event
     }
     
 }

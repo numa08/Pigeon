@@ -15,6 +15,7 @@ protocol GoogleAccountStorageType {
     var accounts: Observable<[(GIDGoogleUser, GTLRCalendar_Colors)]> { get }
     func refresh()
     func store(user: GIDGoogleUser)
+    func find(forProvider provider: CalendarProviderEntity) -> Observable<GIDGoogleUser?>
 }
 
 enum GoogleAccountStorageError: Error {
@@ -96,6 +97,20 @@ class GoogleAccountStorage: GoogleAccountStorageType {
                 emitter.onNext(colors)
                 emitter.onCompleted()
             }
+            return Disposables.create()
+        })
+    }
+    
+    func find(forProvider provider: CalendarProviderEntity) -> Observable<GIDGoogleUser?> {
+        return Observable.create({ (emitter) -> Disposable in
+            guard let ownerIdentifier = provider.ownerIdentifier else {
+                emitter.onNext(nil)
+                emitter.onCompleted()
+                return Disposables.create()
+            }
+            let user = self.restore().first(where: {(user, _) in user.userID == ownerIdentifier.value })?.0
+            emitter.onNext(user)
+            emitter.onCompleted()
             return Disposables.create()
         })
     }

@@ -26,10 +26,11 @@ public struct EventTemplateModel {
     var startTime: TimeType?
     var endTime: TimeType?
     var url: URL?
-    var calendar: CalendarCellModel?
+    var calendar: CalendarCellValue?
     var memo: String?
     
     static func defaultValue() -> EventTemplateModel {
         return EventTemplateModel(title: nil, startDate: StartDate(value: Date()), endDate: EndDate(value: Date()), allDay: true, startTime: nil, endTime: nil, url: nil, calendar: nil, memo: nil)
     }
 }
+

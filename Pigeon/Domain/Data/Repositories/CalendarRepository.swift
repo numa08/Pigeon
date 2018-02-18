@@ -10,5 +10,6 @@ import RxSwift
 
 protocol CalendarRepositoryType {
     var calendars: Observable<[(CalendarProviderEntity, [CalendarEntity])]> { get }
+    func register(event: EventEntity, inCalendar calendar: CalendarEntity, forProvider provider: CalendarProviderEntity) -> Observable<Void>
     func refresh()
 }

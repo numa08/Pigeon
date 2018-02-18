@@ -45,6 +45,8 @@
 		245CDE902039498A005AE796 /* OpenGraphMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDE8E2039498A005AE796 /* OpenGraphMetadata.swift */; };
 		245CDE92203949A7005AE796 /* OpenGraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDE91203949A7005AE796 /* OpenGraphParser.swift */; };
 		245CDE93203949A7005AE796 /* OpenGraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDE91203949A7005AE796 /* OpenGraphParser.swift */; };
+		245CDE95203965F0005AE796 /* EventEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDE94203965F0005AE796 /* EventEntity.swift */; };
+		245CDE96203965F0005AE796 /* EventEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245CDE94203965F0005AE796 /* EventEntity.swift */; };
 		2461E36B2037EDCE0029C23C /* OpenGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2461E36A2037EDCE0029C23C /* OpenGraph.framework */; };
 		2461E36C2037EDE10029C23C /* OpenGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2461E36A2037EDCE0029C23C /* OpenGraph.framework */; };
 		2461E36F2037EFDD0029C23C /* WebPageActionHandler.js in Resources */ = {isa = PBXBuildFile; fileRef = 2461E36E2037EFDD0029C23C /* WebPageActionHandler.js */; };
@@ -154,6 +156,7 @@
 		243F1ACC202F064C0030EFE2 /* GoogleAccountStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAccountStorage.swift; sourceTree = "<group>"; };
 		245CDE8E2039498A005AE796 /* OpenGraphMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphMetadata.swift; sourceTree = "<group>"; };
 		245CDE91203949A7005AE796 /* OpenGraphParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphParser.swift; sourceTree = "<group>"; };
+		245CDE94203965F0005AE796 /* EventEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntity.swift; sourceTree = "<group>"; };
 		2461E36A2037EDCE0029C23C /* OpenGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGraph.framework; path = Carthage/Build/iOS/OpenGraph.framework; sourceTree = "<group>"; };
 		2461E36E2037EFDD0029C23C /* WebPageActionHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WebPageActionHandler.js; sourceTree = "<group>"; };
 		2461E3752037F4120029C23C /* EventTemplateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTemplateModel.swift; sourceTree = "<group>"; };
@@ -325,6 +328,7 @@
 			children = (
 				245CDE8D2039497B005AE796 /* OpenGraph */,
 				24085BB9202E7332000B4066 /* Repositories */,
+				245CDE94203965F0005AE796 /* EventEntity.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -877,6 +881,7 @@
 				243F1ACB202F05E90030EFE2 /* GoogleAccountStoreService.swift in Sources */,
 				24E59CA6203726020097333E /* CalendarRow.swift in Sources */,
 				24A91CD420370D040000870B /* ServiceProvider.swift in Sources */,
+				245CDE96203965F0005AE796 /* EventEntity.swift in Sources */,
 				24085BBF202E7C14000B4066 /* CalendarCellModel.swift in Sources */,
 				24D1009B20317EDA0011F32D /* CalendarRepository.swift in Sources */,
 				24E59CA7203728610097333E /* CalendarListViewController.swift in Sources */,
@@ -899,6 +904,7 @@
 				BF_629410552227 /* AppDelegate.swift in Sources */,
 				245CDE92203949A7005AE796 /* OpenGraphParser.swift in Sources */,
 				BF_670056304807 /* CalendarListViewController.swift in Sources */,
+				245CDE95203965F0005AE796 /* EventEntity.swift in Sources */,
 				24E59CA920372C630097333E /* CalendarRow.swift in Sources */,
 				24085B8C202D3BE1000B4066 /* CalendarService.swift in Sources */,
 				2461E3792037F84B0029C23C /* EventTemplateRepository.swift in Sources */,
