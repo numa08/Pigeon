@@ -48,7 +48,7 @@ public final class AddCalendarActionReactor: Reactor {
             .observeOn(OperationQueueScheduler(operationQueue: OperationQueue.main))
             .map { Mutation.update(title: $0.title, url: $0.url, description: $0.description) }
         case let .register(template):
-            return provider.calendarService.register(event: template).debug()
+            return provider.calendarService.register(event: template)
             .asObservable()
             .map { _ in Mutation.register(state: .success) }
             .catchError { Observable.just(Mutation.register(state: .failure(e: $0))) }

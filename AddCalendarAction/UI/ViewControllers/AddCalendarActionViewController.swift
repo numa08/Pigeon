@@ -124,7 +124,15 @@ open class AddCalendarActionViewController: FormViewController, View {
                         let memo: TextAreaRow = self.form.rowBy(tag: "Memo") else {
                             return
                     }
-                    let template = EventTemplateModel(title: title.value, startDate: StartDate(value: startDate.value ?? Date()), endDate: EndDate(value: endDate.value ?? Date()), allDay: allDay.value!, startTime: StartTime(value: startDateTime.value ?? Date()), endTime: EndTime(value: endDateTime.value ?? Date()), url: url.value, calendar: calendar.value, memo: memo.value)
+                    
+                    func time(fromDate date: Date?) -> TimeType? {
+                        if let date = date {
+                            return TimeType(value: date)
+                        }
+                        return nil
+                    }
+                    
+                    let template = EventTemplateModel(title: title.value, startDate: StartDate(value: startDate.value ?? Date()), endDate: EndDate(value: endDate.value ?? Date()), allDay: allDay.value!, startTime: time(fromDate: startDateTime.value), endTime: time(fromDate: endDateTime.value), url: url.value, calendar: calendar.value, memo: memo.value)
                     let action = Reactor.Action.register(event: template)
                     observeAction(action: action).disposed(by: self.disposeBag)
         }

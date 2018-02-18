@@ -90,7 +90,7 @@ extension EventTemplateModel {
         guard let title = title else {
             throw Errors.NoTitleError
         }
-        if !allDay {
+        if allDay {
             return EventEntity(title: title, allDay: allDay, start: startDate.value, end: endDate.value, url: url, memo: memo)
         }
         guard let startTime = startTime,
