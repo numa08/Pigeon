@@ -6,6 +6,6 @@
 //
 
 enum SupportedProvider: String {
-    case EventKit = "EventKit"
-    case Google = "Google"
+    case EventKit
+    case Google
 }

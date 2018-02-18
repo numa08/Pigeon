@@ -5,10 +5,10 @@
 //  Created by numa08 on 2018/02/09.
 //
 
-import Foundation
 import EventKit
-import GoogleSignIn
+import Foundation
 import GoogleAPIClientForREST
+import GoogleSignIn
 
 protocol ServiceProviderType {
     var calendarService: CalendarServiceType { get }
@@ -20,8 +20,7 @@ struct ServiceProvider: ServiceProviderType {
     let googleAccountStorage: GoogleAccountStorageType
     let calendarService: CalendarServiceType
     let eventTemplateRepository: EventTemplateRepository
-    
-    
+
     static var serviceProvider: ServiceProviderType = {
         let userDefaults = UserDefaults.shared
         let googleAccountStorage = GoogleAccountStorage(userDefaults: userDefaults)
@@ -32,5 +31,4 @@ struct ServiceProvider: ServiceProviderType {
             eventTemplateRepository: EventTemplateRepository(DefaultOpenGraphParser()))
         return serviceProvider
     }()
-
 }

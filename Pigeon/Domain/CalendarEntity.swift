@@ -13,15 +13,13 @@ public struct CalendarEntityId {
 }
 
 extension CalendarEntityId: Hashable {
-    
-    static public func==(lhs: CalendarEntityId, rhs: CalendarEntityId) -> Bool {
+    public static func== (lhs: CalendarEntityId, rhs: CalendarEntityId) -> Bool {
         return lhs.value == rhs.value
     }
-    
+
     public var hashValue: Int {
         return value.hashValue
     }
-    
 }
 
 public struct CalendarEntity {

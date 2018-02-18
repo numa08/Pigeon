@@ -5,17 +5,16 @@
 //  Created by numa08 on 2018/02/09.
 //
 
-import UIKit
 import ReactorKit
 import RxSwift
+import UIKit
 
 public class CalendarListCell:
-UITableViewCell,
-View {
-    
+    UITableViewCell,
+    View {
     public typealias Reactor = CalendarCellReactor
     public var disposeBag: DisposeBag = DisposeBag()
-    
+
     public func bind(reactor: CalendarCellReactor) {
         textLabel?.text = reactor.currentState.title
         detailTextLabel?.text = reactor.currentState.detail
@@ -27,6 +26,4 @@ View {
             imageView.layer.masksToBounds = true
         }
     }
-
-    
 }

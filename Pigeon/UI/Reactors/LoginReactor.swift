@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import RxSwift
-import ReactorKit
 import GoogleSignIn
+import ReactorKit
+import RxSwift
 
 final class LoginReactor: Reactor {
     enum Action {
@@ -16,7 +16,7 @@ final class LoginReactor: Reactor {
         case loggedInEventKit
         case loggedInGoogle(GIDGoogleUser)
     }
-    
+
     enum Mutation {
         case loginToProvider(SupportedProvider)
         case loggedInFinished(LoginState)
@@ -27,25 +27,25 @@ final class LoginReactor: Reactor {
         case failed(Error)
         case loggingin
     }
-    
+
     struct State {
         var loggingingService: SupportedProvider?
         var loginState: LoginState?
         var title: String?
     }
-    
+
     public let initialState: LoginReactor.State
     let provider: ServiceProviderType
-    
+
     init(_ serviceProvider: ServiceProviderType) {
-        self.provider = serviceProvider
-        self.initialState = State(
+        provider = serviceProvider
+        initialState = State(
             loggingingService: nil,
             loginState: nil,
             title: "ログイン"
         )
     }
-    
+
     func mutate(action: LoginReactor.Action) -> Observable<LoginReactor.Mutation> {
         switch action {
         case let .login(provider):
@@ -65,12 +65,11 @@ final class LoginReactor: Reactor {
         case let .loginToProvider(provider):
             state.loggingingService = provider
             state.loginState = .loggingin
-            
+
         case let .loggedInFinished(result):
             state.loggingingService = nil
-            state.loginState  = result
+            state.loginState = result
         }
         return state
     }
-    
 }

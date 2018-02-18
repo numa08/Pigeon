@@ -14,13 +14,10 @@ public struct CalendarProviderCellModel {
 }
 
 extension CalendarProviderCellModel: Hashable {
-    
     public var hashValue: Int {
-        get {
-            return name.hashValue
-        }
+        return name.hashValue
     }
-    
+
     public static func == (lhs: CalendarProviderCellModel, rhs: CalendarProviderCellModel) -> Bool {
         return lhs.name == rhs.name
     }

@@ -7,8 +7,8 @@
 
 import Foundation
 import ReactorKit
-import RxSwift
 import RxDataSources
+import RxSwift
 
 public struct CalendarSection {
     let section: CalendarProviderCellModel
@@ -16,21 +16,18 @@ public struct CalendarSection {
 }
 
 extension CalendarSection: SectionModelType {
-    
     public typealias Item = CalendarCellReactor
-    
+
     public init(original: CalendarSection, items: [CalendarCellReactor]) {
         self = original
         self.items = items
     }
 }
 
-
-final public class CalendarListReactor: Reactor {
-    
+public final class CalendarListReactor: Reactor {
     public let initialState: CalendarListReactor.State
     let provider: ServiceProviderType
-    
+
     public enum Action {
         case loadCalendarSections
         case selectedCalendar(IndexPath)
@@ -38,7 +35,7 @@ final public class CalendarListReactor: Reactor {
         case setShowAddCalendarButton(Bool)
         case refreshCalendars
     }
-    
+
     public enum Mutation {
         case setCalendarSections([CalendarSection])
         case selectedCalendar(IndexPath)
@@ -46,25 +43,25 @@ final public class CalendarListReactor: Reactor {
         case setShowAddCalendarButton(Bool)
         case refreshedCalendars
     }
-    
+
     public struct State {
         var calendarSections: [CalendarSection]
         var selectedCalendar: (CalendarProviderCellModel, CalendarCellReactor)?
         var title: String?
         var showAddCalendarButton: Bool
     }
-    
+
     init(
         _ serviceProvider: ServiceProviderType
-        ) {
-        self.provider = serviceProvider
-        self.initialState = State(
+    ) {
+        provider = serviceProvider
+        initialState = State(
             calendarSections: [],
             selectedCalendar: nil,
             title: nil,
             showAddCalendarButton: false)
     }
-    
+
     public func mutate(action: CalendarListReactor.Action) -> Observable<CalendarListReactor.Mutation> {
         switch action {
         case let .setTitle(title):
@@ -72,8 +69,8 @@ final public class CalendarListReactor: Reactor {
         case .loadCalendarSections:
             return
                 provider.calendarService.calendars
-                    .map({ (cellModels) -> [CalendarSection] in
-                    return cellModels.map({ (arg) -> CalendarSection in
+                .map({ (cellModels) -> [CalendarSection] in
+                    cellModels.map({ (arg) -> CalendarSection in
                         let (provider, cells) = arg
                         let reactors = cells.map({ CalendarCellReactor(calendar: $0) })
                         return CalendarSection(section: provider, items: reactors)
@@ -89,20 +86,20 @@ final public class CalendarListReactor: Reactor {
             return Observable.just(Mutation.refreshedCalendars)
         }
     }
-    
+
     public func reduce(state: CalendarListReactor.State, mutation: CalendarListReactor.Mutation) -> CalendarListReactor.State {
         var state = state
         state.selectedCalendar = nil
         switch mutation {
         case let .setCalendarSections(calendarSections):
-            calendarSections.forEach({section in
+            calendarSections.forEach({ section in
                 // 同じセクションの物を削除する
-                if let idx = state.calendarSections.index(where: {$0.section == section.section}) {
+                if let idx = state.calendarSections.index(where: { $0.section == section.section }) {
                     state.calendarSections.remove(at: idx)
                 }
                 state.calendarSections += [section]
             })
-            
+
             return state
         case let .selectedCalendar(indexPath):
             let section = state.calendarSections[indexPath.section]
@@ -121,4 +118,3 @@ final public class CalendarListReactor: Reactor {
         }
     }
 }
-

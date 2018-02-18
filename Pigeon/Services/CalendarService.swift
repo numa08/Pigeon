@@ -9,53 +9,52 @@ import RxSwift
 import UIKit
 
 protocol CalendarServiceType {
-    var calendars: Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]> { get }
+    var calendars: Observable<[(CalendarProviderCellModel, [CalendarCellModel])]> { get }
     func refreshCalendars()
-    func register(event template:  EventTemplateModel) -> Observable<Void>
+    func register(event template: EventTemplateModel) -> Observable<Void>
 }
 
 class CalendarService: CalendarServiceType {
-    
     let googleCalendarRepository: GoogleCalendarRepository
     let eventKitCalendarRepository: EventKitCalendarRepository
     let disposeBag = DisposeBag()
-    let calendarSubjects: PublishSubject<[(CalendarProviderCellModel ,[CalendarCellModel])]> = PublishSubject()
+    let calendarSubjects: PublishSubject<[(CalendarProviderCellModel, [CalendarCellModel])]> = PublishSubject()
     lazy var repositories: [CalendarRepositoryType] = {
         [eventKitCalendarRepository, googleCalendarRepository]
     }()
-    lazy var calendars: Observable<[(CalendarProviderCellModel ,[CalendarCellModel])]> = {
-        return calendarSubjects.share(replay: 1)
+
+    lazy var calendars: Observable<[(CalendarProviderCellModel, [CalendarCellModel])]> = {
+        calendarSubjects.share(replay: 1)
     }()
-    
+
     init(
         eventKitCalendarRepository: EventKitCalendarRepository,
         googleCalendarRepository: GoogleCalendarRepository
-        ) {
+    ) {
         self.eventKitCalendarRepository = eventKitCalendarRepository
         self.googleCalendarRepository = googleCalendarRepository
         Observable.from(repositories.map({ $0.calendars }))
             .merge()
             .map({ (entries) -> [(CalendarProviderCellModel, [CalendarCellModel])] in
-                return entries.map({(provider, calendars) -> (CalendarProviderCellModel, [CalendarCellModel]) in
+                entries.map({ (provider, calendars) -> (CalendarProviderCellModel, [CalendarCellModel]) in
                     let providerCell = CalendarProviderCellModel(name: provider.name, provider: provider.provider, entity: provider)
                     let calendarCells = calendars.map({ (c) -> CalendarCellModel in
-                        return CalendarCellModel(id: c.id, title: c.title, detail: c.detail, color: c.color, entity: c)
+                        CalendarCellModel(id: c.id, title: c.title, detail: c.detail, color: c.color, entity: c)
                     })
                     return (providerCell, calendarCells)
                 })
             })
-            .subscribe(onNext: { (entries) in
+            .subscribe(onNext: { entries in
                 self.calendarSubjects.onNext(entries)
             })
             .disposed(by: disposeBag)
-
     }
-    
+
     func refreshCalendars() {
         repositories.forEach({ $0.refresh() })
     }
 
-    func register(event template:  EventTemplateModel) -> Observable<Void> {
+    func register(event template: EventTemplateModel) -> Observable<Void> {
         guard let calendar = template.calendar else {
             return Observable.error(EventTemplateModel.Errors.NoCalendarError)
         }
@@ -75,17 +74,15 @@ class CalendarService: CalendarServiceType {
             return Observable.error(error)
         }
     }
-    
 }
 
 extension EventTemplateModel {
-    
     enum Errors: Error {
         case NoTitleError
         case NoTimeError
         case NoCalendarError
     }
-    
+
     func toEvent() throws -> EventEntity {
         guard let title = title else {
             throw Errors.NoTitleError
@@ -95,13 +92,13 @@ extension EventTemplateModel {
         }
         guard let startTime = startTime,
             let endTime = endTime else {
-                throw Errors.NoTimeError
+            throw Errors.NoTimeError
         }
         let start = date(fromDate: startDate, withTime: startTime)
         let end = date(fromDate: endDate, withTime: endTime)
         return EventEntity(title: title, allDay: allDay, start: start, end: end, url: url, memo: memo)
     }
-    
+
     func date(fromDate date: DateType, withTime time: TimeType) -> Date {
         let newCalendar = Calendar.current
         return newCalendar.date(from:

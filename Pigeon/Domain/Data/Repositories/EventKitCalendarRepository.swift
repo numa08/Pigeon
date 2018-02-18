@@ -5,54 +5,53 @@
 //  Created by numa08 on 2018/02/12.
 //
 
-import Foundation
 import EventKit
+import Foundation
 import RxSwift
 import UIKit
 
 class EventKitCalendarRepository: CalendarRepositoryType {
-    
     enum Errors: Error {
         case NoCalendarError(forCalendar: CalendarEntity)
     }
 
     let eventStore: EKEventStore
-    lazy var calendarSubject : BehaviorSubject<[(CalendarProviderEntity, [CalendarEntity])]> = {
+    lazy var calendarSubject: BehaviorSubject<[(CalendarProviderEntity, [CalendarEntity])]> = {
         let subject = BehaviorSubject(value: getCalendars())
         return subject
     }()
+
     lazy var calendars: Observable<[(CalendarProviderEntity, [CalendarEntity])]> = {
-        return calendarSubject.share(replay: 1)
+        calendarSubject.share(replay: 1)
     }()
 
     init(eventStore: EKEventStore) {
         self.eventStore = eventStore
-        self.previousAuthorizationState = EKEventStore.authorizationStatus(for: .event)
+        previousAuthorizationState = EKEventStore.authorizationStatus(for: .event)
         subscribeAuthorizationStateChanged()
     }
-    
-    
+
     func refresh() {
         calendarSubject.onNext(getCalendars())
     }
-    
+
     func getCalendars() -> [(CalendarProviderEntity, [CalendarEntity])] {
         if EKEventStore.authorizationStatus(for: .event) != .authorized {
             return []
         }
-        let calendars = self.eventStore.calendars(for: .event)
+        let calendars = eventStore.calendars(for: .event)
             .filter { $0.allowsContentModifications }
             .map({ c -> CalendarEntity in
-                return CalendarEntity(
+                CalendarEntity(
                     id: CalendarEntityId(value: c.calendarIdentifier),
                     title: c.title,
                     detail: c.source.title,
                     color: UIColor(cgColor: c.cgColor)
                 )
             })
-        return [(CalendarProviderEntity(name: "iOS", ownerIdentifier: nil, provider: .EventKit) ,calendars)]
+        return [(CalendarProviderEntity(name: "iOS", ownerIdentifier: nil, provider: .EventKit), calendars)]
     }
-    
+
     func register(event: EventEntity, inCalendar calendar: CalendarEntity, forProvider _: CalendarProviderEntity) -> Observable<Void> {
         return Observable.create({ (emitter) -> Disposable in
             guard let eventKitCalendar = self.eventStore.calendars(for: .event).first(where: { $0.calendarIdentifier == calendar.id.value }) else {
@@ -72,7 +71,7 @@ class EventKitCalendarRepository: CalendarRepositoryType {
     }
 
     private var previousAuthorizationState: EKAuthorizationStatus
-    
+
     private func subscribeAuthorizationStateChanged() {
         if previousAuthorizationState == .authorized {
             return
@@ -88,7 +87,6 @@ class EventKitCalendarRepository: CalendarRepositoryType {
 }
 
 extension EventEntity {
-    
     func event(forStore: EKEventStore, withCalendar calendar: EKCalendar) -> EKEvent {
         let event = EKEvent(eventStore: forStore)
         event.title = title
@@ -100,5 +98,4 @@ extension EventEntity {
         event.notes = memo
         return event
     }
-    
 }

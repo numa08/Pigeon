@@ -9,13 +9,12 @@ import Foundation
 import UIKit
 
 struct NavigationManager: NavigationManagerType {
-    
     func navigationToLoginViewController(current: UINavigationController) {
         let reactor = LoginReactor(ServiceProvider.serviceProvider)
         let viewController = LoginViewController(reactor)
         current.pushViewController(viewController, animated: true)
     }
-    
-    func navigationToAddCalendarCancell(current: UIViewController) {}
-    func navigationToOnCompleteEventRegister(current: UIViewController) {}
+
+    func navigationToAddCalendarCancell(current _: UIViewController) {}
+    func navigationToOnCompleteEventRegister(current _: UIViewController) {}
 }

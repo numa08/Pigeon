@@ -12,11 +12,10 @@ struct CalendarOwnerIdentifier {
 }
 
 extension CalendarOwnerIdentifier: Hashable {
-    
-    static func==(lhs: CalendarOwnerIdentifier, rhs: CalendarOwnerIdentifier) -> Bool {
+    static func== (lhs: CalendarOwnerIdentifier, rhs: CalendarOwnerIdentifier) -> Bool {
         return lhs.value == rhs.value
     }
-    
+
     var hashValue: Int {
         return value.hashValue
     }
@@ -27,4 +26,3 @@ struct CalendarProviderEntity {
     let ownerIdentifier: CalendarOwnerIdentifier?
     let provider: SupportedProvider
 }
-

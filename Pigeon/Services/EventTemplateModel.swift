@@ -10,9 +10,11 @@ import Foundation
 public struct DateType {
     let value: Date
 }
+
 public struct TimeType {
     let value: Date
 }
+
 typealias StartDate = DateType
 typealias EndDate = DateType
 typealias StartTime = TimeType
@@ -28,9 +30,8 @@ public struct EventTemplateModel {
     var url: URL?
     var calendar: CalendarCellValue?
     var memo: String?
-    
+
     static func defaultValue() -> EventTemplateModel {
         return EventTemplateModel(title: nil, startDate: StartDate(value: Date()), endDate: EndDate(value: Date()), allDay: true, startTime: nil, endTime: nil, url: nil, calendar: nil, memo: nil)
     }
 }
-

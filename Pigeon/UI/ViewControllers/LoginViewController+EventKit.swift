@@ -5,8 +5,8 @@
 //  Created by numa08 on 2018/02/10.
 //
 
-import UIKit
 import EventKit
+import UIKit
 
 enum EventKitError: Error {
     case AuthorizationStatusRestricted
@@ -14,7 +14,6 @@ enum EventKitError: Error {
 }
 
 extension LoginViewController {
-    
     func loginToEventKit() {
         let state = EKEventStore.authorizationStatus(for: .event)
         switch state {
@@ -27,7 +26,7 @@ extension LoginViewController {
         default:
             break
         }
-        EKEventStore().requestAccess(to: .event) { (granted, error) in
+        EKEventStore().requestAccess(to: .event) { granted, error in
             if let error = error {
                 self.onLoginEventKit.onError(error)
                 return
@@ -39,5 +38,4 @@ extension LoginViewController {
             self.onLoginEventKit.onNext(())
         }
     }
-    
 }

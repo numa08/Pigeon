@@ -6,28 +6,27 @@
 //
 
 import Foundation
-import RxSwift
 import MobileCoreServices
+import RxSwift
 
 protocol EventTemplateRepositoryType {
     func acquireEventTemplateFrom(context: NSExtensionContext) -> Observable<EventTemplateEntity>
 }
 
 class EventTemplateRepository: EventTemplateRepositoryType {
-    
     let openGraphParser: OpenGraphParser
- 
+
     enum Errors: Error {
         case InvalidDataTypeAcuquired
     }
-    
+
     init(_ openGraphParser: OpenGraphParser) {
         self.openGraphParser = openGraphParser
     }
-    
+
     func acquireEventTemplateFrom(context: NSExtensionContext) -> Observable<EventTemplateEntity> {
         let observer = Observable<NSItemProvider>.create { (emitter) -> Disposable in
-            let items = context.inputItems.flatMap({item -> [NSItemProvider] in
+            let items = context.inputItems.flatMap({ item -> [NSItemProvider] in
                 guard let item = item as? NSExtensionItem else {
                     return []
                 }
@@ -44,15 +43,15 @@ class EventTemplateRepository: EventTemplateRepositoryType {
                     emitter.onNext(NSDictionary())
                     return Disposables.create()
                 }
-                item.loadItem(forTypeIdentifier: (kUTTypePropertyList as String), options: nil, completionHandler: {(data, error) in
+                item.loadItem(forTypeIdentifier: (kUTTypePropertyList as String), options: nil, completionHandler: { data, error in
                     if let error = error {
                         emitter.onError(error)
                         return
                     }
                     guard let dictionary = data as? NSDictionary,
                         let results = dictionary.object(forKey: NSExtensionJavaScriptPreprocessingResultsKey) as? NSDictionary else {
-                            emitter.onError(Errors.InvalidDataTypeAcuquired)
-                            return
+                        emitter.onError(Errors.InvalidDataTypeAcuquired)
+                        return
                     }
                     emitter.onNext(results)
                 })
@@ -73,4 +72,3 @@ class EventTemplateRepository: EventTemplateRepositoryType {
         }.share(replay: 1)
     }
 }
-

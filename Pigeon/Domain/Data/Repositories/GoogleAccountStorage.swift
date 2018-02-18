@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import RxSwift
-import GoogleSignIn
 import GoogleAPIClientForREST
+import GoogleSignIn
 import GTMOAuth2
+import RxSwift
 
 protocol GoogleAccountStorageType {
     var accounts: Observable<[(GIDGoogleUser, GTLRCalendar_Colors)]> { get }
@@ -23,49 +23,49 @@ enum GoogleAccountStorageError: Error {
 }
 
 class GoogleAccountStorage: GoogleAccountStorageType {
-    
     private enum UserDefaultsKeys: String {
         case GoogleUsers = "google_users"
         case UserIdentifier = "account"
         case CalendarColors = "calendar_colors"
     }
-    
+
     let userDefaults: UserDefaults
-    lazy var accountsSubject : BehaviorSubject<[(GIDGoogleUser, GTLRCalendar_Colors)]> = {
+    lazy var accountsSubject: BehaviorSubject<[(GIDGoogleUser, GTLRCalendar_Colors)]> = {
         let subject = BehaviorSubject(value: restore())
         return subject
     }()
+
     lazy var accounts: Observable<[(GIDGoogleUser, GTLRCalendar_Colors)]> = {
-        return accountsSubject.share(replay: 1)
+        accountsSubject.share(replay: 1)
     }()
-    
+
     init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
     }
-    
+
     func refresh() {
-        let _ = Observable.from(
-        restore().map({(user, _) in
-            self.fetchColors(forUser: user)
-            .map({(user, $0)})
-            .do(onNext: {(user, color) in self.store(user: user, andColor: color) })
+        _ = Observable.from(
+            restore().map({ user, _ in
+                self.fetchColors(forUser: user)
+                    .map({ (user, $0) })
+                    .do(onNext: { user, color in self.store(user: user, andColor: color) })
         })).merge()
-        .reduce([], accumulator: {(list, account) -> [(GIDGoogleUser, GTLRCalendar_Colors)] in
-            var l = list
-            l.append(account)
-            return l
-        })
-        .subscribe(onNext: { accounts in
-            self.accountsSubject.onNext(accounts)
-        })
+            .reduce([], accumulator: { (list, account) -> [(GIDGoogleUser, GTLRCalendar_Colors)] in
+                var l = list
+                l.append(account)
+                return l
+            })
+            .subscribe(onNext: { accounts in
+                self.accountsSubject.onNext(accounts)
+            })
     }
-    
+
     func store(user: GIDGoogleUser) {
-        let _ = fetchColors(forUser: user)
-        .subscribe(onNext: {colors in
-            self.store(user: user, andColor: colors)
-            self.accountsSubject.onNext(self.restore())
-        })
+        _ = fetchColors(forUser: user)
+            .subscribe(onNext: { colors in
+                self.store(user: user, andColor: colors)
+                self.accountsSubject.onNext(self.restore())
+            })
     }
 
     func restore() -> [(GIDGoogleUser, GTLRCalendar_Colors)] {
@@ -75,18 +75,18 @@ class GoogleAccountStorage: GoogleAccountStorageType {
                 let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? GIDGoogleUser,
                 let colorData = self.userDefaults.data(forKey: "\(userID).\(UserDefaultsKeys.CalendarColors.rawValue)"),
                 let color = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? GTLRCalendar_Colors else {
-                    fatalError("failed unarchive from user defaults")
+                fatalError("failed unarchive from user defaults")
             }
             return (user, color)
         }
     }
-    
+
     func fetchColors(forUser user: GIDGoogleUser) -> Observable<GTLRCalendar_Colors> {
-        return Observable.create({emitter in
+        return Observable.create({ emitter in
             let query = GTLRCalendarQuery_ColorsGet.query()
             let service = GTLRCalendarService()
             service.authorizer = user.authentication.fetcherAuthorizer()
-            service.executeQuery(query) {(_, response, error) in
+            service.executeQuery(query) { _, response, error in
                 if let error = error {
                     emitter.onError(error)
                 }
@@ -100,7 +100,7 @@ class GoogleAccountStorage: GoogleAccountStorageType {
             return Disposables.create()
         })
     }
-    
+
     func find(forProvider provider: CalendarProviderEntity) -> Observable<GIDGoogleUser?> {
         return Observable.create({ (emitter) -> Disposable in
             guard let ownerIdentifier = provider.ownerIdentifier else {
@@ -108,13 +108,13 @@ class GoogleAccountStorage: GoogleAccountStorageType {
                 emitter.onCompleted()
                 return Disposables.create()
             }
-            let user = self.restore().first(where: {(user, _) in user.userID == ownerIdentifier.value })?.0
+            let user = self.restore().first(where: { user, _ in user.userID == ownerIdentifier.value })?.0
             emitter.onNext(user)
             emitter.onCompleted()
             return Disposables.create()
         })
     }
-    
+
     private func store(user: GIDGoogleUser, andColor color: GTLRCalendar_Colors) {
         let userData = NSKeyedArchiver.archivedData(withRootObject: user)
         let userIdentifier = "\(user.userID!).\(UserDefaultsKeys.UserIdentifier.rawValue)"
@@ -127,5 +127,4 @@ class GoogleAccountStorage: GoogleAccountStorageType {
         users.append(user.userID!)
         userDefaults.set(users, forKey: UserDefaultsKeys.GoogleUsers.rawValue)
     }
-
 }
