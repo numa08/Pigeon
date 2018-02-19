@@ -48,7 +48,6 @@ class EventTemplateRepository: EventTemplateRepositoryType {
                                 emitter.onError(Errors.InvalidDataTypeAcuquired)
                                 return
                         }
-                        print("content")
                         emitter.onNext(results)
                         emitter.onCompleted()
                     })
@@ -63,12 +62,10 @@ class EventTemplateRepository: EventTemplateRepositoryType {
                             return
                         }
                         let dictionary = NSDictionary(dictionary: ["baseURI": url.absoluteString])
-                        print("uri")
                         emitter.onNext(dictionary)
                         emitter.onCompleted()
                     })
                 }
-                print("dispose")
                 return Disposables.create()
             }).share(replay: 1)
         }.share(replay: 1)
@@ -80,7 +77,7 @@ class EventTemplateRepository: EventTemplateRepositoryType {
                 return [:]
             }
         }
-        return Observable.zip(uri, openGraph).debug().map { (uri, openGraph) -> EventTemplateEntity in
+        return Observable.zip(uri, openGraph).map { (uri, openGraph) -> EventTemplateEntity in
             let url = URL(string: uri ?? "")
             let title = openGraph[.title]
             let description = openGraph[.description]
