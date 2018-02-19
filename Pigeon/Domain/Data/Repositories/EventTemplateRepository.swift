@@ -25,42 +25,62 @@ class EventTemplateRepository: EventTemplateRepositoryType {
     }
 
     func acquireEventTemplateFrom(context: NSExtensionContext) -> Observable<EventTemplateEntity> {
-        let observer = Observable<NSItemProvider>.create { (emitter) -> Disposable in
-            let items = context.inputItems.flatMap({ item -> [NSItemProvider] in
-                guard let item = item as? NSExtensionItem else {
-                    return []
-                }
-                guard let attachements = item.attachments else {
-                    return []
-                }
-                return attachements.map { $0 as? NSItemProvider }.filter { $0 != nil }.map { $0! }
-            })
-            items.forEach { emitter.onNext($0) }
-            return Disposables.create()
-        }.flatMap { item -> Observable<NSDictionary> in
+        let providers = context.inputItems.flatMap({ item -> [NSItemProvider] in
+            guard let item = item as? NSExtensionItem else {
+                return []
+            }
+            guard let attachements = item.attachments else {
+                return []
+            }
+            return attachements.map { $0 as? NSItemProvider }.filter { $0 != nil }.map { $0! }
+        })
+        
+        let observer = Observable<NSItemProvider>.from(providers).flatMap { item -> Observable<NSDictionary> in
             return Observable.create({ (emitter) -> Disposable in
-                if !item.hasItemConformingToTypeIdentifier((kUTTypePropertyList as String)) {
-                    emitter.onNext(NSDictionary())
-                    return Disposables.create()
+                if item.hasItemConformingToTypeIdentifier((kUTTypePropertyList as String)) {
+                    item.loadItem(forTypeIdentifier: (kUTTypePropertyList as String), options: nil, completionHandler: { data, error in
+                        if let error = error {
+                            emitter.onError(error)
+                            return
+                        }
+                        guard let dictionary = data as? NSDictionary,
+                            let results = dictionary.object(forKey: NSExtensionJavaScriptPreprocessingResultsKey) as? NSDictionary else {
+                                emitter.onError(Errors.InvalidDataTypeAcuquired)
+                                return
+                        }
+                        print("content")
+                        emitter.onNext(results)
+                        emitter.onCompleted()
+                    })
+                } else if item.hasItemConformingToTypeIdentifier((kUTTypeURL as String)) {
+                    item.loadItem(forTypeIdentifier: (kUTTypeURL as String), options: nil, completionHandler: { data, error in
+                        if let error = error {
+                            emitter.onError(error)
+                            return
+                        }
+                        guard let url = data as? URL else {
+                            emitter.onError(Errors.InvalidDataTypeAcuquired)
+                            return
+                        }
+                        let dictionary = NSDictionary(dictionary: ["baseURI": url.absoluteString])
+                        print("uri")
+                        emitter.onNext(dictionary)
+                        emitter.onCompleted()
+                    })
                 }
-                item.loadItem(forTypeIdentifier: (kUTTypePropertyList as String), options: nil, completionHandler: { data, error in
-                    if let error = error {
-                        emitter.onError(error)
-                        return
-                    }
-                    guard let dictionary = data as? NSDictionary,
-                        let results = dictionary.object(forKey: NSExtensionJavaScriptPreprocessingResultsKey) as? NSDictionary else {
-                        emitter.onError(Errors.InvalidDataTypeAcuquired)
-                        return
-                    }
-                    emitter.onNext(results)
-                })
+                print("dispose")
                 return Disposables.create()
-            })
-        }
+            }).share(replay: 1)
+        }.share(replay: 1)
         let uri = observer.map { $0.object(forKey: "baseURI") as? String }
-        let openGraph = observer.map { $0.object(forKey: "content") as? String }.filter { $0 != nil }.map { $0! }.map { self.openGraphParser.parse(htmlString: $0) }
-        return Observable.zip(uri, openGraph).map { (uri, openGraph) -> EventTemplateEntity in
+        let openGraph = observer.map { dict -> [OpenGraphMetadata: String] in
+            if let content = dict.object(forKey: "content") as? String {
+                return self.openGraphParser.parse(htmlString: content)
+            } else {
+                return [:]
+            }
+        }
+        return Observable.zip(uri, openGraph).debug().map { (uri, openGraph) -> EventTemplateEntity in
             let url = URL(string: uri ?? "")
             let title = openGraph[.title]
             let description = openGraph[.description]

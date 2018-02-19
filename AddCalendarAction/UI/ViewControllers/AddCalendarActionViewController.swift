@@ -19,12 +19,6 @@ open class AddCalendarActionViewController: FormViewController, View {
     open override func viewDidLoad() {
         super.viewDidLoad()
         reactor = AddCalendarActionReactor(ServiceProvider.serviceProvider)
-        if let reactor = reactor,
-            let context = extensionContext {
-            Observable.just(Reactor.Action.handleAppAction(context: context))
-                .bind(to: reactor.action)
-                .disposed(by: disposeBag)
-        }
     }
 
     public func bind(reactor: AddCalendarActionReactor) {
