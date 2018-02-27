@@ -124,7 +124,9 @@ class GoogleAccountStorage: GoogleAccountStorageType {
         userDefaults.set(colorData, forKey: colorIdentifier)
         // 保存しているユーザー一覧へ追加する
         var users = userDefaults.stringArray(forKey: UserDefaultsKeys.GoogleUsers.rawValue) ?? []
-        users.append(user.userID!)
+        if !users.contains(user.userID!) {
+            users.append(user.userID!)
+        }
         userDefaults.set(users, forKey: UserDefaultsKeys.GoogleUsers.rawValue)
     }
 }

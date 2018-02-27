@@ -140,6 +140,7 @@ class GoogleCalendarRepository: CalendarRepositoryType {
                     return Disposables.create()
                 })
             }
+        .share(replay: 1)
     }
 
     private func restoreCalendar(forUser user: GIDGoogleUser) -> [GTLRCalendar_CalendarListEntry] {
