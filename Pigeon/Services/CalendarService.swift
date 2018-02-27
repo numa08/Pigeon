@@ -94,9 +94,7 @@ extension EventTemplateModel {
             let endTime = endTime else {
             throw Errors.NoTimeError
         }
-        let start = date(fromDate: startDate, withTime: startTime)
-        let end = date(fromDate: endDate, withTime: endTime)
-        return EventEntity(title: title, allDay: allDay, start: start, end: end, url: url, memo: memo)
+        return EventEntity(title: title, allDay: allDay, start: startTime.value, end: endTime.value, url: url, memo: memo)
     }
 
     func date(fromDate date: DateType, withTime time: TimeType) -> Date {
