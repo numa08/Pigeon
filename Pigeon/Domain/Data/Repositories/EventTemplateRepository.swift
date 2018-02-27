@@ -7,6 +7,8 @@
 
 import Foundation
 import MobileCoreServices
+import Moya
+import RxMoya
 import RxSwift
 
 protocol EventTemplateRepositoryType {
@@ -15,12 +17,14 @@ protocol EventTemplateRepositoryType {
 
 class EventTemplateRepository: EventTemplateRepositoryType {
     let openGraphParser: OpenGraphParser
+    let openGraphIOAPI: MoyaProvider<OpenGraphIOAPI>
 
     enum Errors: Error {
         case InvalidDataTypeAcuquired
     }
 
-    init(_ openGraphParser: OpenGraphParser) {
+    init(_ openGraphIOAPI: MoyaProvider<OpenGraphIOAPI>, _ openGraphParser: OpenGraphParser) {
+        self.openGraphIOAPI = openGraphIOAPI
         self.openGraphParser = openGraphParser
     }
 
@@ -34,58 +38,51 @@ class EventTemplateRepository: EventTemplateRepositoryType {
             }
             return attachements.map { $0 as? NSItemProvider }.filter { $0 != nil }.map { $0! }
         })
-        
-        let observer = Observable<NSItemProvider>.from(providers).flatMap { item -> Observable<NSDictionary> in
-            return Observable.create({ (emitter) -> Disposable in
-                if item.hasItemConformingToTypeIdentifier((kUTTypePropertyList as String)) {
-                    item.loadItem(forTypeIdentifier: (kUTTypePropertyList as String), options: nil, completionHandler: { data, error in
-                        if let error = error {
-                            emitter.onError(error)
-                            return
-                        }
-                        guard let dictionary = data as? NSDictionary,
-                            let results = dictionary.object(forKey: NSExtensionJavaScriptPreprocessingResultsKey) as? NSDictionary else {
-                                emitter.onError(Errors.InvalidDataTypeAcuquired)
-                                return
-                        }
-                        emitter.onNext(results)
-                        emitter.onCompleted()
-                    })
-                } else if item.hasItemConformingToTypeIdentifier((kUTTypeURL as String)) {
-                    item.loadItem(forTypeIdentifier: (kUTTypeURL as String), options: nil, completionHandler: { data, error in
-                        if let error = error {
-                            emitter.onError(error)
-                            return
-                        }
-                        guard let url = data as? URL else {
-                            emitter.onError(Errors.InvalidDataTypeAcuquired)
-                            return
-                        }
-                        let dictionary = NSDictionary(dictionary: ["baseURI": url.absoluteString])
-                        emitter.onNext(dictionary)
-                        emitter.onCompleted()
-                    })
-                }
-                return Disposables.create()
-            }).share(replay: 1)
-        }.share(replay: 1)
-        let uri = observer.map { $0.object(forKey: "baseURI") as? String }
-        let openGraph = observer.map { dict -> [OpenGraphMetadata: String] in
-            if let content = dict.object(forKey: "content") as? String {
-                return self.openGraphParser.parse(htmlString: content)
-            } else {
-                return [:]
+        let observers = Observable<NSItemProvider>.from(providers).flatMap { (item) -> Observable<EventTemplateEntity> in
+            if item.hasItemConformingToTypeIdentifier((kUTTypePropertyList as String)) {
+                let dataObserver: Observable<NSDictionary> = item.loadItemAsync(forTypeIdentifier: (kUTTypePropertyList as String))
+                return dataObserver.flatMap(self.eventTemplate(fromJavaScriptHandlerResult:))
+            } else if item.hasItemConformingToTypeIdentifier((kUTTypeURL as String)) {
+                let dataObserver: Observable<URL> = item.loadItemAsync(forTypeIdentifier: (kUTTypeURL as String))
+                return dataObserver.flatMap(self.eventTemplate(fromURL:))
             }
+            fatalError()
         }
-        return Observable.zip(uri, openGraph).map { (uri, openGraph) -> EventTemplateEntity in
-            let url = URL(string: uri ?? "")
-            let title = openGraph[.title]
-            let description = openGraph[.description]
-            return EventTemplateEntity(
-                title: title,
-                url: url,
-                description: description
-            )
+        return observers.reduce(EventTemplateEntity(title: nil, url: nil, description: nil)) { (result, entity) -> EventTemplateEntity in
+            let title = entity.title ?? result.title
+            let url = entity.url ?? result.url
+            let description = entity.description ?? result.description
+            return EventTemplateEntity(title: title, url: url, description: description)
         }.share(replay: 1)
+    }
+
+    func eventTemplate(fromJavaScriptHandlerResult result: NSDictionary) -> Observable<EventTemplateEntity> {
+        return Observable.create({ (emitter) -> Disposable in
+            let url = URL(string: result.object(forKey: "baseURI") as? String ?? "")
+            let content = result.object(forKey: "content") as? String
+            let openGraph = self.openGraphParser.parse(htmlString: content ?? "")
+            let eventTemplate = EventTemplateEntity(title: openGraph[.title], url: url, description: openGraph[.description])
+            emitter.onNext(eventTemplate)
+            emitter.onCompleted()
+            return Disposables.create()
+        }).share(replay: 1)
+    }
+
+    func eventTemplate(fromURL url: URL) -> Observable<EventTemplateEntity> {
+        return openGraphIOAPI.rx.request(.site(url: url))
+            .asObservable()
+            .map { (response) -> OpenGraphIOResponse in
+                let decoder = JSONDecoder()
+                return try decoder.decode(OpenGraphIOResponse.self, from: response.data) }
+            .map { (response) -> EventTemplateEntity in
+                let title = response.hybridGraph.title ?? response.openGraph?.title
+                let description = response.hybridGraph.description ?? response.openGraph?.description
+                let url = response.hybridGraph.url ?? response.openGraph?.url
+                return EventTemplateEntity(title: title, url: URL(string: url ?? ""), description: description)
+            }
+            .catchError({ (_) -> Observable<EventTemplateEntity> in
+                Observable.just(EventTemplateEntity(title: nil, url: url, description: nil))
+            })
+            .share(replay: 1)
     }
 }
