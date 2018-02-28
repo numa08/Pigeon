@@ -19,11 +19,13 @@ public final class AddCalendarActionReactor: Reactor {
     }
 
     public enum Action {
+        case updateEventTemplate(event: EventTemplateModel)
         case handleAppAction(context: NSExtensionContext)
         case register(event: EventTemplateModel)
     }
 
     public enum Mutation {
+        case updateTemplate(template: EventTemplateModel)
         case update(title: String?, url: URL?, description: String?)
         case register(state: RegisteredState)
     }
@@ -42,6 +44,8 @@ public final class AddCalendarActionReactor: Reactor {
 
     public func mutate(action: AddCalendarActionReactor.Action) -> Observable<AddCalendarActionReactor.Mutation> {
         switch action {
+        case let .updateEventTemplate(event):
+            return Observable.just(Mutation.updateTemplate(template: event))
         case let .handleAppAction(context):
             return provider.eventTemplateRepository.acquireEventTemplateFrom(context: context)
                 .observeOn(OperationQueueScheduler(operationQueue: OperationQueue.main))
@@ -57,6 +61,18 @@ public final class AddCalendarActionReactor: Reactor {
     public func reduce(state: AddCalendarActionReactor.State, mutation: AddCalendarActionReactor.Mutation) -> AddCalendarActionReactor.State {
         var state = state
         switch mutation {
+        case let .updateTemplate(event):
+            let current = state.eventTemplate
+            state.eventTemplate = EventTemplateModel(
+                title: event.title ?? current.title,
+                startDate: event.startDate,
+                endDate: event.endDate,
+                allDay: event.allDay,
+                startTime: event.startTime ?? current.startTime,
+                endTime: event.endTime ?? current.endTime,
+                url: event.url ?? current.url,
+                calendar: event.calendar ?? current.calendar,
+                memo: event.memo ?? current.memo)
         case let .update(title, url, description):
             var template = state.eventTemplate
             template.title = title

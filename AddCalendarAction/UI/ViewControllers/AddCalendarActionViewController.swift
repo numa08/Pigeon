@@ -21,6 +21,28 @@ open class AddCalendarActionViewController: FormViewController, View {
         reactor = AddCalendarActionReactor(ServiceProvider.serviceProvider)
     }
 
+    var currentEventTemplate: EventTemplateModel {
+        let title: TextRow? = form.rowBy(tag: "Title")
+        let allDay: SwitchRow? = form.rowBy(tag: "AllDay")
+        let startDate: DateRow? = form.rowBy(tag: "StartDate")
+        let endDate: DateRow? = form.rowBy(tag: "EndDate")
+        let startDateTime: DateTimeRow? = form.rowBy(tag: "StartDateTime")
+        let endDateTime: DateTimeRow? = form.rowBy(tag: "EndDateTime")
+        let calendar: CalendarRow? = form.rowBy(tag: "Calendar")
+        let url: URLRow? = form.rowBy(tag: "URL")
+        let memo: TextAreaRow? = form.rowBy(tag: "Memo")
+        return EventTemplateModel(
+            title: title?.value,
+            startDate: StartDate(value: startDate?.value ?? Date()),
+            endDate: EndDate(value: endDate?.value ?? Date()),
+            allDay: allDay!.value!,
+            startTime: StartTime(value: startDateTime?.value ?? Date()),
+            endTime: EndTime(value: endDateTime?.value ?? Date()),
+            url: url?.value,
+            calendar: calendar?.value,
+            memo: memo?.value)
+    }
+
     public func bind(reactor: AddCalendarActionReactor) {
         if let context = extensionContext {
             Observable.just(Reactor.Action.handleAppAction(context: context))
@@ -71,20 +93,34 @@ open class AddCalendarActionViewController: FormViewController, View {
             <<< DateTimeRow("StartDateTime") { row in
                 row.title = "開始"
                 row.hidden = dateTimeRowPredicate
-            }
+                row.value = Date()
+            }.onChange({ row in
+                if let endTimeRow: DateTimeRow = self.form.rowBy(tag: "EndDateTime"),
+                    let value = row.value {
+                    let newDate = Calendar.current
+                    let newVaue = newDate.date(byAdding: DateComponents(hour: 2), to: value)
+                    endTimeRow.value = newVaue
+                    endTimeRow.updateCell()
+                }
+            })
             <<< DateTimeRow("EndDateTime") { row in
                 row.title = "終了"
                 row.hidden = dateTimeRowPredicate
+                row.value = {
+                    let now = Date()
+                    let newDate = Calendar.current
+                    return newDate.date(byAdding: DateComponents(hour: 2), to: now)
+                }()
             }
             <<< DateRow("StartDate") { row in
                 row.title = "開始"
-
                 row.hidden = dateRowPredicate
+                row.value = Date()
             }
             <<< DateRow("EndDate") { row in
                 row.title = "終了"
-
                 row.hidden = dateRowPredicate
+                row.value = Date()
             }
             +++ Section()
             <<< CalendarRow("Calendar") {
@@ -104,51 +140,44 @@ open class AddCalendarActionViewController: FormViewController, View {
             <<< ButtonRow("Register") { row in
                 row.title = "登録"
             }.onCellSelection { _, _ in
-
-                guard let title: TextRow = self.form.rowBy(tag: "Title"),
-                    let allDay: SwitchRow = self.form.rowBy(tag: "AllDay"),
-                    let startDate: DateRow = self.form.rowBy(tag: "StartDate"),
-                    let endDate: DateRow = self.form.rowBy(tag: "EndDate"),
-                    let startDateTime: DateTimeRow = self.form.rowBy(tag: "StartDateTime"),
-                    let endDateTime: DateTimeRow = self.form.rowBy(tag: "EndDateTime"),
-                    let calendar: CalendarRow = self.form.rowBy(tag: "Calendar"),
-                    let url: URLRow = self.form.rowBy(tag: "URL"),
-                    let memo: TextAreaRow = self.form.rowBy(tag: "Memo") else {
-                    return
+                if let reactor = self.reactor {
+                    let updateTemplateAction = Reactor.Action.updateEventTemplate(event: self.currentEventTemplate)
+                    observeAction(action: updateTemplateAction).dispose()
+                    let registerEventAction = Reactor.Action.register(event: reactor.currentState.eventTemplate)
+                    observeAction(action: registerEventAction).dispose()
                 }
-
-                func time(fromDate date: Date?) -> TimeType? {
-                    if let date = date {
-                        return TimeType(value: date)
-                    }
-                    return nil
-                }
-
-                let template = EventTemplateModel(title: title.value, startDate: StartDate(value: startDate.value ?? Date()), endDate: EndDate(value: endDate.value ?? Date()), allDay: allDay.value!, startTime: time(fromDate: startDateTime.value), endTime: time(fromDate: endDateTime.value), url: url.value, calendar: calendar.value, memo: memo.value)
-                let action = Reactor.Action.register(event: template)
-                observeAction(action: action).disposed(by: self.disposeBag)
             }
+
+        func updateTemplate(_ template: EventTemplateModel) {
+            if let title: TextRow = self.form.rowBy(tag: "Title") {
+                title.value = template.title
+            }
+            if let url: URLRow = self.form.rowBy(tag: "URL") {
+                url.value = template.url
+            }
+            if let memo: TextAreaRow = self.form.rowBy(tag: "Memo") {
+                memo.value = template.memo
+            }
+            if let allDay: SwitchRow = self.form.rowBy(tag: "AllDay") {
+                allDay.value = template.allDay
+            }
+            if let startDate: DateRow = self.form.rowBy(tag: "StartDate") {
+                startDate.value = template.startDate.value
+            }
+            if let endDate: DateRow = self.form.rowBy(tag: "EndDate") {
+                endDate.value = template.endDate.value
+            }
+            if let starTime: DateTimeRow = self.form.rowBy(tag: "StartDateTime") {
+                starTime.value = template.startTime?.value
+            }
+            if let endTime: DateTimeRow = self.form.rowBy(tag: "EndDateTime") {
+                endTime.value = template.endTime?.value
+            }
+        }
 
         reactor.state.asObservable().map { $0.eventTemplate }
             .subscribe(onNext: { template in
-                if let title: TextRow = self.form.rowBy(tag: "Title") {
-                    title.value = template.title
-                }
-                if let url: URLRow = self.form.rowBy(tag: "URL") {
-                    url.value = template.url
-                }
-                if let memo: TextAreaRow = self.form.rowBy(tag: "Memo") {
-                    memo.value = template.memo
-                }
-                if let allDay: SwitchRow = self.form.rowBy(tag: "AllDay") {
-                    allDay.value = template.allDay
-                }
-                if let startDate: DateRow = self.form.rowBy(tag: "StartDate") {
-                    startDate.value = template.startDate.value
-                }
-                if let endDate: DateRow = self.form.rowBy(tag: "EndDate") {
-                    endDate.value = template.endDate.value
-                }
+                updateTemplate(template)
                 self.tableView.reloadData()
             })
             .disposed(by: disposeBag)
