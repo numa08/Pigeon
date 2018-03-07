@@ -9,12 +9,15 @@ import EventKit
 import GoogleAPIClientForREST
 import GoogleSignIn
 import UIKit
+import Keys
+import HockeySDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        BITHockeyManager.shared().configure(withIdentifier: PigeonKeys().hockeyAppAPIKey)
         // Initialize sign-in
         GIDSignIn.sharedInstance().clientID = "520461717930-gt1cnp2ecjmk3dvjtdpnbqau36tv06lk.apps.googleusercontent.com"
 

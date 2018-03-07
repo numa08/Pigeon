@@ -100,7 +100,8 @@
 		24E59CA8203728680097333E /* CalendarListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24085B81202D1FE8000B4066 /* CalendarListReactor.swift */; };
 		24E59CA920372C630097333E /* CalendarRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E59CA5203726020097333E /* CalendarRow.swift */; };
 		45D4A72F4A3AD6047FB6A223 /* Pods_PigeonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */; };
-		6227C246712F32810EEA2AA8 /* Pods_Pigeon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9118A7D273452A756D713F8D /* Pods_Pigeon.framework */; };
+		9D70A941F384F34D5A348C9B /* Pods_Pigeon_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263604CBA9DE53A587353ECE /* Pods_Pigeon_iOS.framework */; };
+		A885A17EBF610EA14DDCB2CC /* Pods_Pigeon_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B4A94646B6CAC376F9785A /* Pods_Pigeon_iOSTests.framework */; };
 		BF_165923807992 /* SupportedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_553055846822 /* SupportedProvider.swift */; };
 		BF_215061820840 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = VG_774826763097 /* LaunchScreen.storyboard */; };
 		BF_226169127571 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FR_314644839885 /* GoogleService-Info.plist */; };
@@ -108,7 +109,7 @@
 		BF_670056304807 /* CalendarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_385422901303 /* CalendarListViewController.swift */; };
 		BF_794404818034 /* PigeonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_243283262423 /* PigeonTests.swift */; };
 		BF_891482553594 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FR_690328767421 /* Assets.xcassets */; };
-		E88D7FA1C2259BA8C0776C35 /* Pods_Pigeon_AddCalendarAction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63B38B1DD03A8C37B9F98B44 /* Pods_Pigeon_AddCalendarAction.framework */; };
+		FA49DE1DBC304F73AE3B6AC2 /* Pods_Pigeon_iOS_AddCalendarAction.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A6421C4D88A81B8C456BCB3 /* Pods_Pigeon_iOS_AddCalendarAction.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,7 @@
 		245CDE8E2039498A005AE796 /* OpenGraphMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphMetadata.swift; sourceTree = "<group>"; };
 		245CDE91203949A7005AE796 /* OpenGraphParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGraphParser.swift; sourceTree = "<group>"; };
 		245CDE94203965F0005AE796 /* EventEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntity.swift; sourceTree = "<group>"; };
+		2461BB452046D42300FDDA0F /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Venders/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
 		2461E36A2037EDCE0029C23C /* OpenGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGraph.framework; path = Carthage/Build/iOS/OpenGraph.framework; sourceTree = "<group>"; };
 		2461E36E2037EFDD0029C23C /* WebPageActionHandler.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WebPageActionHandler.js; sourceTree = "<group>"; };
 		2461E3752037F4120029C23C /* EventTemplateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTemplateModel.swift; sourceTree = "<group>"; };
@@ -201,25 +203,34 @@
 		24F578DC202D17AA00ED7E5D /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		24F578DD202D17AA00ED7E5D /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		24F578DE202D17AA00ED7E5D /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		263604CBA9DE53A587353ECE /* Pods_Pigeon_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		30E96186334804930F7429BA /* Pods-Pigeon-iOS-AddCalendarAction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-iOS-AddCalendarAction.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-iOS-AddCalendarAction/Pods-Pigeon-iOS-AddCalendarAction.release.xcconfig"; sourceTree = "<group>"; };
 		454576ECE087B5988BFF5820 /* Pods-Pigeon-AddCalendarAction.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-AddCalendarAction.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-AddCalendarAction/Pods-Pigeon-AddCalendarAction.release.xcconfig"; sourceTree = "<group>"; };
+		56B4A94646B6CAC376F9785A /* Pods_Pigeon_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B38B1DD03A8C37B9F98B44 /* Pods_Pigeon_AddCalendarAction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon_AddCalendarAction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BEF4C85EA1F7D40D33DBE01 /* Pods-Pigeon-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-iOSTests/Pods-Pigeon-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		6EB8559496BA385EFA1A6C4D /* Pods-Pigeon-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-iOS/Pods-Pigeon-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		70E800ECDBEDFA01E03E2388 /* Pods-Pigeon-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-iOSTests/Pods-Pigeon-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7A6421C4D88A81B8C456BCB3 /* Pods_Pigeon_iOS_AddCalendarAction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon_iOS_AddCalendarAction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9118A7D273452A756D713F8D /* Pods_Pigeon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pigeon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PigeonTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98BA5EEEF8723F4EF3920EE2 /* Pods-PigeonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigeonTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests.release.xcconfig"; sourceTree = "<group>"; };
 		ADD249AFBA3A3939F4799921 /* Pods-Pigeon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon.debug.xcconfig"; sourceTree = "<group>"; };
 		B887CBDB3A52D24FB1486055 /* Pods-Pigeon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon.release.xcconfig"; sourceTree = "<group>"; };
+		C268DFAFFCD31ECC979E5CCC /* Pods-Pigeon-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-iOS/Pods-Pigeon-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		CA6248CAE9E5BA34536982A1 /* Pods-Pigeon-iOS-AddCalendarAction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pigeon-iOS-AddCalendarAction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pigeon-iOS-AddCalendarAction/Pods-Pigeon-iOS-AddCalendarAction.debug.xcconfig"; sourceTree = "<group>"; };
 		D889F987E544AA34EEB191DC /* Pods-PigeonTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigeonTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FR_243283262423 /* PigeonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PigeonTests.swift; sourceTree = "<group>"; };
 		FR_314644839885 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FR_366419411241 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FR_385422901303 /* CalendarListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarListViewController.swift; sourceTree = "<group>"; };
-		FR_479237163229 /* Pigeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pigeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FR_479237163229 /* Pigeon-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pigeon-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FR_499683667281 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FR_500918527952 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FR_553055846822 /* SupportedProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedProvider.swift; sourceTree = "<group>"; };
 		FR_690328767421 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FR_774826763097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FR_980708020655 /* PigeonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PigeonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FR_980708020655 /* Pigeon-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pigeon-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45D4A72F4A3AD6047FB6A223 /* Pods_PigeonTests.framework in Frameworks */,
+				A885A17EBF610EA14DDCB2CC /* Pods_Pigeon_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +259,7 @@
 				24A91CCE203709450000870B /* RxCocoa.framework in Frameworks */,
 				24A91CCF203709450000870B /* RxDataSources.framework in Frameworks */,
 				24A91CD0203709450000870B /* RxSwift.framework in Frameworks */,
-				E88D7FA1C2259BA8C0776C35 /* Pods_Pigeon_AddCalendarAction.framework in Frameworks */,
+				FA49DE1DBC304F73AE3B6AC2 /* Pods_Pigeon_iOS_AddCalendarAction.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +280,7 @@
 				24085BA3202DDA61000B4066 /* RxBlocking.framework in Frameworks */,
 				24085BA4202DDA61000B4066 /* RxCocoa.framework in Frameworks */,
 				24085BA5202DDA61000B4066 /* RxSwift.framework in Frameworks */,
-				6227C246712F32810EEA2AA8 /* Pods_Pigeon.framework in Frameworks */,
+				9D70A941F384F34D5A348C9B /* Pods_Pigeon_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +474,12 @@
 				98BA5EEEF8723F4EF3920EE2 /* Pods-PigeonTests.release.xcconfig */,
 				19BCA5B0B87A07A28D61990F /* Pods-Pigeon-AddCalendarAction.debug.xcconfig */,
 				454576ECE087B5988BFF5820 /* Pods-Pigeon-AddCalendarAction.release.xcconfig */,
+				C268DFAFFCD31ECC979E5CCC /* Pods-Pigeon-iOS.debug.xcconfig */,
+				6EB8559496BA385EFA1A6C4D /* Pods-Pigeon-iOS.release.xcconfig */,
+				CA6248CAE9E5BA34536982A1 /* Pods-Pigeon-iOS-AddCalendarAction.debug.xcconfig */,
+				30E96186334804930F7429BA /* Pods-Pigeon-iOS-AddCalendarAction.release.xcconfig */,
+				70E800ECDBEDFA01E03E2388 /* Pods-Pigeon-iOSTests.debug.xcconfig */,
+				6BEF4C85EA1F7D40D33DBE01 /* Pods-Pigeon-iOSTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -469,6 +487,7 @@
 		C95293F0CCF86137720CF84D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2461BB452046D42300FDDA0F /* HockeySDK.framework */,
 				24328FD0203CFE4D00D8B303 /* Result.framework */,
 				24328FC1203C597600D8B303 /* Alamofire.framework */,
 				24328FC2203C597600D8B303 /* Moya.framework */,
@@ -488,6 +507,9 @@
 				9118A7D273452A756D713F8D /* Pods_Pigeon.framework */,
 				94730AC96D91DDCB7DF660C7 /* Pods_PigeonTests.framework */,
 				63B38B1DD03A8C37B9F98B44 /* Pods_Pigeon_AddCalendarAction.framework */,
+				263604CBA9DE53A587353ECE /* Pods_Pigeon_iOS.framework */,
+				7A6421C4D88A81B8C456BCB3 /* Pods_Pigeon_iOS_AddCalendarAction.framework */,
+				56B4A94646B6CAC376F9785A /* Pods_Pigeon_iOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -526,8 +548,8 @@
 		G_8620238527590 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FR_479237163229 /* Pigeon.app */,
-				FR_980708020655 /* PigeonTests.xctest */,
+				FR_479237163229 /* Pigeon-iOS.app */,
+				FR_980708020655 /* Pigeon-iOSTests.xctest */,
 				249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */,
 			);
 			name = Products;
@@ -565,9 +587,9 @@
 			productReference = 249B8FB71FFF730F00C3535E /* AddCalendarAction.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		NT_479237163229 /* Pigeon */ = {
+		NT_479237163229 /* Pigeon-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CL_479237163229-1 /* Build configuration list for PBXNativeTarget "Pigeon" */;
+			buildConfigurationList = CL_479237163229-1 /* Build configuration list for PBXNativeTarget "Pigeon-iOS" */;
 			buildPhases = (
 				31571FDA4C9E5C41AC75102A /* [CP] Check Pods Manifest.lock */,
 				SBP_47923716322 /* Sources */,
@@ -577,20 +599,21 @@
 				26FE4EEE82BAE491FADD1F3B /* [CP] Copy Pods Resources */,
 				249B8FC51FFF730F00C3535E /* Embed App Extensions */,
 				24085BA6202DDA72000B4066 /* ShellScript */,
+				2461BB472046DDEF00FDDA0F /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				249B8FC01FFF730F00C3535E /* PBXTargetDependency */,
 			);
-			name = Pigeon;
+			name = "Pigeon-iOS";
 			productName = Pigeon;
-			productReference = FR_479237163229 /* Pigeon.app */;
+			productReference = FR_479237163229 /* Pigeon-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		NT_980708020655 /* PigeonTests */ = {
+		NT_980708020655 /* Pigeon-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CL_980708020655 /* Build configuration list for PBXNativeTarget "PigeonTests" */;
+			buildConfigurationList = CL_980708020655 /* Build configuration list for PBXNativeTarget "Pigeon-iOSTests" */;
 			buildPhases = (
 				4496E4C343219C826F80AE2D /* [CP] Check Pods Manifest.lock */,
 				SBP_98070802065 /* Sources */,
@@ -603,9 +626,9 @@
 			dependencies = (
 				TD_789237052955 /* PBXTargetDependency */,
 			);
-			name = PigeonTests;
+			name = "Pigeon-iOSTests";
 			productName = PigeonTests;
-			productReference = FR_980708020655 /* PigeonTests.xctest */;
+			productReference = FR_980708020655 /* Pigeon-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -641,7 +664,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CL_479237163229 /* Build configuration list for PBXProject "Pigeon" */;
+			buildConfigurationList = CL_479237163229 /* Build configuration list for PBXProject "Pigeon-iOS" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = ja;
 			hasScannedForEncodings = 0;
@@ -653,8 +676,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				NT_479237163229 /* Pigeon */,
-				NT_980708020655 /* PigeonTests */,
+				NT_479237163229 /* Pigeon-iOS */,
+				NT_980708020655 /* Pigeon-iOSTests */,
 				249B8FB61FFF730F00C3535E /* AddCalendarAction */,
 			);
 		};
@@ -694,7 +717,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Pigeon-AddCalendarAction-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Pigeon-iOS-AddCalendarAction-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -740,6 +763,19 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
+		2461BB472046DDEF00FDDA0F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
 		24A91CD1203709640000870B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -776,16 +812,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-iOS/Pods-Pigeon-iOS-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-iOS/Pods-Pigeon-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2D6E1D81501D769EDFBE7B3E /* [CP] Copy Pods Resources */ = {
@@ -800,7 +838,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-iOSTests/Pods-Pigeon-iOSTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		31571FDA4C9E5C41AC75102A /* [CP] Check Pods Manifest.lock */ = {
@@ -814,7 +852,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Pigeon-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Pigeon-iOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -832,7 +870,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PigeonTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Pigeon-iOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -851,7 +889,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PigeonTests/Pods-PigeonTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-iOSTests/Pods-Pigeon-iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CF7BDE1325454E77B1379A92 /* [CP] Copy Pods Resources */ = {
@@ -860,16 +898,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-AddCalendarAction/Pods-Pigeon-AddCalendarAction-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-iOS-AddCalendarAction/Pods-Pigeon-iOS-AddCalendarAction-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-AddCalendarAction/Pods-Pigeon-AddCalendarAction-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-iOS-AddCalendarAction/Pods-Pigeon-iOS-AddCalendarAction-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FBD2BCD907441F6BEB7831C4 /* [CP] Embed Pods Frameworks */ = {
@@ -878,7 +918,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-iOS/Pods-Pigeon-iOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
@@ -895,7 +935,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon/Pods-Pigeon-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pigeon-iOS/Pods-Pigeon-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1000,7 +1040,7 @@
 		};
 		TD_789237052955 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = NT_479237163229 /* Pigeon */;
+			target = NT_479237163229 /* Pigeon-iOS */;
 			targetProxy = CIP_98070802065 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1027,11 +1067,11 @@
 /* Begin XCBuildConfiguration section */
 		249B8FC21FFF730F00C3535E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 19BCA5B0B87A07A28D61990F /* Pods-Pigeon-AddCalendarAction.debug.xcconfig */;
+			baseConfigurationReference = CA6248CAE9E5BA34536982A1 /* Pods-Pigeon-iOS-AddCalendarAction.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = AddCalendarAction/AddCalendarAction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = K45ES832VB;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1047,8 +1087,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.covelline.pigeon.AddCalendarAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "94a05cda-4ae6-486b-87f2-28b0c2fcf42a";
-				PROVISIONING_PROFILE_SPECIFIER = "Development Pigeon AddCalendarAction";
+				PROVISIONING_PROFILE = "952498e5-8668-4a05-acc3-b02be8109562";
+				PROVISIONING_PROFILE_SPECIFIER = "Adhoc Pigeon AddCalendarAction";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -1058,11 +1098,11 @@
 		};
 		249B8FC31FFF730F00C3535E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 454576ECE087B5988BFF5820 /* Pods-Pigeon-AddCalendarAction.release.xcconfig */;
+			baseConfigurationReference = 30E96186334804930F7429BA /* Pods-Pigeon-iOS-AddCalendarAction.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = AddCalendarAction/AddCalendarAction.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = K45ES832VB;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1075,8 +1115,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.covelline.pigeon.AddCalendarAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "94a05cda-4ae6-486b-87f2-28b0c2fcf42a";
-				PROVISIONING_PROFILE_SPECIFIER = "Development Pigeon AddCalendarAction";
+				PROVISIONING_PROFILE = "952498e5-8668-4a05-acc3-b02be8109562";
+				PROVISIONING_PROFILE_SPECIFIER = "Adhoc Pigeon AddCalendarAction";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -1086,38 +1126,41 @@
 		};
 		BC_187620597143 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D889F987E544AA34EEB191DC /* Pods-PigeonTests.debug.xcconfig */;
+			baseConfigurationReference = 70E800ECDBEDFA01E03E2388 /* Pods-Pigeon-iOSTests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = PigeonTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.covelline.PigeonTests;
+				PRODUCT_NAME = "Pigeon-iOSTests";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pigeon.app/Pigeon";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pigeon-iOS.app/Pigeon-iOS";
 			};
 			name = Debug;
 		};
 		BC_275709116434 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADD249AFBA3A3939F4799921 /* Pods-Pigeon.debug.xcconfig */;
+			baseConfigurationReference = C268DFAFFCD31ECC979E5CCC /* Pods-Pigeon-iOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Pigeon/Pigeon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = K45ES832VB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Venders/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				INFOPLIST_FILE = Pigeon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.covelline.pigeon;
-				PROVISIONING_PROFILE = "2047e011-dc30-423e-abce-f00662e331f8";
-				PROVISIONING_PROFILE_SPECIFIER = "Development com.covelline.pigeon";
+				PRODUCT_NAME = "Pigeon-iOS";
+				PROVISIONING_PROFILE = "f57dc678-e5b9-4f17-9245-920d281ca2db";
+				PROVISIONING_PROFILE_SPECIFIER = "Adhock pigeon";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1181,25 +1224,27 @@
 		};
 		BC_506828132044 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B887CBDB3A52D24FB1486055 /* Pods-Pigeon.release.xcconfig */;
+			baseConfigurationReference = 6EB8559496BA385EFA1A6C4D /* Pods-Pigeon-iOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Pigeon/Pigeon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = K45ES832VB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Venders/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				INFOPLIST_FILE = Pigeon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.covelline.pigeon;
-				PROVISIONING_PROFILE = "2047e011-dc30-423e-abce-f00662e331f8";
-				PROVISIONING_PROFILE_SPECIFIER = "Development com.covelline.pigeon";
+				PRODUCT_NAME = "Pigeon-iOS";
+				PROVISIONING_PROFILE = "f57dc678-e5b9-4f17-9245-920d281ca2db";
+				PROVISIONING_PROFILE_SPECIFIER = "Adhock pigeon";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1207,14 +1252,15 @@
 		};
 		BC_699817386549 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98BA5EEEF8723F4EF3920EE2 /* Pods-PigeonTests.release.xcconfig */;
+			baseConfigurationReference = 6BEF4C85EA1F7D40D33DBE01 /* Pods-Pigeon-iOSTests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = PigeonTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.covelline.PigeonTests;
+				PRODUCT_NAME = "Pigeon-iOSTests";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pigeon.app/Pigeon";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pigeon-iOS.app/Pigeon-iOS";
 			};
 			name = Release;
 		};
@@ -1278,7 +1324,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		CL_479237163229 /* Build configuration list for PBXProject "Pigeon" */ = {
+		CL_479237163229 /* Build configuration list for PBXProject "Pigeon-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BC_479945831424 /* Debug */,
@@ -1287,7 +1333,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		CL_479237163229-1 /* Build configuration list for PBXNativeTarget "Pigeon" */ = {
+		CL_479237163229-1 /* Build configuration list for PBXNativeTarget "Pigeon-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BC_275709116434 /* Debug */,
@@ -1296,7 +1342,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = "";
 		};
-		CL_980708020655 /* Build configuration list for PBXNativeTarget "PigeonTests" */ = {
+		CL_980708020655 /* Build configuration list for PBXNativeTarget "Pigeon-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BC_187620597143 /* Debug */,

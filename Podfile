@@ -3,11 +3,11 @@
 
 plugin 'cocoapods-keys', {
   :project => "Pigeon",
-  :target => "Pigeon",
+  :target => "Pigeon-iOS",
   :keys => ["OpenGraphIOAPIKey"]
 }
 
-target 'Pigeon' do
+target 'Pigeon-iOS' do
   platform :ios, '11.0'
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
@@ -15,12 +15,12 @@ target 'Pigeon' do
   # Pods for Pigeon
   pod 'GoogleAPIClientForREST/Calendar', '~> 1.3.1'
   pod 'GoogleSignIn', '~> 4.1.1'
-
+  pod 'HockeySDK'
 
   target 'AddCalendarAction' do
   end
 
-  target 'PigeonTests' do
+  target 'Pigeon-iOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
