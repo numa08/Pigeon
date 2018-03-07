@@ -17,14 +17,14 @@ protocol EventTemplateRepositoryType {
 
 class EventTemplateRepository: EventTemplateRepositoryType {
     let openGraphParser: OpenGraphParser
-    let openGraphIOAPI: MoyaProvider<OpenGraphIOAPI>
+    let urlMetaAPI: MoyaProvider<URLMetaAPI>
 
     enum Errors: Error {
         case InvalidDataTypeAcuquired
     }
 
-    init(_ openGraphIOAPI: MoyaProvider<OpenGraphIOAPI>, _ openGraphParser: OpenGraphParser) {
-        self.openGraphIOAPI = openGraphIOAPI
+    init(_ urlMetaAPI: MoyaProvider<URLMetaAPI>, _ openGraphParser: OpenGraphParser) {
+        self.urlMetaAPI = urlMetaAPI
         self.openGraphParser = openGraphParser
     }
 
@@ -69,15 +69,15 @@ class EventTemplateRepository: EventTemplateRepositoryType {
     }
 
     func eventTemplate(fromURL url: URL) -> Observable<EventTemplateEntity> {
-        return openGraphIOAPI.rx.request(.site(url: url))
+        return urlMetaAPI.rx.request(.meta(url: url))
             .asObservable()
-            .map { (response) -> OpenGraphIOResponse in
+            .map { (response) -> URLMetaResponse in
                 let decoder = JSONDecoder()
-                return try decoder.decode(OpenGraphIOResponse.self, from: response.data) }
+                return try decoder.decode(URLMetaResponse.self, from: response.data) }
             .map { (response) -> EventTemplateEntity in
-                let title = response.hybridGraph.title ?? response.openGraph?.title
-                let description = response.hybridGraph.description ?? response.openGraph?.description
-                let url = response.hybridGraph.url ?? response.openGraph?.url
+                let title = response.meta?.title
+                let description = response.meta?.description
+                let url = response.meta?.url
                 return EventTemplateEntity(title: title, url: URL(string: url ?? ""), description: description)
             }
             .catchError({ (_) -> Observable<EventTemplateEntity> in

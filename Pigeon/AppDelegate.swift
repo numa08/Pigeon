@@ -8,9 +8,9 @@
 import EventKit
 import GoogleAPIClientForREST
 import GoogleSignIn
-import UIKit
-import Keys
 import HockeySDK
+import Keys
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
